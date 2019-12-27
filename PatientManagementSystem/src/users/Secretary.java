@@ -1,7 +1,9 @@
+package users;
+
 public class Secretary extends User {
 
-    public Secretary(int ID, String Name, String Address) {
-        super(ID, Name, Address);
+    public Secretary(String ID, String Forename, String Surname, String Address) {
+        super(ID, Forename, Surname, Address);
     }
 
     public void approvePatientAccount() {

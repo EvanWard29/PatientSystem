@@ -1,7 +1,9 @@
+package users;
+
 public class Admin extends User {
 
-    public Admin(int ID, String Name, String Address) {
-        super(ID, Name, Address);
+    public Admin(String ID, String Forename, String Surname, String Address) {
+        super(ID, Forename, Surname, Address);
     }
     
     public void createAccount() {
