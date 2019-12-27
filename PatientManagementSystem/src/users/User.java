@@ -1,12 +1,19 @@
+package users;
+
 public class User {
 
-    private int ID;
+    private String ID;
 
-    private String Name;
+    private String Forename;
+    private String Surname;
 
     private String Address;
 
-    public User(int ID, String Name, String Address) {
+    public User(String ID, String Forename, String Surname, String Address) {
+        this.ID = ID;
+        this.Forename = Forename;
+        this.Surname = Surname;
+        this.Address = Address;
     }
 
     public int getID() {

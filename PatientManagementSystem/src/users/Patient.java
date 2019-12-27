@@ -1,11 +1,13 @@
+package users;
+
 public class Patient extends User {
 
     private String Gender;
 
     private int Age;
 
-    public Patient(String Gender, int Age, int ID, String Name, String Address) {
-        super(ID, Name, Address);
+    public Patient(String Gender, int Age, String ID, String Forename, String Surname, String Address) {
+        super(ID, Forename, Surname, Address);
         this.Gender = Gender;
         this.Age = Age;
     }

@@ -1,7 +1,9 @@
+package users;
+
 public class Doctor extends User {
 
-    public Doctor(int ID, String Name, String Address) {
-        super(ID, Name, Address);
+    public Doctor(String ID, String Forename, String Surname, String Address) {
+        super(ID, Forename, Surname, Address);
     }
 
     public void viewAppointments() {
