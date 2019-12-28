@@ -55,7 +55,7 @@ public class AdminMenu extends javax.swing.JFrame {
     private void initComponents() {
 
         lblMain = new java.awt.Label();
-        jTabbedPane1 = new javax.swing.JTabbedPane();
+        menuAdmin = new javax.swing.JTabbedPane();
         tabUserInfo = new javax.swing.JPanel();
         jPanel12 = new javax.swing.JPanel();
         lblUserInfo1 = new javax.swing.JLabel();
@@ -133,7 +133,7 @@ public class AdminMenu extends javax.swing.JFrame {
         lblMain.setName(""); // NOI18N
         lblMain.setText("Patient Management System");
 
-        jTabbedPane1.setFont(new java.awt.Font("Arial", 1, 14)); // NOI18N
+        menuAdmin.setFont(new java.awt.Font("Arial", 1, 14)); // NOI18N
 
         jPanel12.setBorder(javax.swing.BorderFactory.createEtchedBorder());
 
@@ -238,7 +238,7 @@ public class AdminMenu extends javax.swing.JFrame {
                 .addContainerGap())
         );
 
-        jTabbedPane1.addTab("User Information", tabUserInfo);
+        menuAdmin.addTab("User Information", tabUserInfo);
 
         jPanel1.setBorder(javax.swing.BorderFactory.createEtchedBorder());
 
@@ -430,7 +430,7 @@ public class AdminMenu extends javax.swing.JFrame {
                 .addContainerGap())
         );
 
-        jTabbedPane1.addTab("Create Admin Account", tabCreateAdminAccount);
+        menuAdmin.addTab("Create Admin Account", tabCreateAdminAccount);
 
         jPanel7.setBorder(javax.swing.BorderFactory.createEtchedBorder());
 
@@ -644,7 +644,7 @@ public class AdminMenu extends javax.swing.JFrame {
                 .addContainerGap())
         );
 
-        jTabbedPane1.addTab("Add Doctors/Secretarys", tabAddDoctors_Secretarys);
+        menuAdmin.addTab("Add Doctors/Secretarys", tabAddDoctors_Secretarys);
 
         jPanel27.setBorder(javax.swing.BorderFactory.createEtchedBorder());
 
@@ -741,7 +741,7 @@ public class AdminMenu extends javax.swing.JFrame {
                 .addContainerGap())
         );
 
-        jTabbedPane1.addTab("Doctor Ratings/Feedback", tabDoctorsRatings);
+        menuAdmin.addTab("Doctor Ratings/Feedback", tabDoctorsRatings);
 
         jPanel28.setBorder(javax.swing.BorderFactory.createEtchedBorder());
 
@@ -923,7 +923,7 @@ public class AdminMenu extends javax.swing.JFrame {
                 .addContainerGap())
         );
 
-        jTabbedPane1.addTab("Add Feedback", tabAddFeedback);
+        menuAdmin.addTab("Add Feedback", tabAddFeedback);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -931,7 +931,7 @@ public class AdminMenu extends javax.swing.JFrame {
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jTabbedPane1)
+                .addComponent(menuAdmin)
                 .addContainerGap())
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
@@ -944,7 +944,7 @@ public class AdminMenu extends javax.swing.JFrame {
                 .addContainerGap()
                 .addComponent(lblMain, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(24, 24, 24)
-                .addComponent(jTabbedPane1)
+                .addComponent(menuAdmin)
                 .addContainerGap())
         );
 
@@ -1099,7 +1099,6 @@ public class AdminMenu extends javax.swing.JFrame {
     private javax.swing.JScrollPane jScrollPane3;
     private javax.swing.JScrollPane jScrollPane4;
     private javax.swing.JScrollPane jScrollPane6;
-    private javax.swing.JTabbedPane jTabbedPane1;
     private javax.swing.JLabel lblAccountLetter;
     private javax.swing.JLabel lblAccountType1;
     private javax.swing.JLabel lblAddDoctorFeedback;
@@ -1128,6 +1127,7 @@ public class AdminMenu extends javax.swing.JFrame {
     private javax.swing.JLabel lblUserName1;
     private javax.swing.JLabel lblViewAppointment3;
     private javax.swing.JLabel lblViewAppointment5;
+    private javax.swing.JTabbedPane menuAdmin;
     private javax.swing.JPanel tabAddDoctors_Secretarys;
     private javax.swing.JPanel tabAddFeedback;
     private javax.swing.JPanel tabCreateAdminAccount;

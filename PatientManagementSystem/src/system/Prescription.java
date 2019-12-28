@@ -10,14 +10,15 @@ package system;
  * @author LoL-1
  */
 public class Prescription {
+    public static Prescription[] prescriptions;
     private String DoctorID;
     private String PatientID;
     private String Notes;
     private Medicine Medicine;
-    private String Quantity;
+    private int Quantity;
     private String Dosage;
 
-    public Prescription(String DoctorID, String PatientID, String Notes, Medicine Medicine, String Quantity, String Dosage) {
+    public Prescription(String DoctorID, String PatientID, String Notes, Medicine Medicine, int Quantity, String Dosage) {
         this.DoctorID = DoctorID;
         this.PatientID = PatientID;
         this.Notes = Notes;
@@ -58,11 +59,11 @@ public class Prescription {
         this.Medicine = Medicine;
     }
 
-    public String getQuantity() {
+    public int getQuantity() {
         return Quantity;
     }
 
-    public void setQuantity(String Quantity) {
+    public void setQuantity(int Quantity) {
         this.Quantity = Quantity;
     }
 

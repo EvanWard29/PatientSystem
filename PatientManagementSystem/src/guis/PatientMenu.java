@@ -84,22 +84,23 @@ public class PatientMenu extends javax.swing.JFrame {
         String DoctorID = "";
         String PatientID = "";
         String Notes = "";
-        Medicine Medicine = new Medicine("Strong Stuff");
-        String Quantity = "3";
+        Medicine Medicine = new Medicine("Strong Stuff", 7);
+        int Quantity = 3;
         String Dosage = "1 every 4 hours";
         
         Prescription newPrescription = new Prescription(DoctorID, PatientID, Notes, Medicine, Quantity, Dosage);
         
         //FOREACH PRESCRIPTION
-        //GET PATIENT NAME FROM ID
-        //GET DOCTOR NAME FROM ID
-        //GET NOTES
-        //GET MEDICINE
-            //FROM MEDICINE GET NAME
-        //GET QUANTITY
-        //GET DOSAGE
-        
-        //OUTPUT DATA INTO TABLE
+            //GET PATIENT NAME FROM ID
+            //GET DOCTOR NAME FROM ID
+            //GET NOTES
+            //GET MEDICINE
+                //FROM MEDICINE GET NAME
+            //GET QUANTITY
+            //GET DOSAGE
+
+            //OUTPUT DATA INTO TABLE
+        //END FOREACH
         
         DefaultTableModel model = (DefaultTableModel) this.tblMedicine.getModel();
         for(String[] data : prescription)
@@ -181,7 +182,7 @@ public class PatientMenu extends javax.swing.JFrame {
     private void initComponents() {
 
         lblMain = new java.awt.Label();
-        tabMenu = new javax.swing.JTabbedPane();
+        menuPatient = new javax.swing.JTabbedPane();
         tabUserInfo = new javax.swing.JPanel();
         jPanel12 = new javax.swing.JPanel();
         lblUserInfo1 = new javax.swing.JLabel();
@@ -311,7 +312,7 @@ public class PatientMenu extends javax.swing.JFrame {
         lblMain.setName(""); // NOI18N
         lblMain.setText("Patient Management System");
 
-        tabMenu.setFont(new java.awt.Font("Arial", 1, 14)); // NOI18N
+        menuPatient.setFont(new java.awt.Font("Arial", 1, 14)); // NOI18N
 
         jPanel12.setBorder(javax.swing.BorderFactory.createEtchedBorder());
 
@@ -416,7 +417,7 @@ public class PatientMenu extends javax.swing.JFrame {
                 .addContainerGap())
         );
 
-        tabMenu.addTab("User Information", tabUserInfo);
+        menuPatient.addTab("User Information", tabUserInfo);
 
         jPanel14.setBorder(javax.swing.BorderFactory.createEtchedBorder());
 
@@ -700,7 +701,7 @@ public class PatientMenu extends javax.swing.JFrame {
                 .addContainerGap())
         );
 
-        tabMenu.addTab("Request Appointment", tabRequestAccount);
+        menuPatient.addTab("Request Appointment", tabRequestAccount);
 
         jPanel17.setBorder(javax.swing.BorderFactory.createEtchedBorder());
 
@@ -885,7 +886,7 @@ public class PatientMenu extends javax.swing.JFrame {
                 .addContainerGap())
         );
 
-        tabMenu.addTab("View Appointment", tabViewAppointment);
+        menuPatient.addTab("View Appointment", tabViewAppointment);
 
         jPanel18.setBorder(javax.swing.BorderFactory.createEtchedBorder());
 
@@ -1220,7 +1221,7 @@ public class PatientMenu extends javax.swing.JFrame {
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
-        tabMenu.addTab("View Prescription", tabViewPrescription);
+        menuPatient.addTab("View Prescription", tabViewPrescription);
 
         jPanel23.setBorder(javax.swing.BorderFactory.createEtchedBorder());
 
@@ -1405,7 +1406,7 @@ public class PatientMenu extends javax.swing.JFrame {
                 .addContainerGap())
         );
 
-        tabMenu.addTab("View History", tabViewHistory);
+        menuPatient.addTab("View History", tabViewHistory);
 
         jPanel26.setBorder(javax.swing.BorderFactory.createEtchedBorder());
 
@@ -1698,7 +1699,7 @@ public class PatientMenu extends javax.swing.JFrame {
                 .addContainerGap())
         );
 
-        tabMenu.addTab("Doctor Feedback", tabDoctorFeedback);
+        menuPatient.addTab("Doctor Feedback", tabDoctorFeedback);
 
         jPanel34.setBorder(javax.swing.BorderFactory.createEtchedBorder());
 
@@ -1754,7 +1755,7 @@ public class PatientMenu extends javax.swing.JFrame {
                 .addContainerGap())
         );
 
-        tabMenu.addTab("Request Account Termination", tabRequestTermination);
+        menuPatient.addTab("Request Account Termination", tabRequestTermination);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -1762,7 +1763,7 @@ public class PatientMenu extends javax.swing.JFrame {
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(tabMenu)
+                .addComponent(menuPatient)
                 .addContainerGap())
             .addGroup(layout.createSequentialGroup()
                 .addGap(315, 315, 315)
@@ -1775,7 +1776,7 @@ public class PatientMenu extends javax.swing.JFrame {
                 .addContainerGap()
                 .addComponent(lblMain, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
-                .addComponent(tabMenu, javax.swing.GroupLayout.PREFERRED_SIZE, 731, Short.MAX_VALUE)
+                .addComponent(menuPatient, javax.swing.GroupLayout.PREFERRED_SIZE, 731, Short.MAX_VALUE)
                 .addContainerGap())
         );
 
@@ -2040,13 +2041,13 @@ public class PatientMenu extends javax.swing.JFrame {
     private javax.swing.JLabel lblViewAppointment5;
     private javax.swing.JLabel lblViewPrescription;
     private javax.swing.JLabel lblViewPrescription1;
+    private javax.swing.JTabbedPane menuPatient;
     private javax.swing.JPanel pnlDoctorInfo;
     private javax.swing.JPanel pnlNotes;
     private javax.swing.JPanel pnlPatientInfo;
     private javax.swing.JPanel pnlPrescription;
     private javax.swing.JPanel pnlPrescription1;
     private javax.swing.JPanel tabDoctorFeedback;
-    private javax.swing.JTabbedPane tabMenu;
     private javax.swing.JPanel tabRequestAccount;
     private javax.swing.JPanel tabRequestTermination;
     private javax.swing.JPanel tabUserInfo;

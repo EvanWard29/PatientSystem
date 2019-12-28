@@ -30,7 +30,7 @@
       <Group type="103" groupAlignment="0" attributes="0">
           <Group type="102" attributes="0">
               <EmptySpace max="-2" attributes="0"/>
-              <Component id="tabMenu" max="32767" attributes="0"/>
+              <Component id="menuPatient" max="32767" attributes="0"/>
               <EmptySpace max="-2" attributes="0"/>
           </Group>
           <Group type="102" alignment="0" attributes="0">
@@ -46,7 +46,7 @@
               <EmptySpace min="-2" max="-2" attributes="0"/>
               <Component id="lblMain" min="-2" max="-2" attributes="0"/>
               <EmptySpace type="separate" max="-2" attributes="0"/>
-              <Component id="tabMenu" pref="731" max="32767" attributes="0"/>
+              <Component id="menuPatient" pref="731" max="32767" attributes="0"/>
               <EmptySpace max="-2" attributes="0"/>
           </Group>
       </Group>
@@ -62,7 +62,7 @@
         <Property name="text" type="java.lang.String" value="Patient Management System"/>
       </Properties>
     </Component>
-    <Container class="javax.swing.JTabbedPane" name="tabMenu">
+    <Container class="javax.swing.JTabbedPane" name="menuPatient">
       <Properties>
         <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
           <Font name="Arial" size="14" style="1"/>

@@ -10,20 +10,34 @@ package system;
  * @author LoL-1
  */
 public class AccountRequest {
-    private String Name;
+    private String Forename;
+    private String Surname;
     private String Address;
+    private String Gender;
+    private String DOB;
 
-    public AccountRequest(String Name, String Address) {
-        this.Name = Name;
+    public AccountRequest(String Forename, String Surname, String Address, String Gender, String DOB) {
+        this.Forename = Forename;
+        this.Surname = Surname;
         this.Address = Address;
+        this.Gender = Gender;
+        this.DOB = DOB;
     }
 
-    public String getName() {
-        return Name;
+    public String getForename() {
+        return Forename;
     }
 
     public void setName(String Name) {
-        this.Name = Name;
+        this.Forename = Forename;
+    }
+
+    public String getSurname() {
+        return Surname;
+    }
+
+    public void setSurname(String Surname) {
+        this.Surname = Surname;
     }
 
     public String getAddress() {
@@ -32,6 +46,22 @@ public class AccountRequest {
 
     public void setAddress(String Address) {
         this.Address = Address;
+    }
+
+    public String getGender() {
+        return Gender;
+    }
+
+    public void setGender(String Gender) {
+        this.Gender = Gender;
+    }
+
+    public String getDOB() {
+        return DOB;
+    }
+
+    public void setDOB(String DOB) {
+        this.DOB = DOB;
     }
     
     
