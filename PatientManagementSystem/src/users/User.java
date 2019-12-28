@@ -16,27 +16,36 @@ public class User {
         this.Address = Address;
     }
 
-    public int getID() {
-        throw new UnsupportedOperationException("Not supported yet.");
+    public String getID() {
+        return ID;
     }
 
-    public void setID(int ID) {
+    public void setID(String ID) {
+        this.ID = ID;
     }
 
-    public String getName() {
-        throw new UnsupportedOperationException("Not supported yet.");
+    public String getForename() {
+        return Forename;
     }
 
-    public void setName(String Name) {
+    public void setForename(String Forename) {
+        this.Forename = Forename;
+    }
+
+    public String getSurname() {
+        return Surname;
+    }
+
+    public void setSurname(String Surname) {
+        this.Surname = Surname;
     }
 
     public String getAddress() {
-        throw new UnsupportedOperationException("Not supported yet.");
+        return Address;
     }
 
     public void setAddress(String Address) {
+        this.Address = Address;
     }
 
-    public void login(int id, String password) {
-    }
 }

@@ -1,7 +1,8 @@
 package users;
 
 public class Doctor extends User {
-
+    public static Doctor[] doctors;
+    
     public Doctor(String ID, String Forename, String Surname, String Address) {
         super(ID, Forename, Surname, Address);
     }

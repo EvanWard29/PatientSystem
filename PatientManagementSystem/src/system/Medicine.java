@@ -10,10 +10,14 @@ package system;
  * @author LoL-1
  */
 public class Medicine {
+    public static Medicine[] medicines; //GET MEDICINES FROM FILE
+    
     private String Name;
+    private int Stock;
 
-    public Medicine(String Name) {
+    public Medicine(String Name, int Stock) {
         this.Name = Name;
+        this.Stock = Stock;
     }
 
     public String getName() {
@@ -22,6 +26,14 @@ public class Medicine {
 
     public void setName(String Name) {
         this.Name = Name;
+    }
+
+    public int getStock() {
+        return Stock;
+    }
+
+    public void setStock(int Stock) {
+        this.Stock = Stock;
     }
     
     
