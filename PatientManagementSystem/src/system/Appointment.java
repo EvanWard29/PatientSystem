@@ -10,6 +10,7 @@ package system;
  * @author LoL-1
  */
 public class Appointment {
+    public static Appointment[] appointments;
     private String DoctorID;
     private String PatientID;
     private String Date;
