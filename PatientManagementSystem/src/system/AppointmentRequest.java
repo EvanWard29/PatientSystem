@@ -4,14 +4,14 @@
  * and open the template in the editor.
  */
 package system;
-
+import users.*;
 /**
  *
  * @author LoL-1
  */
 public class AppointmentRequest extends Appointment{
 
-    public AppointmentRequest(String DoctorID, String PatientID, String Date) {
-        super(DoctorID, PatientID, Date);
+    public AppointmentRequest(Doctor Doctor, users.Patient Patient, String Date) {
+        super(Doctor, Patient, Date);
     }
 }

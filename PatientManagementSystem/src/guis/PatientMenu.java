@@ -106,7 +106,7 @@ public class PatientMenu extends javax.swing.JFrame {
         int Quantity = 3;
         String Dosage = "1 every 4 hours";
         
-        Prescription newPrescription = new Prescription(DoctorID, PatientID, Notes, Medicine, Quantity, Dosage);
+        //Prescription newPrescription = new Prescription(DoctorID, PatientID, Notes, Medicine, Quantity, Dosage);
         
         //FOREACH PRESCRIPTION
             //GET PATIENT NAME FROM ID
@@ -1094,11 +1094,9 @@ public class PatientMenu extends javax.swing.JFrame {
 
         txtSex.setEditable(false);
         txtSex.setFont(new java.awt.Font("Arial", 1, 16)); // NOI18N
-        txtSex.setText("jTextField1");
 
         txtAge.setEditable(false);
         txtAge.setFont(new java.awt.Font("Arial", 1, 16)); // NOI18N
-        txtAge.setText("jTextField1");
 
         txtPatientAddr.setEditable(false);
         txtPatientAddr.setColumns(5);
@@ -1175,7 +1173,6 @@ public class PatientMenu extends javax.swing.JFrame {
 
         txtDoctorName.setEditable(false);
         txtDoctorName.setFont(new java.awt.Font("Arial", 1, 16)); // NOI18N
-        txtDoctorName.setText("jTextField1");
 
         lblDoctorAddr.setFont(new java.awt.Font("Arial", 0, 16)); // NOI18N
         lblDoctorAddr.setText("Address:");

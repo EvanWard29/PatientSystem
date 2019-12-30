@@ -4,43 +4,45 @@
  * and open the template in the editor.
  */
 package system;
+import java.io.*;
+import users.*;
 
 /**
  *
  * @author LoL-1
  */
-public class Prescription {
+public class Prescription implements Serializable{
     public static Prescription[] prescriptions;
-    private String DoctorID;
-    private String PatientID;
+    private Doctor Doctor;
+    private Patient Patient;
     private String Notes;
     private Medicine Medicine;
     private int Quantity;
     private String Dosage;
 
-    public Prescription(String DoctorID, String PatientID, String Notes, Medicine Medicine, int Quantity, String Dosage) {
-        this.DoctorID = DoctorID;
-        this.PatientID = PatientID;
+    public Prescription(Doctor Doctor, Patient Patient, String Notes, Medicine Medicine, int Quantity, String Dosage) {
+        this.Doctor = Doctor;
+        this.Patient = Patient;
         this.Notes = Notes;
         this.Medicine = Medicine;
         this.Quantity = Quantity;
         this.Dosage = Dosage;
     }
 
-    public String getDoctorID() {
-        return DoctorID;
+    public Doctor getDoctor() {
+        return Doctor;
     }
 
-    public void setDoctorID(String DoctorID) {
-        this.DoctorID = DoctorID;
+    public void setDoctor(Doctor Doctor) {
+        this.Doctor = Doctor;
     }
 
-    public String getPatientID() {
-        return PatientID;
+    public Patient getPatient() {
+        return Patient;
     }
 
-    public void setPatientID(String PatientID) {
-        this.PatientID = PatientID;
+    public void setPatient(Patient Patient) {
+        this.Patient = Patient;
     }
 
     public String getNotes() {
@@ -75,5 +77,77 @@ public class Prescription {
         this.Dosage = Dosage;
     }
     
+    public static void savePrescriptions()
+    {
+        String filename = "data/prescriptions.ser"; 
+          
+        // Serialization  
+        try
+        {    
+            //Saving of object in a file 
+            FileOutputStream file = new FileOutputStream(filename); 
+            ObjectOutputStream out = new ObjectOutputStream(file); 
+              
+            // Method for serialization of object 
+            out.writeObject(prescriptions); 
+              
+            out.close(); 
+            file.close(); 
+        } 
+          
+        catch(IOException ex) 
+        { 
+            System.out.println("IOException is caught: " +  ex); 
+        } 
+    }
     
+    public static void getPrescriptions()
+    {
+        Prescription[] temp = null;
+        String filename = "data/prescriptions.ser";
+        try
+        {    
+            // Reading the object from a file 
+            FileInputStream file = new FileInputStream(filename); 
+            ObjectInputStream in = new ObjectInputStream(file); 
+              
+            // Method for deserialization of object 
+            temp = (Prescription[])in.readObject(); 
+              
+            in.close(); 
+            file.close(); 
+        } 
+          
+        catch(IOException ex) 
+        { 
+            System.out.println("IOException is caught: " + ex); 
+        } 
+          
+        catch(ClassNotFoundException ex) 
+        { 
+            System.out.println("ClassNotFoundException is caught"); 
+        } 
+        
+        prescriptions = temp;
+    }
+    
+    public static void setPrescriptions()
+    {
+        Prescription[] temp = {
+            new Prescription(
+                    new Doctor("D001", "5f4dcc3b5aa765d61d8327deb882cf99", "Joe", "Bloggs", "3 Charles Darwin Road,\nPlymouth,\nPL3 4GU"),
+                    new Patient("P001", "5f4dcc3b5aa765d61d8327deb882cf99", "Evan", "Ward", "Flat 5,\n58 North Road East,\nPlymouth,\nPL4 6AJ", "M", "29/02/2000"),
+                    "Showing signs of health improving.\nOn course for a full recovery.", new Medicine("Chlorpromazine", 5), 4, "1 EVERY 24 HOURS"),
+            new Prescription(
+                    new Doctor("D002", "5f4dcc3b5aa765d61d8327deb882cf99", "Shirley", "Jones", "5 Admirals Hard,\nPlymouth,\nPL1 3RJ"),
+                    new Patient("P002", "5f4dcc3b5aa765d61d8327deb882cf99", "Chloe", "Jones", "31 Clarence Place,\nPlymouth,\nPL2 3JP", "F", "13/06/1998"),
+                    "Signs of decreasing health.\nRecommend dosage increase.", new Medicine("Tamoxifen", 3), 9, "1 A DAY"),
+            new Prescription(
+                    new Doctor("D003", "5f4dcc3b5aa765d61d8327deb882cf99", "Henry", "Brooks", "66 Neswick Street,\nPlymouth,\nPL2 5JN"), 
+                    new Patient("P003", "5f4dcc3b5aa765d61d8327deb882cf99", "Linda", "Bennett", "66 Neswick Street,\nPlymouth,\nPL1 5JN", "F", "10/08/1992"),
+                    "Needs more Medicine.", new Medicine("Beta Blocker", 15), 19, "4 EVERY 12 HOURS")
+        };
+        
+        prescriptions = temp;
+    }
 }

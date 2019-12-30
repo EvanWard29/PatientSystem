@@ -10,6 +10,8 @@ import java.io.*;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
 import javax.swing.JOptionPane;
+import java.lang.Thread;
+import java.lang.Runtime;
 
 
 /**
@@ -26,6 +28,14 @@ public class Login extends javax.swing.JFrame {
         //User.setUsers();
         //User.saveUsers();
         User.getUsers();
+        
+        //Appointment.setAppointments();
+        //Appointment.saveAppointments();
+        Appointment.getAppointments();
+        
+        //Prescription.setPrescriptions();
+        //Prescription.savePrescriptions();
+        Prescription.getPrescriptions();
     }
     
     private String hashPassword(String password)
@@ -220,13 +230,27 @@ public class Login extends javax.swing.JFrame {
             java.util.logging.Logger.getLogger(Login.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
         //</editor-fold>
-
+        
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
                 new Login().setVisible(true);
             }
         });
+        
+        ShutDownTask shutDownTask = new ShutDownTask();
+        Runtime.getRuntime().addShutdownHook(shutDownTask);
+    }
+    
+    private static class ShutDownTask extends Thread
+    {
+        @Override
+	public void run() 
+        {
+            User.saveUsers();
+            Appointment.saveAppointments();
+            Prescription.savePrescriptions();
+	}
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
@@ -238,3 +262,5 @@ public class Login extends javax.swing.JFrame {
     private javax.swing.JTextField txtUserID;
     // End of variables declaration//GEN-END:variables
 }
+
+

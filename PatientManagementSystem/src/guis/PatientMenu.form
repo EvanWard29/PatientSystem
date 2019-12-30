@@ -1596,7 +1596,6 @@
                             <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
                               <Font name="Arial" size="16" style="1"/>
                             </Property>
-                            <Property name="text" type="java.lang.String" value="jTextField1"/>
                           </Properties>
                         </Component>
                         <Component class="javax.swing.JTextField" name="txtAge">
@@ -1605,7 +1604,6 @@
                             <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
                               <Font name="Arial" size="16" style="1"/>
                             </Property>
-                            <Property name="text" type="java.lang.String" value="jTextField1"/>
                           </Properties>
                         </Component>
                         <Container class="javax.swing.JScrollPane" name="jScrollPane1">
@@ -1715,7 +1713,6 @@
                             <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
                               <Font name="Arial" size="16" style="1"/>
                             </Property>
-                            <Property name="text" type="java.lang.String" value="jTextField1"/>
                           </Properties>
                         </Component>
                         <Component class="javax.swing.JLabel" name="lblDoctorAddr">

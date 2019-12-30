@@ -1120,7 +1120,7 @@ public class AdminMenu extends javax.swing.JFrame {
         String note = this.txtFeedbackNote.getText();
         
         //ADD FEEDBACK TO FILE
-        Feedback doctorFeedback = new Feedback(doctorID, rating, note);
+        //Feedback doctorFeedback = new Feedback(doctorID, rating, note);
     }//GEN-LAST:event_btnApproveActionPerformed
 
     private void btnLogoutActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnLogoutActionPerformed

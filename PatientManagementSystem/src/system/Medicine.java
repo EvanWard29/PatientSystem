@@ -5,11 +5,13 @@
  */
 package system;
 
+import java.io.*;
+
 /**
  *
  * @author LoL-1
  */
-public class Medicine {
+public class Medicine implements Serializable{
     public static Medicine[] medicines; //GET MEDICINES FROM FILE
     
     private String Name;
