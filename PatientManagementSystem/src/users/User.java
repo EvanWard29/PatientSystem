@@ -76,6 +76,8 @@ public class User implements Serializable{
         
         temp[i] = newUser;
         users = temp;
+        
+        saveUsers();
     }
 
     public static void saveUsers()

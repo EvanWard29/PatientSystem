@@ -25,6 +25,7 @@ public class Login extends javax.swing.JFrame {
      */
     public Login() {
         initComponents();
+        
         //User.setUsers();
         //User.saveUsers();
         User.getUsers();
@@ -36,6 +37,22 @@ public class Login extends javax.swing.JFrame {
         //Prescription.setPrescriptions();
         //Prescription.savePrescriptions();
         Prescription.getPrescriptions();
+        
+        //PastAppointment.setPastAppointments();
+        //PastAppointment.savePastAppointments();
+        PastAppointment.getPastAppointments();
+        
+        //Medicine.setMedicine();
+        //Medicine.saveMedicine();
+        Medicine.getMedicine();
+        
+        PrescriptionRequest.setPrescriptionRequests();
+        PrescriptionRequest.savePrescriptionRequests();
+        PrescriptionRequest.getPrescriptionRequests();
+        
+        MedicineRequest.setMedicineRequests();
+        MedicineRequest.saveMedicineRequests();
+        MedicineRequest.getMedicineRequests();
     }
     
     private String hashPassword(String password)
@@ -250,6 +267,7 @@ public class Login extends javax.swing.JFrame {
             User.saveUsers();
             Appointment.saveAppointments();
             Prescription.savePrescriptions();
+            PastAppointment.savePastAppointments();
 	}
     }
 

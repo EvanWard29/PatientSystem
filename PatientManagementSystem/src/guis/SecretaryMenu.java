@@ -41,20 +41,7 @@ public class SecretaryMenu extends javax.swing.JFrame {
     
     private void initArrays()
     { 
-        Medicine[] medicines = {
-            new Medicine("Chlorpromazine", 5),
-            new Medicine("Polio Vaccine", 7),
-            new Medicine("Oral Contraceptives", 3),
-            new Medicine("Penicillin", 3),
-            new Medicine("Beta Blocker", 15),
-            new Medicine("Beta2 Agonists", 25),
-            new Medicine("Tamoxifen", 3),
-            new Medicine("Immunosuppressants", 27),
-            new Medicine("HIV/AIDS Antiretrovirals", 18),
-            new Medicine("MMR Vaccine", 11)
-        };
         
-        Medicine.medicines = medicines;
         
         TerminationRequest[] requests = {
             new TerminationRequest("P001"),

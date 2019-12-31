@@ -47,6 +47,41 @@ public class Appointment implements Serializable{
         this.Date = Date;
     }
     
+    public void addAppointment(Appointment newAppointment)
+    {
+        Appointment[] temp = new Appointment[appointments.length + 1];
+        int i;
+        
+        for(i = 0;i < temp.length - 1; i++)
+        {
+            temp[i] = appointments[i];
+        }
+        
+        temp[i] = newAppointment;
+        appointments = temp;
+        
+        saveAppointments();
+        getAppointments();
+    }
+    
+    public void removeAppointment(Appointment removeAppointment)
+    {
+        Appointment[] temp = new Appointment[appointments.length - 1];
+        int i = 0;
+        
+        for(Appointment appointment : Appointment.appointments)
+        {
+            if(appointment != removeAppointment)
+            {
+                temp[i] = appointment;
+                i++;
+            }
+        }
+        appointments = temp;
+        saveAppointments();
+        getAppointments();
+    }
+    
     public static void getAppointments()
     {
         Appointment[] temp = null;
