@@ -41,28 +41,7 @@ public class SecretaryMenu extends javax.swing.JFrame {
     
     private void initArrays()
     { 
-        Medicine[] medicines = {
-            new Medicine("Chlorpromazine", 5),
-            new Medicine("Polio Vaccine", 7),
-            new Medicine("Oral Contraceptives", 3),
-            new Medicine("Penicillin", 3),
-            new Medicine("Beta Blocker", 15),
-            new Medicine("Beta2 Agonists", 25),
-            new Medicine("Tamoxifen", 3),
-            new Medicine("Immunosuppressants", 27),
-            new Medicine("HIV/AIDS Antiretrovirals", 18),
-            new Medicine("MMR Vaccine", 11)
-        };
         
-        Medicine.medicines = medicines;
-        
-        Prescription[] prescriptions = {
-            new Prescription("D003", "P001", "NOTES", Medicine.medicines[3], 4, "LOTS OF DA SHIT"),
-            new Prescription("D002", "P004", "NOTES", Medicine.medicines[7], 9, "1 A DAY"),
-            new Prescription("D008", "P011", "NOTES", Medicine.medicines[5], 19, "FUCK TON")
-        };
-        
-        Prescription.prescriptions = prescriptions;
         
         TerminationRequest[] requests = {
             new TerminationRequest("P001"),
@@ -141,13 +120,13 @@ public class SecretaryMenu extends javax.swing.JFrame {
         
         AppointmentRequest[] requests = new AppointmentRequest[3];
         
-        AppointmentRequest request1 = new AppointmentRequest("D003", "P001", "27/12/2019");
-        AppointmentRequest request2 = new AppointmentRequest("D002", "P004", "28/12/2019");
-        AppointmentRequest request3 = new AppointmentRequest("D008", "P011", "01/01/2020");
-        
-        requests[0] = request1;
-        requests[1] = request2;
-        requests[2] = request3;
+//        AppointmentRequest request1 = new AppointmentRequest("D003", "P001", "27/12/2019");
+//        AppointmentRequest request2 = new AppointmentRequest("D002", "P004", "28/12/2019");
+//        AppointmentRequest request3 = new AppointmentRequest("D008", "P011", "01/01/2020");
+//        
+//        requests[0] = request1;
+//        requests[1] = request2;
+//        requests[2] = request3;
         
         DefaultTableModel model = (DefaultTableModel) this.tblAppointmentRequests.getModel();
         
@@ -158,7 +137,7 @@ public class SecretaryMenu extends javax.swing.JFrame {
         for(AppointmentRequest request : requests)
         {
             for(Patient patient : Patient.patients){
-                if(patient.getID() == request.getPatientID()){
+                if(patient.getID() == request.getPatient().getID()){
                     String forename = patient.getForename();
                     String surname = patient.getSurname();
                     
@@ -166,7 +145,7 @@ public class SecretaryMenu extends javax.swing.JFrame {
                     appointmentRequests[i][1] = forename + " " + surname;
                     
                     for(Doctor doctor : Doctor.doctors){
-                        if(doctor.getID() == request.getDoctorID())
+                        if(doctor.getID() == request.getDoctor().getID())
                         {
                             appointmentRequests[i][2] = doctor.getID();
                             appointmentRequests[i][3] = "Dr. " + doctor.getSurname();
@@ -207,15 +186,15 @@ public class SecretaryMenu extends javax.swing.JFrame {
             String name = "";
             for(Patient patient : Patient.patients)
             {
-                if(prescription.getPatientID() == patient.getID()){
+                if(prescription.getPatient().getID() == patient.getID()){
                     name = patient.getForename() + " " + patient.getSurname();
                     break;
                 }
             }
             
             String[] data = {
-                prescription.getDoctorID(),
-                prescription.getPatientID(),
+                prescription.getDoctor().getID(),
+                prescription.getPatient().getID(),
                 name,
                 prescription.getMedicine().getName(),
                 Integer.toString(prescription.getQuantity())
@@ -240,7 +219,7 @@ public class SecretaryMenu extends javax.swing.JFrame {
         int i = 0;
         for(Prescription prescription : Prescription.prescriptions)
         {
-            if(!((doctorID.equals(prescription.getDoctorID())) && (patientID.equals(prescription.getPatientID()))))
+            if(!((doctorID.equals(prescription.getDoctor())) && (patientID.equals(prescription.getPatient()))))
             {
                 temp[i] = prescription;
                 i++;
@@ -1987,7 +1966,7 @@ public class SecretaryMenu extends javax.swing.JFrame {
         
         if(confirm == 0)
         {
-            Appointment newAppointment = new Appointment(doctorID, patientID, date);
+            //Appointment newAppointment = new Appointment(doctorID, patientID, date);
                     
             int selectedRow = this.tblAppointmentRequests.getSelectedRow();
             DefaultTableModel model = (DefaultTableModel) this.tblAppointmentRequests.getModel();

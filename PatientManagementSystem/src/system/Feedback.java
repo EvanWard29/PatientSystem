@@ -4,28 +4,28 @@
  * and open the template in the editor.
  */
 package system;
-
+import users.*;
 /**
  *
  * @author LoL-1
  */
 public class Feedback {
-    private String DoctorID;
+    private Doctor Doctor;
     private String Rating;
     private String Notes;
 
-    public Feedback(String DoctorID, String Rating, String Notes) {
-        this.DoctorID = DoctorID;
+    public Feedback(Doctor Doctor, String Rating, String Notes) {
+        this.Doctor = Doctor;
         this.Rating = Rating;
         this.Notes = Notes;
     }
 
-    public String getDoctorID() {
-        return DoctorID;
+    public Doctor getDoctor() {
+        return Doctor;
     }
 
-    public void setDoctorID(String DoctorID) {
-        this.DoctorID = DoctorID;
+    public void setDoctor(Doctor Doctor) {
+        this.Doctor = Doctor;
     }
 
     public String getRating() {

@@ -76,11 +76,13 @@ public class User implements Serializable{
         
         temp[i] = newUser;
         users = temp;
+        
+        saveUsers();
     }
 
     public static void saveUsers()
     {
-        String filename = "users.ser"; 
+        String filename = "data/users.ser"; 
           
         // Serialization  
         try
@@ -106,8 +108,8 @@ public class User implements Serializable{
     
     public static void getUsers()
     {
-        User[] users = null;
-        String filename = "users.ser";
+        User[] temp = null;
+        String filename = "data/users.ser";
         try
         {    
             // Reading the object from a file 
@@ -115,7 +117,7 @@ public class User implements Serializable{
             ObjectInputStream in = new ObjectInputStream(file); 
               
             // Method for deserialization of object 
-            users = (User[])in.readObject(); 
+            temp = (User[])in.readObject(); 
               
             in.close(); 
             file.close(); 
@@ -131,7 +133,7 @@ public class User implements Serializable{
             System.out.println("ClassNotFoundException is caught"); 
         } 
         
-        User.users = users;
+        User.users = temp;
         
         sortUsers();
     }
@@ -204,7 +206,7 @@ public class User implements Serializable{
         Admin.admins = admins;
         Secretary.secretarys = secretarys;
         
-        showUsers();
+        //showUsers();
     }
     
     private static void showUsers()
