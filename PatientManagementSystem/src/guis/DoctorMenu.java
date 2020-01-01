@@ -2035,7 +2035,8 @@ public class DoctorMenu extends javax.swing.JFrame {
                     for(Prescription prescription : Prescription.prescriptions)
                     {
                         //System.out.println(prescription.getNotes());
-                        if(patient.getID().equals(prescription.getPatient().getID()))
+                        if((patient.getID().equals(prescription.getPatient().getID())) &&
+                                (prescription.getDoctor().getID().equals(User.loggedUser.getID())))
                         {
                             this.txtPrescriptionNotes.setText(prescription.getNotes());
                             
@@ -2092,7 +2093,8 @@ public class DoctorMenu extends javax.swing.JFrame {
         
         for(Prescription prescription : Prescription.prescriptions)
         {
-            if(prescription.getPatient().getID().equals(id))
+            if((prescription.getPatient().getID().equals(id)) && 
+                    (prescription.getDoctor().getID()).equals(User.loggedUser.getID()))
             {   
                 prescription.setNotes(notes);
                 Prescription.savePrescriptions();
@@ -2101,6 +2103,7 @@ public class DoctorMenu extends javax.swing.JFrame {
                 break;
             }
         }
+        System.out.println("CANNOT FIND PRESCRIPTION?");
     }//GEN-LAST:event_btnSaveNotesActionPerformed
 
     private void cmbSelectPatientIDActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cmbSelectPatientIDActionPerformed
@@ -2304,19 +2307,21 @@ public class DoctorMenu extends javax.swing.JFrame {
                 int confirm = JOptionPane.showConfirmDialog(this, "ARE YOU SURE YOU WISH TO CONCLUDE THIS APPOINTMENT?", 
                         "WARNING", JOptionPane.WARNING_MESSAGE);
                 
-                if(confirm ==0)
+                if(confirm == 0)
                 {
                     for(Prescription prescription : Prescription.prescriptions)
                     {
-                        if(prescription.getPatient().getID().equals(patient.getID()))
+                        if((prescription.getPatient().getID().equals(patient.getID())) && 
+                                (prescription.getDoctor().getID().equals(User.loggedUser.getID())))
                         {
+                            System.out.println("SAVED");
                             Prescription newPrescription = prescription;
                             PastAppointment pastAppointment = new PastAppointment((Doctor)User.loggedUser, patient, 
                                 this.txtSelectedAppointmentDate.getText(), newPrescription);
                             
                             pastAppointment.addPastAppointment(pastAppointment);
-                            getPastAppointments();
                             removeAppointment(id);
+                            getPastAppointments();
                             getAppointments();
                             setAppointments();
                         }

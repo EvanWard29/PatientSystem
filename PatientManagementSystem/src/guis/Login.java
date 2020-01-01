@@ -46,12 +46,12 @@ public class Login extends javax.swing.JFrame {
         //Medicine.saveMedicine();
         Medicine.getMedicine();
         
-        PrescriptionRequest.setPrescriptionRequests();
-        PrescriptionRequest.savePrescriptionRequests();
+        //PrescriptionRequest.setPrescriptionRequests();
+        //PrescriptionRequest.savePrescriptionRequests();
         PrescriptionRequest.getPrescriptionRequests();
         
-        MedicineRequest.setMedicineRequests();
-        MedicineRequest.saveMedicineRequests();
+        //MedicineRequest.setMedicineRequests();
+        //MedicineRequest.saveMedicineRequests();
         MedicineRequest.getMedicineRequests();
     }
     
