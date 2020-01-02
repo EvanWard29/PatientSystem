@@ -5,49 +5,38 @@
  */
 package system;
 import java.io.*;
-import users.*;
-
 /**
  *
  * @author LoL-1
  */
-public class TerminationRequest implements Serializable{
-    public static TerminationRequest[] terminationRequests;
-    private Patient Patient;
-
-    public TerminationRequest(Patient Patient) {
-        this.Patient = Patient;
-    }
-
-    public Patient getPatient() {
-        return Patient;
-    }
-
-    public void setPatientID(Patient Patient) {
-        this.Patient = Patient;
+public class MedicineRequest extends Medicine{
+    public static MedicineRequest[] medicineRequests;
+    
+    public MedicineRequest(String Name, int Stock) {
+        super(Name, Stock);
     }
     
-    public void addTerminationRequest(TerminationRequest newTerminationRequest)
+    public void addMedicineRequest(MedicineRequest newMedicine)
     {
-        TerminationRequest[] temp = new TerminationRequest[terminationRequests.length + 1];
+        MedicineRequest[] temp = new MedicineRequest[medicineRequests.length + 1];
         int i;
         
         for(i = 0;i < temp.length - 1; i++)
         {
-            temp[i] = terminationRequests[i];
+            temp[i] = medicineRequests[i];
         }
         
-        temp[i] = newTerminationRequest;
-        terminationRequests = temp;
+        temp[i] = newMedicine;
+        medicineRequests = temp;
         
-        saveTerminationRequests();
-        getTerminationRequests();
+        saveMedicineRequests();
+        getMedicineRequests();
     }
     
-    public static void getTerminationRequests()
+    public static void getMedicineRequests()
     {
-        TerminationRequest[] temp = null;
-        String filename = "data/terminationRequests.ser";
+        MedicineRequest[] temp = null;
+        String filename = "data/medicineRequests.ser";
         try
         {    
             // Reading the object from a file 
@@ -55,7 +44,7 @@ public class TerminationRequest implements Serializable{
             ObjectInputStream in = new ObjectInputStream(file); 
               
             // Method for deserialization of object 
-            temp = (TerminationRequest[])in.readObject(); 
+            temp = (MedicineRequest[])in.readObject(); 
               
             in.close(); 
             file.close(); 
@@ -71,12 +60,12 @@ public class TerminationRequest implements Serializable{
             System.out.println("ClassNotFoundException is caught"); 
         } 
         
-        terminationRequests = temp;
+        medicineRequests = temp;
     }
     
-    public static void saveTerminationRequests()
+    public static void saveMedicineRequests()
     {
-        String filename = "data/terminationRequests.ser"; 
+        String filename = "data/medicineRequests.ser"; 
           
         // Serialization  
         try
@@ -86,7 +75,7 @@ public class TerminationRequest implements Serializable{
             ObjectOutputStream out = new ObjectOutputStream(file); 
               
             // Method for serialization of object 
-            out.writeObject(terminationRequests); 
+            out.writeObject(medicineRequests); 
               
             out.close(); 
             file.close(); 
@@ -95,15 +84,15 @@ public class TerminationRequest implements Serializable{
         catch(IOException ex) 
         { 
             System.out.println("IOException is caught: " +  ex); 
-        } 
+        }
     }
     
-    public static void setTerminationRequests()
+    public static void setMedicineRequests()
     {
-        TerminationRequest[] temp = {
-            new TerminationRequest(new Patient("P003", "5f4dcc3b5aa765d61d8327deb882cf99", 
-                    "Linda", "Bennett", "66 Neswick Street,\nPlymouth,\nPL1 5JN", "F", "10/08/1992"))
+        MedicineRequest[] temp = {
+            new MedicineRequest("Paracetamol", 45)
         };
-        terminationRequests = temp;
+        
+        medicineRequests = temp;
     }
 }

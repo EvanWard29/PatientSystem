@@ -4,50 +4,41 @@
  * and open the template in the editor.
  */
 package system;
-import java.io.*;
 import users.*;
-
+import java.io.*;
 /**
  *
  * @author LoL-1
  */
-public class TerminationRequest implements Serializable{
-    public static TerminationRequest[] terminationRequests;
-    private Patient Patient;
-
-    public TerminationRequest(Patient Patient) {
-        this.Patient = Patient;
-    }
-
-    public Patient getPatient() {
-        return Patient;
-    }
-
-    public void setPatientID(Patient Patient) {
-        this.Patient = Patient;
+public class PrescriptionRequest extends Prescription {
+    public static PrescriptionRequest[] prescriptionRequests;
+    
+    public PrescriptionRequest(Doctor Doctor, Patient Patient, String Notes, Medicine Medicine, int Quantity, String Dosage) {
+        super(Doctor, Patient, Notes, Medicine, Quantity, Dosage);
     }
     
-    public void addTerminationRequest(TerminationRequest newTerminationRequest)
+    
+    public static void addPrescriptionRequest(PrescriptionRequest newPrescriptionRequest)
     {
-        TerminationRequest[] temp = new TerminationRequest[terminationRequests.length + 1];
+        PrescriptionRequest[] temp = new PrescriptionRequest[prescriptionRequests.length + 1];
         int i;
         
         for(i = 0;i < temp.length - 1; i++)
         {
-            temp[i] = terminationRequests[i];
+            temp[i] = prescriptionRequests[i];
         }
         
-        temp[i] = newTerminationRequest;
-        terminationRequests = temp;
+        temp[i] = newPrescriptionRequest;
+        prescriptionRequests = temp;
         
-        saveTerminationRequests();
-        getTerminationRequests();
+        savePrescriptionRequests();
+        getPrescriptionRequests();
     }
     
-    public static void getTerminationRequests()
+    public static void getPrescriptionRequests()
     {
-        TerminationRequest[] temp = null;
-        String filename = "data/terminationRequests.ser";
+        PrescriptionRequest[] temp = null;
+        String filename = "data/prescriptionRequests.ser";
         try
         {    
             // Reading the object from a file 
@@ -55,7 +46,7 @@ public class TerminationRequest implements Serializable{
             ObjectInputStream in = new ObjectInputStream(file); 
               
             // Method for deserialization of object 
-            temp = (TerminationRequest[])in.readObject(); 
+            temp = (PrescriptionRequest[])in.readObject(); 
               
             in.close(); 
             file.close(); 
@@ -71,12 +62,12 @@ public class TerminationRequest implements Serializable{
             System.out.println("ClassNotFoundException is caught"); 
         } 
         
-        terminationRequests = temp;
+        prescriptionRequests = temp;
     }
     
-    public static void saveTerminationRequests()
+    public static void savePrescriptionRequests()
     {
-        String filename = "data/terminationRequests.ser"; 
+        String filename = "data/prescriptionRequests.ser"; 
           
         // Serialization  
         try
@@ -86,7 +77,7 @@ public class TerminationRequest implements Serializable{
             ObjectOutputStream out = new ObjectOutputStream(file); 
               
             // Method for serialization of object 
-            out.writeObject(terminationRequests); 
+            out.writeObject(prescriptionRequests); 
               
             out.close(); 
             file.close(); 
@@ -95,15 +86,15 @@ public class TerminationRequest implements Serializable{
         catch(IOException ex) 
         { 
             System.out.println("IOException is caught: " +  ex); 
-        } 
+        }
     }
     
-    public static void setTerminationRequests()
+    public static void setPrescriptionRequests()
     {
-        TerminationRequest[] temp = {
-            new TerminationRequest(new Patient("P003", "5f4dcc3b5aa765d61d8327deb882cf99", 
-                    "Linda", "Bennett", "66 Neswick Street,\nPlymouth,\nPL1 5JN", "F", "10/08/1992"))
+        PrescriptionRequest[] temp = {
+            new PrescriptionRequest(Doctor.doctors[2], Patient.patients[1], "N/A", Medicine.medicines[3], 5, "1 EVERY 12 HOURS")
         };
-        terminationRequests = temp;
+        
+        prescriptionRequests = temp;
     }
 }
