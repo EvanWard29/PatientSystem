@@ -30,16 +30,16 @@ public class Login extends javax.swing.JFrame {
         //User.saveUsers();
         User.getUsers();
         
-        //Appointment.setAppointments();
-        //Appointment.saveAppointments();
+        Appointment.setAppointments();
+        Appointment.saveAppointments();
         Appointment.getAppointments();
         
-        //Prescription.setPrescriptions();
-        //Prescription.savePrescriptions();
+        Prescription.setPrescriptions();
+        Prescription.savePrescriptions();
         Prescription.getPrescriptions();
         
-        //PastAppointment.setPastAppointments();
-        //PastAppointment.savePastAppointments();
+        PastAppointment.setPastAppointments();
+        PastAppointment.savePastAppointments();
         PastAppointment.getPastAppointments();
         
         //Medicine.setMedicine();
@@ -53,9 +53,21 @@ public class Login extends javax.swing.JFrame {
         //MedicineRequest.setMedicineRequests();
         //MedicineRequest.saveMedicineRequests();
         MedicineRequest.getMedicineRequests();
+        
+        AppointmentRequest.setAppointmentRequests();
+        AppointmentRequest.saveAppointmentRequests();
+        AppointmentRequest.getAppointmentRequests();
+        
+        Feedback.setFeedback();
+        Feedback.saveFeedback();
+        Feedback.getFeedback();
+        
+        TerminationRequest.setTerminationRequests();
+        TerminationRequest.saveTerminationRequests();
+        TerminationRequest.getTerminationRequests();
     }
     
-    private String hashPassword(String password)
+    public static String hashPassword(String password)
     {
         String generatedPassword = null;
         try {
@@ -268,6 +280,11 @@ public class Login extends javax.swing.JFrame {
             Appointment.saveAppointments();
             Prescription.savePrescriptions();
             PastAppointment.savePastAppointments();
+            Medicine.saveMedicine();
+            PrescriptionRequest.savePrescriptionRequests();
+            MedicineRequest.saveMedicineRequests();
+            AppointmentRequest.saveAppointmentRequests();
+            Feedback.saveFeedback();
 	}
     }
 
