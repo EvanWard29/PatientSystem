@@ -22,8 +22,8 @@ public class AdminMenu extends javax.swing.JFrame {
     public AdminMenu() {
         initComponents();
         getUserInfo();
-        setDoctors();
-        setNewFeedback();
+        getDoctors();
+        setFeedbackRequests();
     }
     
     private void getUserInfo()
@@ -34,25 +34,49 @@ public class AdminMenu extends javax.swing.JFrame {
         this.txtUserAddress.setText(User.loggedUser.getAddress());
     }
     
-    private void setDoctors()
+    private void setFeedbackRequests()
     {
-        String[] doctors = {"Dr. Who", "Dr. Ward", "Dr. Bloggs", "Dr. Cavil", "Dr. Thompson", "Dr. Booton",
-            "Dr. Glennie", "Dr. Jones", "Dr. Howells", "Dr. Walsh"};
+        DefaultTableModel model = (DefaultTableModel) this.tblNewFeedback.getModel();
+        
+        int rowCount = model.getRowCount();
+        if(rowCount > 0)
+        {
+            for (int i = rowCount - 1; i >= 0; i--) 
+            {
+                model.removeRow(i);
+            }
+        }
+        
+        for(FeedbackRequest feedbackRequest : FeedbackRequest.feedbackRequests)
+        {
+            Doctor doctor = feedbackRequest.getDoctor();
+            
+            String[] data = {
+                doctor.getForename() + " " + doctor.getSurname(),
+                Double.toString(feedbackRequest.getRating()),
+                feedbackRequest.getNotes()
+            };
+            
+            model.addRow(data);
+        }
+    }
+    
+    private void getDoctors()
+    {
+        String[] doctors = new String[Doctor.doctors.length + 1];
+        doctors[0] = "Select Doctor";
+        int i = 1;
+        
+        for(Doctor doctor : Doctor.doctors)
+        {
+            String name = doctor.getForename() + " " + doctor.getSurname();
+            
+            doctors[i] = name;
+            i++;
+        }
         
         DefaultComboBoxModel model = new DefaultComboBoxModel(doctors);
         this.cmbSelectDoctor.setModel(model);
-    }
-    
-    private void setNewFeedback()
-    {
-        String[][] newFeedback = {{"Dr. Who", "8", "DOCTOR WAS KIND"}, {"Dr. Ward", 
-            "9.5","DOCTOR WAS THE BEST"}, {"Dr. Bloggs", "3.4", "DOCTOR WAS SHITE"}};
-        
-        DefaultTableModel model = (DefaultTableModel) this.tblNewFeedback.getModel();
-        for(String[] feedback : newFeedback)
-        {
-            model.addRow(feedback);
-        }  
     }
 
     /**
@@ -84,10 +108,6 @@ public class AdminMenu extends javax.swing.JFrame {
         tabCreateAdminAccount = new javax.swing.JPanel();
         jPanel1 = new javax.swing.JPanel();
         lblCreateAdmin = new javax.swing.JLabel();
-        jPanel2 = new javax.swing.JPanel();
-        lblNewUserID = new javax.swing.JLabel();
-        txtNewAdminID = new javax.swing.JTextField();
-        lblAdmin = new javax.swing.JLabel();
         jPanel3 = new javax.swing.JPanel();
         lblNewForename = new javax.swing.JLabel();
         txtNewForename = new javax.swing.JTextField();
@@ -102,10 +122,6 @@ public class AdminMenu extends javax.swing.JFrame {
         tabAddDoctors_Secretarys = new javax.swing.JPanel();
         jPanel7 = new javax.swing.JPanel();
         lblCreateAdmin1 = new javax.swing.JLabel();
-        jPanel8 = new javax.swing.JPanel();
-        lblNewUserID1 = new javax.swing.JLabel();
-        txtNewUserID = new javax.swing.JTextField();
-        lblAccountLetter = new javax.swing.JLabel();
         jPanel9 = new javax.swing.JPanel();
         lblNewUserForename = new javax.swing.JLabel();
         txtNewUserForename = new javax.swing.JTextField();
@@ -126,6 +142,14 @@ public class AdminMenu extends javax.swing.JFrame {
         lblViewAppointment5 = new javax.swing.JLabel();
         jScrollPane3 = new javax.swing.JScrollPane();
         tblDoctorFeedback = new javax.swing.JTable();
+        jPanel2 = new javax.swing.JPanel();
+        lblDoctorName = new javax.swing.JLabel();
+        txtDoctorName = new javax.swing.JTextField();
+        lblOverallRating = new javax.swing.JLabel();
+        txtDoctorRating = new javax.swing.JTextField();
+        lblFeedback = new javax.swing.JLabel();
+        jScrollPane5 = new javax.swing.JScrollPane();
+        txtFeedback = new javax.swing.JTextArea();
         tabAddFeedback = new javax.swing.JPanel();
         jPanel28 = new javax.swing.JPanel();
         lblAddDoctorFeedback = new javax.swing.JLabel();
@@ -308,7 +332,7 @@ public class AdminMenu extends javax.swing.JFrame {
                 .addComponent(jPanel16, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
                 .addComponent(jPanel18, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(235, Short.MAX_VALUE))
+                .addContainerGap(239, Short.MAX_VALUE))
         );
 
         menuAdmin.addTab("User Information", tabUserInfo);
@@ -317,40 +341,6 @@ public class AdminMenu extends javax.swing.JFrame {
 
         lblCreateAdmin.setFont(new java.awt.Font("Arial", 1, 18)); // NOI18N
         lblCreateAdmin.setText("Create Admin Account");
-
-        jPanel2.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
-
-        lblNewUserID.setFont(new java.awt.Font("Arial", 0, 16)); // NOI18N
-        lblNewUserID.setText("User ID:");
-
-        txtNewAdminID.setFont(new java.awt.Font("Arial", 1, 16)); // NOI18N
-
-        lblAdmin.setFont(new java.awt.Font("Arial", 1, 16)); // NOI18N
-        lblAdmin.setText("A");
-
-        javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
-        jPanel2.setLayout(jPanel2Layout);
-        jPanel2Layout.setHorizontalGroup(
-            jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel2Layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(lblNewUserID)
-                .addGap(18, 18, 18)
-                .addComponent(lblAdmin)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(txtNewAdminID)
-                .addContainerGap())
-        );
-        jPanel2Layout.setVerticalGroup(
-            jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(lblNewUserID, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(txtNewAdminID, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(lblAdmin))
-                .addContainerGap())
-        );
 
         jPanel3.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
 
@@ -366,8 +356,8 @@ public class AdminMenu extends javax.swing.JFrame {
             .addGroup(jPanel3Layout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(lblNewForename)
-                .addGap(18, 18, 18)
-                .addComponent(txtNewForename, javax.swing.GroupLayout.PREFERRED_SIZE, 876, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(32, 32, 32)
+                .addComponent(txtNewForename)
                 .addContainerGap())
         );
         jPanel3Layout.setVerticalGroup(
@@ -425,8 +415,8 @@ public class AdminMenu extends javax.swing.JFrame {
             .addGroup(jPanel6Layout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(lblNewSurname)
-                .addGap(27, 27, 27)
-                .addComponent(txtNewSurname, javax.swing.GroupLayout.PREFERRED_SIZE, 853, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(txtNewSurname)
                 .addContainerGap())
         );
         jPanel6Layout.setVerticalGroup(
@@ -451,39 +441,39 @@ public class AdminMenu extends javax.swing.JFrame {
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(lblCreateAdmin)
-                .addGap(392, 392, 392))
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jPanel2, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jPanel3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jPanel4, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jPanel6, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                .addContainerGap())
-            .addGroup(jPanel1Layout.createSequentialGroup()
-                .addGap(472, 472, 472)
-                .addComponent(btnAddAdmin)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jPanel3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(jPanel4, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(jPanel6, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                        .addContainerGap())
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+                        .addGap(0, 415, Short.MAX_VALUE)
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+                                .addComponent(lblCreateAdmin)
+                                .addGap(392, 392, 392))
+                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+                                .addComponent(btnAddAdmin)
+                                .addGap(465, 465, 465))))))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(lblCreateAdmin)
-                .addGap(18, 18, 18)
-                .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
+                .addGap(48, 48, 48)
                 .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
                 .addComponent(jPanel6, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
                 .addComponent(jPanel4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
+                .addGap(33, 33, 33)
                 .addComponent(btnAddAdmin)
-                .addContainerGap(148, Short.MAX_VALUE))
+                .addContainerGap(185, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout tabCreateAdminAccountLayout = new javax.swing.GroupLayout(tabCreateAdminAccount);
@@ -509,40 +499,6 @@ public class AdminMenu extends javax.swing.JFrame {
 
         lblCreateAdmin1.setFont(new java.awt.Font("Arial", 1, 18)); // NOI18N
         lblCreateAdmin1.setText("Add Doctor/Secretary");
-
-        jPanel8.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
-
-        lblNewUserID1.setFont(new java.awt.Font("Arial", 0, 16)); // NOI18N
-        lblNewUserID1.setText("User ID:");
-
-        txtNewUserID.setFont(new java.awt.Font("Arial", 1, 16)); // NOI18N
-
-        lblAccountLetter.setFont(new java.awt.Font("Arial", 1, 16)); // NOI18N
-        lblAccountLetter.setText("D");
-
-        javax.swing.GroupLayout jPanel8Layout = new javax.swing.GroupLayout(jPanel8);
-        jPanel8.setLayout(jPanel8Layout);
-        jPanel8Layout.setHorizontalGroup(
-            jPanel8Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel8Layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(lblNewUserID1)
-                .addGap(18, 18, 18)
-                .addComponent(lblAccountLetter)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(txtNewUserID)
-                .addContainerGap())
-        );
-        jPanel8Layout.setVerticalGroup(
-            jPanel8Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel8Layout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addGroup(jPanel8Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(lblNewUserID1, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(txtNewUserID, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(lblAccountLetter))
-                .addContainerGap())
-        );
 
         jPanel9.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
 
@@ -661,7 +617,6 @@ public class AdminMenu extends javax.swing.JFrame {
             .addGroup(jPanel7Layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(jPanel7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jPanel8, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(jPanel9, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(jPanel10, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(jPanel11, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
@@ -683,21 +638,19 @@ public class AdminMenu extends javax.swing.JFrame {
             .addGroup(jPanel7Layout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(lblCreateAdmin1)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 33, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 37, Short.MAX_VALUE)
                 .addGroup(jPanel7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(cmbAccountType, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(lblType))
-                .addGap(35, 35, 35)
-                .addComponent(jPanel8, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
                 .addComponent(jPanel9, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
                 .addComponent(jPanel11, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
                 .addComponent(jPanel10, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
+                .addGap(54, 54, 54)
                 .addComponent(btnAddAccount)
-                .addGap(73, 73, 73))
+                .addGap(132, 132, 132))
         );
 
         javax.swing.GroupLayout tabAddDoctors_SecretarysLayout = new javax.swing.GroupLayout(tabAddDoctors_Secretarys);
@@ -735,16 +688,17 @@ public class AdminMenu extends javax.swing.JFrame {
         lblViewAppointment5.setFont(new java.awt.Font("Arial", 1, 18)); // NOI18N
         lblViewAppointment5.setText("View Doctor Ratings");
 
+        tblDoctorFeedback.setFont(new java.awt.Font("Arial", 1, 16)); // NOI18N
         tblDoctorFeedback.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
 
             },
             new String [] {
-                "Doctor Rating", "Feedback"
+                "Rating", "Feedback"
             }
         ) {
             Class[] types = new Class [] {
-                java.lang.Integer.class, java.lang.String.class
+                java.lang.String.class, java.lang.String.class
             };
             boolean[] canEdit = new boolean [] {
                 false, false
@@ -758,30 +712,101 @@ public class AdminMenu extends javax.swing.JFrame {
                 return canEdit [columnIndex];
             }
         });
+        tblDoctorFeedback.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                tblDoctorFeedbackMouseClicked(evt);
+            }
+        });
         jScrollPane3.setViewportView(tblDoctorFeedback);
         if (tblDoctorFeedback.getColumnModel().getColumnCount() > 0) {
             tblDoctorFeedback.getColumnModel().getColumn(0).setResizable(false);
-            tblDoctorFeedback.getColumnModel().getColumn(1).setPreferredWidth(100);
+            tblDoctorFeedback.getColumnModel().getColumn(1).setResizable(false);
         }
+
+        jPanel2.setBorder(javax.swing.BorderFactory.createEtchedBorder());
+
+        lblDoctorName.setFont(new java.awt.Font("Arial", 0, 16)); // NOI18N
+        lblDoctorName.setText("Doctor:");
+
+        txtDoctorName.setEditable(false);
+        txtDoctorName.setFont(new java.awt.Font("Arial", 1, 16)); // NOI18N
+
+        lblOverallRating.setFont(new java.awt.Font("Arial", 0, 16)); // NOI18N
+        lblOverallRating.setText("Overall Rating");
+
+        txtDoctorRating.setEditable(false);
+        txtDoctorRating.setFont(new java.awt.Font("Arial", 1, 16)); // NOI18N
+
+        lblFeedback.setFont(new java.awt.Font("Arial", 0, 16)); // NOI18N
+        lblFeedback.setText("Feedback:");
+
+        txtFeedback.setColumns(20);
+        txtFeedback.setFont(new java.awt.Font("Arial", 1, 16)); // NOI18N
+        txtFeedback.setLineWrap(true);
+        txtFeedback.setRows(5);
+        jScrollPane5.setViewportView(txtFeedback);
+
+        javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
+        jPanel2.setLayout(jPanel2Layout);
+        jPanel2Layout.setHorizontalGroup(
+            jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel2Layout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.CENTER)
+                    .addComponent(lblOverallRating)
+                    .addComponent(lblDoctorName))
+                .addGap(18, 18, 18)
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(txtDoctorName, javax.swing.GroupLayout.PREFERRED_SIZE, 264, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(txtDoctorRating, javax.swing.GroupLayout.PREFERRED_SIZE, 264, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(50, 50, 50)
+                .addComponent(lblFeedback)
+                .addGap(18, 18, 18)
+                .addComponent(jScrollPane5)
+                .addContainerGap())
+        );
+        jPanel2Layout.setVerticalGroup(
+            jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel2Layout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel2Layout.createSequentialGroup()
+                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(lblDoctorName)
+                            .addComponent(txtDoctorName, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(lblFeedback))
+                        .addGap(18, 18, 18)
+                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(lblOverallRating)
+                            .addComponent(txtDoctorRating, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(0, 59, Short.MAX_VALUE))
+                    .addComponent(jScrollPane5))
+                .addContainerGap())
+        );
 
         javax.swing.GroupLayout jPanel27Layout = new javax.swing.GroupLayout(jPanel27);
         jPanel27.setLayout(jPanel27Layout);
         jPanel27Layout.setHorizontalGroup(
             jPanel27Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel27Layout.createSequentialGroup()
-                .addContainerGap()
                 .addGroup(jPanel27Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jScrollPane3)
                     .addGroup(jPanel27Layout.createSequentialGroup()
-                        .addComponent(lblViewAppointment3)
-                        .addGap(18, 18, 18)
-                        .addComponent(cmbSelectDoctor, javax.swing.GroupLayout.PREFERRED_SIZE, 388, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(0, 479, Short.MAX_VALUE)))
+                        .addContainerGap()
+                        .addGroup(jPanel27Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jScrollPane3)
+                            .addGroup(jPanel27Layout.createSequentialGroup()
+                                .addComponent(lblViewAppointment3)
+                                .addGap(18, 18, 18)
+                                .addComponent(cmbSelectDoctor, javax.swing.GroupLayout.PREFERRED_SIZE, 388, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(0, 479, Short.MAX_VALUE))))
+                    .addGroup(jPanel27Layout.createSequentialGroup()
+                        .addGap(413, 413, 413)
+                        .addComponent(lblViewAppointment5)
+                        .addGap(0, 0, Short.MAX_VALUE))
+                    .addGroup(jPanel27Layout.createSequentialGroup()
+                        .addContainerGap()
+                        .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
                 .addContainerGap())
-            .addGroup(jPanel27Layout.createSequentialGroup()
-                .addGap(413, 413, 413)
-                .addComponent(lblViewAppointment5)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         jPanel27Layout.setVerticalGroup(
             jPanel27Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -793,7 +818,9 @@ public class AdminMenu extends javax.swing.JFrame {
                     .addComponent(lblViewAppointment3)
                     .addComponent(cmbSelectDoctor, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
-                .addComponent(jScrollPane3, javax.swing.GroupLayout.DEFAULT_SIZE, 500, Short.MAX_VALUE)
+                .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 333, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(18, 18, 18)
+                .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addContainerGap())
         );
 
@@ -821,6 +848,7 @@ public class AdminMenu extends javax.swing.JFrame {
         lblAddDoctorFeedback.setFont(new java.awt.Font("Arial", 1, 18)); // NOI18N
         lblAddDoctorFeedback.setText("Add Doctor Feedback");
 
+        tblNewFeedback.setFont(new java.awt.Font("Arial", 1, 16)); // NOI18N
         tblNewFeedback.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
 
@@ -865,14 +893,12 @@ public class AdminMenu extends javax.swing.JFrame {
 
         txtDoctor.setEditable(false);
         txtDoctor.setFont(new java.awt.Font("Arial", 1, 16)); // NOI18N
-        txtDoctor.setText("jTextField1");
 
         lblRating.setFont(new java.awt.Font("Arial", 0, 16)); // NOI18N
         lblRating.setText("Rating:");
 
         txtRating.setEditable(false);
         txtRating.setFont(new java.awt.Font("Arial", 1, 16)); // NOI18N
-        txtRating.setText("jTextField1");
 
         lblPastNote.setFont(new java.awt.Font("Arial", 0, 16)); // NOI18N
         lblPastNote.setText("Note:");
@@ -937,7 +963,7 @@ public class AdminMenu extends javax.swing.JFrame {
                         .addGroup(jPanel25Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(lblRating)
                             .addComponent(txtRating, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 31, Short.MAX_VALUE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 35, Short.MAX_VALUE)
                         .addComponent(btnApprove))
                     .addComponent(jScrollPane6))
                 .addContainerGap())
@@ -1037,30 +1063,66 @@ public class AdminMenu extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnAddAdminActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAddAdminActionPerformed
-        String userType = this.lblAdmin.getText();
-        String userID = userType + this.txtNewAdminID.getText();
         String forename = this.txtNewForename.getText();
         String surname = this.txtNewSurname.getText();
         String address = this.txtNewAddress.getText();
+        String userID = String.format("A%03d", Admin.admins.length + 1);
         
-        //Admin newAdmin = new Admin(userID, forename, surname, address);
+        if((forename.equals("")) || (surname.equals("")) || (address.equals("")))
+        {
+            JOptionPane.showMessageDialog(this, "FILL IN ALL FIELDS", "ERROR", JOptionPane.ERROR_MESSAGE);
+        }
+        else
+        {
+            int confirm = JOptionPane.showConfirmDialog(this, "ARE YOU SURE YOU WISH TO CONFIRM?", "WARNING", 
+                JOptionPane.INFORMATION_MESSAGE);
         
+            if(confirm == 0)
+            {
+                Admin newAdmin = new Admin(userID, "5f4dcc3b5aa765d61d8327deb882cf99", forename, surname, address);
+                newAdmin.addAdmin(newAdmin);
+                
+                JOptionPane.showMessageDialog(this, "ADMIN ADDED", "SUCCESS", JOptionPane.INFORMATION_MESSAGE);
+                
+                this.txtNewForename.setText("");
+                this.txtNewSurname.setText("");
+                this.txtNewAddress.setText("");
+            }
+        } 
     }//GEN-LAST:event_btnAddAdminActionPerformed
 
     private void btnAddAccountActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAddAccountActionPerformed
-        String userType = this.lblAccountLetter.getText();
-        String userID = userType + this.txtNewUserID.getText();
+        String userID = "";
         String forename = this.txtNewUserForename.getText();
         String surname = this.txtNewUserSurname.getText();
         String address = this.txtNewUserAddress.getText();
         
-        if(userType == "D")
+        String userType = (String) this.cmbAccountType.getSelectedItem();
+        
+        if((forename.equals("")) || (surname.equals("")) || (address.equals("")))
         {
-            //Doctor newDoctor = new Doctor(userID, forename, surname, address);
+            JOptionPane.showMessageDialog(this, "FILL IN ALL FIELDS", "ERROR", JOptionPane.ERROR_MESSAGE);
         }
-        else if(userType == "S")
+        else
         {
-            //Secretary newSecretary = new Secretary(userID, forename, surname, address);
+            if(userType.equals("Doctor"))
+            {
+                userID = String.format("D%03d", Doctor.doctors.length + 1);
+                Doctor newDoctor = new Doctor(userID, "5f4dcc3b5aa765d61d8327deb882cf99", forename, surname, address);
+                newDoctor.addDoctor(newDoctor);
+            }
+            else if(userType.equals("Secretary"))
+            {
+                userID = String.format("S%03d", Secretary.secretarys.length + 1);
+                Secretary newSecretary = new Secretary(userID, "5f4dcc3b5aa765d61d8327deb882cf99", forename, surname, address);
+                newSecretary.addSecretary(newSecretary);
+            }
+            
+            JOptionPane.showMessageDialog(this, "USER ADDED", "SUCCESS", JOptionPane.INFORMATION_MESSAGE);
+            
+            this.txtNewUserForename.setText("");
+            this.txtNewUserSurname.setText("");
+            this.txtNewUserAddress.setText("");
         }
     }//GEN-LAST:event_btnAddAccountActionPerformed
 
@@ -1069,35 +1131,13 @@ public class AdminMenu extends javax.swing.JFrame {
         
         if(selection == "Doctor")
         {
-            this.lblAccountLetter.setText("D");
+            //this.lblAccountLetter.setText("D");
         }
         else if(selection == "Secretary")
         {
-            this.lblAccountLetter.setText("S");
+            //this.lblAccountLetter.setText("S");
         }
     }//GEN-LAST:event_cmbAccountTypeActionPerformed
-
-    private void cmbSelectDoctorActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cmbSelectDoctorActionPerformed
-        String doctor = (String) this.cmbSelectDoctor.getSelectedItem();
-        //GET FEEDBACK FROM FILE, ADD TO ARRAY
-        String[][] data = {{"2", "VERY NICE PERSON"}, {"5", "BIT SCARY"}, {"8", "THE BEST DOCTOR"}, {"0", "ABSOLUTE SHITE"}};
-        
-        DefaultTableModel model = (DefaultTableModel) this.tblDoctorFeedback.getModel();
-        int rows = model.getRowCount();
-        if(rows > 0)
-        {
-            for (int i = rows - 1; i >= 0; i--)
-            {
-                model.removeRow(i);
-            }
-        }
-        
-        for(String[] feedback : data)
-        {
-            
-            model.addRow(feedback);
-        }
-    }//GEN-LAST:event_cmbSelectDoctorActionPerformed
 
     private void tblNewFeedbackMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tblNewFeedbackMouseClicked
         int row = 0;
@@ -1114,13 +1154,44 @@ public class AdminMenu extends javax.swing.JFrame {
     }//GEN-LAST:event_tblNewFeedbackMouseClicked
 
     private void btnApproveActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnApproveActionPerformed
-        String doctor = this.txtDoctor.getText();
-        String doctorID = "D"; //Find Doctor ID In Array of Doctors
-        String rating = this.txtRating.getText();
+        String doctorName = this.txtDoctor.getText();
+        double rating = Double.parseDouble(this.txtRating.getText());
         String note = this.txtFeedbackNote.getText();
         
-        //ADD FEEDBACK TO FILE
-        //Feedback doctorFeedback = new Feedback(doctorID, rating, note);
+        int confirm = JOptionPane.showConfirmDialog(this, "ARE YOU SURE YOU WISH TO CONFIRM?", "WARNING",
+                JOptionPane.INFORMATION_MESSAGE);
+        
+        if(confirm == 0)
+        {
+            for(Doctor doctor : Doctor.doctors)
+            {
+                if((doctor.getForename() + " " + doctor.getSurname()).equals(doctorName))
+                {
+                    Feedback newFeedback = new Feedback(doctor, rating, note);
+                    newFeedback.addFeedback(newFeedback);
+                    
+                    for(FeedbackRequest feedbackRequest : FeedbackRequest.feedbackRequests)
+                    {
+                        Doctor requestDoctor = feedbackRequest.getDoctor();
+                        String requestName = requestDoctor.getForename() + " " + requestDoctor.getSurname();
+                        double requestRating = feedbackRequest.getRating();
+                        String requestNotes = feedbackRequest.getNotes();
+                        
+                        if((requestName.equals(doctorName)) && (requestRating == rating) && (requestNotes.equals(note)))
+                        {
+                            feedbackRequest.removeFeedbackRequest(feedbackRequest);
+                            break;
+                        }
+                    }
+                    
+                    setFeedbackRequests();
+                    this.txtDoctor.setText("");
+                    this.txtRating.setText("");
+                    this.txtFeedbackNote.setText("");
+                    break;
+                }
+            }
+        }
     }//GEN-LAST:event_btnApproveActionPerformed
 
     private void btnLogoutActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnLogoutActionPerformed
@@ -1137,6 +1208,75 @@ public class AdminMenu extends javax.swing.JFrame {
             this.setVisible(false);
         }
     }//GEN-LAST:event_btnLogoutActionPerformed
+
+    private void cmbSelectDoctorActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cmbSelectDoctorActionPerformed
+        String doctorName = (String) this.cmbSelectDoctor.getSelectedItem();
+        DefaultTableModel model = (DefaultTableModel) this.tblDoctorFeedback.getModel();
+        this.txtDoctorName.setText("");
+        this.txtDoctorRating.setText("");
+        this.txtFeedback.setText("");
+        
+        int rowCount = model.getRowCount();
+        if(rowCount > 0)
+        {
+            for (int i = rowCount - 1; i >= 0; i--) 
+            {
+                model.removeRow(i);
+            }
+        }
+        
+        for(Doctor doctor : Doctor.doctors)
+        {
+            String forename = doctor.getForename();
+            String surname = doctor.getSurname();
+            
+            if((forename + " " + surname).equals(doctorName))
+            {
+                double totalRating = 0;
+                double numFeedback = 0;
+                double overallRating = 0;
+                
+                for(Feedback feedback : Feedback.feedback)
+                {
+                    if(feedback.getDoctor().getID().equals(doctor.getID()))
+                    {
+                        String[] data = {
+                            Double.toString(feedback.getRating()),
+                            feedback.getNotes()
+                        };
+                        totalRating += feedback.getRating();
+                        numFeedback++;
+                        model.addRow(data);
+                    }
+                }
+                
+                overallRating = totalRating / numFeedback;
+                this.txtDoctorName.setText(doctorName);
+                
+                if(Double.toString(overallRating).equals("NaN"))
+                {
+                    this.txtDoctorRating.setText("0.0");
+                }
+                else
+                {
+                    this.txtDoctorRating.setText(Double.toString(overallRating));
+                }
+                break;
+            }
+        }
+    }//GEN-LAST:event_cmbSelectDoctorActionPerformed
+
+    private void tblDoctorFeedbackMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tblDoctorFeedbackMouseClicked
+        int row = 0;
+        String[] data = new String[2];
+        for(int i = 0; i < data.length; i++)
+        {
+            row = this.tblDoctorFeedback.getSelectedRow();
+            String value = this.tblDoctorFeedback.getModel().getValueAt(row, i).toString();
+            data[i] = value;
+        }
+        this.txtFeedback.setText(data[1]);
+    }//GEN-LAST:event_tblDoctorFeedbackMouseClicked
 
     /**
      * @param args the command line arguments
@@ -1185,7 +1325,6 @@ public class AdminMenu extends javax.swing.JFrame {
     private javax.swing.JPanel jPanel11;
     private javax.swing.JPanel jPanel12;
     private javax.swing.JPanel jPanel13;
-    private javax.swing.JPanel jPanel14;
     private javax.swing.JPanel jPanel16;
     private javax.swing.JPanel jPanel18;
     private javax.swing.JPanel jPanel2;
@@ -1194,25 +1333,23 @@ public class AdminMenu extends javax.swing.JFrame {
     private javax.swing.JPanel jPanel28;
     private javax.swing.JPanel jPanel3;
     private javax.swing.JPanel jPanel4;
-    private javax.swing.JPanel jPanel5;
     private javax.swing.JPanel jPanel6;
     private javax.swing.JPanel jPanel7;
-    private javax.swing.JPanel jPanel8;
     private javax.swing.JPanel jPanel9;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JScrollPane jScrollPane3;
     private javax.swing.JScrollPane jScrollPane4;
+    private javax.swing.JScrollPane jScrollPane5;
     private javax.swing.JScrollPane jScrollPane6;
     private javax.swing.JScrollPane jScrollPane8;
-    private javax.swing.JLabel lblAccountLetter;
     private javax.swing.JLabel lblAccountType1;
-    private javax.swing.JLabel lblAccountType2;
     private javax.swing.JLabel lblAddDoctorFeedback;
-    private javax.swing.JLabel lblAdmin;
     private javax.swing.JLabel lblCreateAdmin;
     private javax.swing.JLabel lblCreateAdmin1;
     private javax.swing.JLabel lblDoctor;
+    private javax.swing.JLabel lblDoctorName;
+    private javax.swing.JLabel lblFeedback;
     private java.awt.Label lblMain;
     private javax.swing.JLabel lblNewAddress;
     private javax.swing.JLabel lblNewFeedback;
@@ -1220,15 +1357,13 @@ public class AdminMenu extends javax.swing.JFrame {
     private javax.swing.JLabel lblNewSurname;
     private javax.swing.JLabel lblNewUserAddress;
     private javax.swing.JLabel lblNewUserForename;
-    private javax.swing.JLabel lblNewUserID;
-    private javax.swing.JLabel lblNewUserID1;
     private javax.swing.JLabel lblNewUserSurname;
+    private javax.swing.JLabel lblOverallRating;
     private javax.swing.JLabel lblPastNote;
     private javax.swing.JLabel lblRating;
     private javax.swing.JLabel lblType;
     private javax.swing.JLabel lblUserID1;
     private javax.swing.JLabel lblUserInfo1;
-    private javax.swing.JLabel lblUserInfo2;
     private javax.swing.JLabel lblUserName1;
     private javax.swing.JLabel lblUserName2;
     private javax.swing.JLabel lblViewAppointment3;
@@ -1241,16 +1376,16 @@ public class AdminMenu extends javax.swing.JFrame {
     private javax.swing.JPanel tabUserInfo;
     private javax.swing.JTable tblDoctorFeedback;
     private javax.swing.JTable tblNewFeedback;
-    private javax.swing.JTextField txtAccountType;
     private javax.swing.JTextField txtDoctor;
+    private javax.swing.JTextField txtDoctorName;
+    private javax.swing.JTextField txtDoctorRating;
+    private javax.swing.JTextArea txtFeedback;
     private javax.swing.JTextArea txtFeedbackNote;
     private javax.swing.JTextArea txtNewAddress;
-    private javax.swing.JTextField txtNewAdminID;
     private javax.swing.JTextField txtNewForename;
     private javax.swing.JTextField txtNewSurname;
     private javax.swing.JTextArea txtNewUserAddress;
     private javax.swing.JTextField txtNewUserForename;
-    private javax.swing.JTextField txtNewUserID;
     private javax.swing.JTextField txtNewUserSurname;
     private javax.swing.JTextField txtRating;
     private javax.swing.JTextField txtUserAccountType;

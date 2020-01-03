@@ -19,6 +19,8 @@ public class Admin extends User {
         
         temp[i] = newAdmin;
         admins = temp;
+        
+        addUser(newAdmin);
     }
     
     public void createAccount() {
@@ -35,4 +37,5 @@ public class Admin extends User {
 
     public void provideDoctorFeedback() {
     }
+    
 }

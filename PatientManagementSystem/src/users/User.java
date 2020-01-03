@@ -96,11 +96,6 @@ public class User implements Serializable{
         temp[i] = newUser;
         users = temp;
         
-        for(User user : users)
-        {
-            System.out.println(user.getID());
-        }
-        
         saveUsers();
         getUsers();
     }
