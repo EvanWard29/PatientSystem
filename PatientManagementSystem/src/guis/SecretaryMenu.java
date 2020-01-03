@@ -22,13 +22,12 @@ public class SecretaryMenu extends javax.swing.JFrame {
     public SecretaryMenu() {
         initComponents();
         getUserInfo();
-        initArrays();
         setAccountRequests();
         setAppointmentRequests();
         setPrescriptions();
         setMedicine();
         setPatients();
-        setTerminationRequests();
+        setTerminations();
     }
     
     private void getUserInfo()
@@ -39,59 +38,30 @@ public class SecretaryMenu extends javax.swing.JFrame {
         this.txtUserAddress.setText(User.loggedUser.getAddress());
     }
     
-    private void initArrays()
-    { 
-        
-        
-        TerminationRequest[] requests = {
-            new TerminationRequest("P001"),
-            new TerminationRequest("P004"),
-            new TerminationRequest("P011")
-        };
-        
-        TerminationRequest.requests = requests;
-    }
     
     private void setAccountRequests()
     {
-        //READ REQUESTS FROM FILE
-        //ADD EACH REQUEST TO ARRAY
-        
-        //FOREACH REQUEST IN ARRAY
-            //GET PATIENT FORENAME
-            //GET PATIENT SURNAME
-            //GET PATIENT ADDRESS
-            //GET PATIENT GENDER
-            //GET PATIENT DOB
-            
-            //ADD DATA TO TABLE
-        //END FOREACH
-        
-        AccountRequest[] requests = new AccountRequest[4];
-        
-        AccountRequest request1 = new AccountRequest("Evan",  "Ward", "81 Greenwood Avenue,\nPontnewydd,\nCwmbran,\nNP44 5LH", "M", "29/02/2000");
-        AccountRequest request2 = new AccountRequest("Joe", "Bloggs", "Studio 5, The Square,\n58 North Road East,\nPlymouth,\nPL4 6AJ", "F", "23/04/200");
-        AccountRequest request3 = new AccountRequest("David", "Ward", "81 Greenwood Avenue,\nPontnewydd,\nCwmbran,\nNP44 5LH", "M", "12/11/1999");
-        AccountRequest request4 = new AccountRequest("Callum", "Booton", "Some Hill in Sarn", "M", "08/12/1999");
-        
-        requests[0] = request1;
-        requests[1] = request2;
-        requests[2] = request3;
-        requests[3] = request4;
+        String[][] patientRequests = new String[AccountRequest.accountRequests.length][5];
         
         DefaultTableModel model = (DefaultTableModel) this.tblPatientRequests.getModel();
         
-        int numRequests = requests.length;
-        String[][] patientRequests = new String[numRequests][5];
-        
-        int i = 0;
-        for(AccountRequest request : requests)
+        int rowCount = model.getRowCount();
+        if(rowCount > 0)
         {
-            patientRequests[i][0] = request.getForename();
-            patientRequests[i][1] = request.getSurname();
-            patientRequests[i][2] = request.getAddress();
-            patientRequests[i][3] = request.getGender();
-            patientRequests[i][4] = request.getDOB();
+            for (int i = rowCount - 1; i >= 0; i--) 
+            {
+                model.removeRow(i);
+            }
+        }
+
+        int i = 0;
+        for(AccountRequest accountRequest : AccountRequest.accountRequests)
+        {
+            patientRequests[i][0] = accountRequest.getForename();
+            patientRequests[i][1] = accountRequest.getSurname();
+            patientRequests[i][2] = accountRequest.getAddress();
+            patientRequests[i][3] = accountRequest.getGender();
+            patientRequests[i][4] = accountRequest.getDOB();
             
             i++;
         }
@@ -104,58 +74,27 @@ public class SecretaryMenu extends javax.swing.JFrame {
     
     private void setAppointmentRequests()
     {
-        //READ REQUESTS FROM FILE
-        //ADD EACH REQUEST TO ARRAY
-        
-        //FOREACH REQUEST IN ARRAY
-            //GET PATIENT FORENAME
-            //GET PATIENT SURNAME
-            //GET PATIENT DOCTOR
-            //GET PATIENT DATE
-            
-            //ADD DATA TO TABLE
-        //END FOREACH
-        
-        
-        
-        AppointmentRequest[] requests = new AppointmentRequest[3];
-        
-//        AppointmentRequest request1 = new AppointmentRequest("D003", "P001", "27/12/2019");
-//        AppointmentRequest request2 = new AppointmentRequest("D002", "P004", "28/12/2019");
-//        AppointmentRequest request3 = new AppointmentRequest("D008", "P011", "01/01/2020");
-//        
-//        requests[0] = request1;
-//        requests[1] = request2;
-//        requests[2] = request3;
         
         DefaultTableModel model = (DefaultTableModel) this.tblAppointmentRequests.getModel();
         
-        int numRequests = requests.length;
-        String[][] appointmentRequests = new String[numRequests][5];
+        String[][] appointmentRequests = new String[AppointmentRequest.appointmentRequests.length][5];
         
         int i = 0;
-        for(AppointmentRequest request : requests)
+        for(AppointmentRequest appointmentRequest : AppointmentRequest.appointmentRequests)
         {
-            for(Patient patient : Patient.patients){
-                if(patient.getID() == request.getPatient().getID()){
-                    String forename = patient.getForename();
-                    String surname = patient.getSurname();
-                    
-                    appointmentRequests[i][0] = patient.getID();
-                    appointmentRequests[i][1] = forename + " " + surname;
-                    
-                    for(Doctor doctor : Doctor.doctors){
-                        if(doctor.getID() == request.getDoctor().getID())
-                        {
-                            appointmentRequests[i][2] = doctor.getID();
-                            appointmentRequests[i][3] = "Dr. " + doctor.getSurname();
-                        }
-                    }
-                    
-                    appointmentRequests[i][4] = request.getDate();
-                    break;
-                }
-            }
+            Patient patient = appointmentRequest.getPatient();
+            
+            String forename = patient.getForename();
+            String surname = patient.getSurname();
+
+            appointmentRequests[i][0] = patient.getID();
+            appointmentRequests[i][1] = forename + " " + surname;
+                
+            Doctor doctor = appointmentRequest.getDoctor();
+            appointmentRequests[i][2] = doctor.getID();
+            appointmentRequests[i][3] = "Dr. " + doctor.getSurname();
+            appointmentRequests[i][4] = appointmentRequest.getDate();
+
             i++;
         }
         
@@ -166,73 +105,51 @@ public class SecretaryMenu extends javax.swing.JFrame {
     }
     
     private void setPrescriptions()
-    {
-        //FOREACH PRESCRIPTION IN ARRAY
-            //GET DOCTOR ID
-            //GET PATIENT ID
-            //GET MEDICINE
-            //GET QUANTITY
-            
-            //ADD TO ARRAY
-        //END FOREACH
-        
-        //FOREACH STRING ARRAY IN DOUBLE STRING ARRAY
-            //ADD STRING ARRAY TO TABLE
-        //END FOREACH
-        
+    {   
         DefaultTableModel model = (DefaultTableModel) this.tblPrescriptions.getModel();
-        for(Prescription prescription : Prescription.prescriptions)
+
+        int rowCount = model.getRowCount();
+        if(rowCount > 0)
+        {
+            for (int i = rowCount - 1; i >= 0; i--) {
+                model.removeRow(i);
+            }
+        }
+        
+        for(PrescriptionRequest prescriptionRequest : PrescriptionRequest.prescriptionRequests)
         {
             String name = "";
             for(Patient patient : Patient.patients)
             {
-                if(prescription.getPatient().getID() == patient.getID()){
+                if(prescriptionRequest.getPatient().getID().equals(patient.getID())){
                     name = patient.getForename() + " " + patient.getSurname();
                     break;
                 }
             }
             
             String[] data = {
-                prescription.getDoctor().getID(),
-                prescription.getPatient().getID(),
+                prescriptionRequest.getDoctor().getID(),
+                prescriptionRequest.getPatient().getID(),
                 name,
-                prescription.getMedicine().getName(),
-                Integer.toString(prescription.getQuantity())
+                prescriptionRequest.getMedicine().getName(),
+                Integer.toString(prescriptionRequest.getQuantity())
             };
 
-            model.addRow(data); 
-            
+            model.addRow(data);  
         }
-    }
-    
-    private void setStock(Medicine medicine, int newStock)
-    {
-        medicine.setStock(newStock);
-        int selectedRow = this.tblPrescriptions.getSelectedRow();
-        DefaultTableModel model = (DefaultTableModel) this.tblPrescriptions.getModel();
-        model.removeRow(selectedRow);
-    }
-    
-    private void removePrescription(String doctorID, String patientID)
-    {
-        Prescription[] temp = new Prescription[Prescription.prescriptions.length - 1];
-        int i = 0;
-        for(Prescription prescription : Prescription.prescriptions)
-        {
-            if(!((doctorID.equals(prescription.getDoctor())) && (patientID.equals(prescription.getPatient()))))
-            {
-                temp[i] = prescription;
-                i++;
-            }
-            
-        }
-        
-        Prescription.prescriptions = temp;
     }
     
     private void setMedicine()
     {
         DefaultTableModel model = (DefaultTableModel) this.tblStock.getModel();
+        int rowCount = model.getRowCount();
+        if(rowCount > 0)
+        {
+            for (int i = rowCount - 1; i >= 0; i--) {
+                model.removeRow(i);
+            }
+        }
+        
         for(Medicine medicine : Medicine.medicines)
         {        
             String[] data = {
@@ -268,8 +185,17 @@ public class SecretaryMenu extends javax.swing.JFrame {
     }
     
     private void setPatients()
-    {
+    {   
         DefaultTableModel model = (DefaultTableModel) this.tblPatients.getModel();
+        int rowCount = model.getRowCount();
+        
+        if(rowCount > 0)
+        {
+            for (int i = rowCount - 1; i >= 0; i--) {
+                model.removeRow(i);
+            }
+        }
+        
         for(Patient patient : Patient.patients)
         {        
             String[] data = {
@@ -300,67 +226,32 @@ public class SecretaryMenu extends javax.swing.JFrame {
         Patient.patients = temp;
     }
     
-    private void removeTerminationRequest(String id)
+    private void setTerminations()
     {
-        TerminationRequest[] temp = new TerminationRequest[TerminationRequest.requests.length - 1];
-        int i = 0;
-        for(TerminationRequest request : TerminationRequest.requests)
+        DefaultTableModel model = (DefaultTableModel) this.tblTermination.getModel();
+        int rowCount = model.getRowCount();
+        
+        if(rowCount > 0)
         {
-            if(!(request.getPatientID().equals(id)))
-            {
-                temp[i] = request;
-                i++;
+            for (int i = rowCount - 1; i >= 0; i--) {
+                model.removeRow(i);
             }
         }
-        TerminationRequest.requests = temp;
-    }
-    
-    private void updatePatientTable()
-    {
-        DefaultTableModel model = (DefaultTableModel) this.tblPatients.getModel();
-        int rowCount = model.getRowCount();
-
-        for (int i = rowCount - 1; i >= 0; i--) {
-            model.removeRow(i);
-        }
         
-        setPatients();
-    }
-    
-    private void setTerminationRequests()
-    {
-        DefaultTableModel model = (DefaultTableModel) this.tblTermination.getModel();
-        for(TerminationRequest request : TerminationRequest.requests)
-        {       
-            for(Patient patient : Patient.patients)
-            {
-                if(patient.getID().equals(request.getPatientID()))
-                {
-                    String[] data = {
-                        patient.getID(),
-                        patient.getForename(),
-                        patient.getSurname(),
-                        patient.getAddress(),
-                        patient.getGender(),
-                        patient.getDOB()
-                    };
-                    
-                    model.addRow(data);
-                }
-            } 
+        for(TerminationRequest terminationRequest : TerminationRequest.terminationRequests)
+        {
+            Patient patient = terminationRequest.getPatient();
+            String[] data = {
+                patient.getID(),
+                patient.getForename(),
+                patient.getSurname(),
+                patient.getAddress(),
+                patient.getGender(),
+                patient.getDOB()
+            };
+            
+            model.addRow(data);
         }
-    }
-    
-    private void updateTerminationTable()
-    {
-        DefaultTableModel model = (DefaultTableModel) this.tblTermination.getModel();
-        int rowCount = model.getRowCount();
-
-        for (int i = rowCount - 1; i >= 0; i--) {
-            model.removeRow(i);
-        }
-        
-        setTerminationRequests();
     }
 
     /**
@@ -445,7 +336,6 @@ public class SecretaryMenu extends javax.swing.JFrame {
         txtPrescriptionMedicine = new javax.swing.JTextField();
         lblQuantity = new javax.swing.JLabel();
         txtPrescriptionQuantity = new javax.swing.JTextField();
-        btnApproveAppointment2 = new javax.swing.JButton();
         tabOrderStock = new javax.swing.JPanel();
         jPanel5 = new javax.swing.JPanel();
         jPanel6 = new javax.swing.JPanel();
@@ -524,7 +414,7 @@ public class SecretaryMenu extends javax.swing.JFrame {
             .addGroup(jPanel12Layout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(lblAccountType1)
-                .addGap(18, 18, 18)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(txtUserAccountType)
                 .addContainerGap())
         );
@@ -556,8 +446,8 @@ public class SecretaryMenu extends javax.swing.JFrame {
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel13Layout.createSequentialGroup()
                 .addGap(26, 26, 26)
                 .addComponent(lblUserID1)
-                .addGap(18, 18, 18)
-                .addComponent(txtUserID)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(txtUserID, javax.swing.GroupLayout.PREFERRED_SIZE, 934, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap())
         );
         jPanel13Layout.setVerticalGroup(
@@ -763,27 +653,32 @@ public class SecretaryMenu extends javax.swing.JFrame {
                 .addContainerGap()
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.CENTER)
                     .addComponent(lblAddress)
-                    .addComponent(lblForename)
-                    .addComponent(btnApprovePatient))
+                    .addComponent(lblForename))
                 .addGap(18, 18, 18)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 384, Short.MAX_VALUE)
                     .addComponent(txtPatientForename))
-                .addGap(18, 18, 18)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.CENTER)
-                    .addComponent(lblSurname)
-                    .addComponent(lblGender)
-                    .addComponent(lblDOB))
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addGap(18, 18, 18)
-                        .addComponent(txtPatientSurname))
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGap(18, 18, 18)
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.CENTER)
+                            .addComponent(lblSurname)
+                            .addComponent(lblGender)
+                            .addComponent(lblDOB))
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(txtPatientDOB, javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addComponent(txtPatientGender))))
-                .addContainerGap())
+                            .addGroup(jPanel1Layout.createSequentialGroup()
+                                .addGap(18, 18, 18)
+                                .addComponent(txtPatientSurname, javax.swing.GroupLayout.DEFAULT_SIZE, 351, Short.MAX_VALUE))
+                            .addGroup(jPanel1Layout.createSequentialGroup()
+                                .addGap(18, 18, 18)
+                                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(txtPatientDOB, javax.swing.GroupLayout.Alignment.TRAILING)
+                                    .addComponent(txtPatientGender))))
+                        .addContainerGap())
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(btnApprovePatient)
+                        .addGap(209, 209, 209))))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -799,17 +694,13 @@ public class SecretaryMenu extends javax.swing.JFrame {
                     .addComponent(lblAddress)
                     .addComponent(lblGender)
                     .addComponent(txtPatientGender, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGap(39, 39, 39)
-                        .addComponent(btnApprovePatient)
-                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGap(24, 24, 24)
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(lblDOB)
-                            .addComponent(txtPatientDOB, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(0, 0, Short.MAX_VALUE))))
+                .addGap(24, 24, 24)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(lblDOB)
+                    .addComponent(txtPatientDOB, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(55, 55, 55)
+                .addComponent(btnApprovePatient)
+                .addGap(0, 0, Short.MAX_VALUE))
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addGap(54, 54, 54)
                 .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 211, Short.MAX_VALUE)
@@ -1081,7 +972,7 @@ public class SecretaryMenu extends javax.swing.JFrame {
         tabApprovePatient2.setBorder(javax.swing.BorderFactory.createEtchedBorder());
 
         lblApproveAccounts2.setFont(new java.awt.Font("Arial", 1, 18)); // NOI18N
-        lblApproveAccounts2.setText("Provide Medicine");
+        lblApproveAccounts2.setText("Prescription Approval");
 
         tblPrescriptions.setFont(new java.awt.Font("Arial", 1, 16)); // NOI18N
         tblPrescriptions.setModel(new javax.swing.table.DefaultTableModel(
@@ -1158,14 +1049,6 @@ public class SecretaryMenu extends javax.swing.JFrame {
         txtPrescriptionQuantity.setEditable(false);
         txtPrescriptionQuantity.setFont(new java.awt.Font("Arial", 1, 16)); // NOI18N
 
-        btnApproveAppointment2.setFont(new java.awt.Font("Arial", 1, 16)); // NOI18N
-        btnApproveAppointment2.setText("Reschedule");
-        btnApproveAppointment2.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnApproveAppointment2ActionPerformed(evt);
-            }
-        });
-
         javax.swing.GroupLayout jPanel4Layout = new javax.swing.GroupLayout(jPanel4);
         jPanel4.setLayout(jPanel4Layout);
         jPanel4Layout.setHorizontalGroup(
@@ -1185,18 +1068,17 @@ public class SecretaryMenu extends javax.swing.JFrame {
                     .addComponent(lblMedicine))
                 .addGap(11, 11, 11)
                 .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(txtPrescriptionPatient)
                     .addGroup(jPanel4Layout.createSequentialGroup()
-                        .addComponent(btnApprovePrescription)
-                        .addGap(18, 18, 18)
-                        .addComponent(btnApproveAppointment2)
-                        .addGap(0, 0, Short.MAX_VALUE))
-                    .addComponent(txtPrescriptionPatient, javax.swing.GroupLayout.DEFAULT_SIZE, 612, Short.MAX_VALUE)
-                    .addGroup(jPanel4Layout.createSequentialGroup()
-                        .addComponent(txtPrescriptionMedicine)
+                        .addComponent(txtPrescriptionMedicine, javax.swing.GroupLayout.DEFAULT_SIZE, 333, Short.MAX_VALUE)
                         .addGap(18, 18, 18)
                         .addComponent(lblQuantity)
                         .addGap(18, 18, 18)
-                        .addComponent(txtPrescriptionQuantity, javax.swing.GroupLayout.PREFERRED_SIZE, 215, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addComponent(txtPrescriptionQuantity, javax.swing.GroupLayout.PREFERRED_SIZE, 215, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(jPanel4Layout.createSequentialGroup()
+                        .addGap(80, 80, 80)
+                        .addComponent(btnApprovePrescription)
+                        .addGap(0, 0, Short.MAX_VALUE)))
                 .addContainerGap())
         );
         jPanel4Layout.setVerticalGroup(
@@ -1216,11 +1098,9 @@ public class SecretaryMenu extends javax.swing.JFrame {
                     .addComponent(txtPrescriptionMedicine, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(lblQuantity)
                     .addComponent(txtPrescriptionQuantity, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(18, 18, 18)
-                .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(btnApprovePrescription)
-                    .addComponent(btnApproveAppointment2))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 18, Short.MAX_VALUE)
+                .addComponent(btnApprovePrescription)
+                .addContainerGap())
         );
 
         javax.swing.GroupLayout tabApprovePatient2Layout = new javax.swing.GroupLayout(tabApprovePatient2);
@@ -1230,27 +1110,26 @@ public class SecretaryMenu extends javax.swing.JFrame {
             .addGroup(tabApprovePatient2Layout.createSequentialGroup()
                 .addGroup(tabApprovePatient2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(tabApprovePatient2Layout.createSequentialGroup()
-                        .addGroup(tabApprovePatient2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(tabApprovePatient2Layout.createSequentialGroup()
-                                .addGap(452, 452, 452)
-                                .addComponent(lblApproveAccounts2))
-                            .addGroup(tabApprovePatient2Layout.createSequentialGroup()
-                                .addContainerGap()
-                                .addComponent(lblNewRequests2)))
-                        .addGap(0, 428, Short.MAX_VALUE))
+                        .addContainerGap()
+                        .addComponent(lblNewRequests2)
+                        .addGap(0, 0, Short.MAX_VALUE))
                     .addGroup(tabApprovePatient2Layout.createSequentialGroup()
                         .addContainerGap()
                         .addGroup(tabApprovePatient2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jScrollPane4)
                             .addComponent(jPanel4, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
                 .addContainerGap())
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, tabApprovePatient2Layout.createSequentialGroup()
+                .addGap(0, 0, Short.MAX_VALUE)
+                .addComponent(lblApproveAccounts2)
+                .addGap(417, 417, 417))
         );
         tabApprovePatient2Layout.setVerticalGroup(
             tabApprovePatient2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(tabApprovePatient2Layout.createSequentialGroup()
-                .addContainerGap()
+                .addGap(14, 14, 14)
                 .addComponent(lblApproveAccounts2)
-                .addGap(9, 9, 9)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(lblNewRequests2)
                 .addGap(18, 18, 18)
                 .addComponent(jScrollPane4, javax.swing.GroupLayout.DEFAULT_SIZE, 376, Short.MAX_VALUE)
@@ -1263,21 +1142,21 @@ public class SecretaryMenu extends javax.swing.JFrame {
         tabGiveMedicine.setLayout(tabGiveMedicineLayout);
         tabGiveMedicineLayout.setHorizontalGroup(
             tabGiveMedicineLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 1082, Short.MAX_VALUE)
+            .addGap(0, 1094, Short.MAX_VALUE)
             .addGroup(tabGiveMedicineLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                .addGroup(tabGiveMedicineLayout.createSequentialGroup()
-                    .addGap(0, 18, Short.MAX_VALUE)
+                .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, tabGiveMedicineLayout.createSequentialGroup()
+                    .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(tabApprovePatient2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addGap(0, 18, Short.MAX_VALUE)))
+                    .addContainerGap()))
         );
         tabGiveMedicineLayout.setVerticalGroup(
             tabGiveMedicineLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGap(0, 707, Short.MAX_VALUE)
             .addGroup(tabGiveMedicineLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                .addGroup(tabGiveMedicineLayout.createSequentialGroup()
-                    .addGap(0, 0, Short.MAX_VALUE)
+                .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, tabGiveMedicineLayout.createSequentialGroup()
+                    .addContainerGap(35, Short.MAX_VALUE)
                     .addComponent(tabApprovePatient2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addGap(0, 0, Short.MAX_VALUE)))
+                    .addContainerGap(36, Short.MAX_VALUE)))
         );
 
         menuSecretary.addTab("Give Medicine", tabGiveMedicine);
@@ -1485,7 +1364,7 @@ public class SecretaryMenu extends javax.swing.JFrame {
         tabApprovePatient3.setBorder(javax.swing.BorderFactory.createEtchedBorder());
 
         lblApproveAccounts3.setFont(new java.awt.Font("Arial", 1, 18)); // NOI18N
-        lblApproveAccounts3.setText("Provide Medicine");
+        lblApproveAccounts3.setText("Remove Patient Account");
 
         jPanel9.setBorder(javax.swing.BorderFactory.createEtchedBorder());
 
@@ -1549,7 +1428,7 @@ public class SecretaryMenu extends javax.swing.JFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel9Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel9Layout.createSequentialGroup()
-                        .addComponent(txtName, javax.swing.GroupLayout.DEFAULT_SIZE, 597, Short.MAX_VALUE)
+                        .addComponent(txtName)
                         .addContainerGap())
                     .addGroup(jPanel9Layout.createSequentialGroup()
                         .addGap(10, 10, 10)
@@ -1563,7 +1442,7 @@ public class SecretaryMenu extends javax.swing.JFrame {
                                 .addComponent(lblPatientDOB)))
                         .addGap(18, 18, 18)
                         .addComponent(txtDOB, javax.swing.GroupLayout.PREFERRED_SIZE, 215, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
+                        .addContainerGap(44, Short.MAX_VALUE))))
         );
         jPanel9Layout.setVerticalGroup(
             jPanel9Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -1633,16 +1512,16 @@ public class SecretaryMenu extends javax.swing.JFrame {
             .addGroup(tabApprovePatient3Layout.createSequentialGroup()
                 .addGroup(tabApprovePatient3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(tabApprovePatient3Layout.createSequentialGroup()
-                        .addGap(452, 452, 452)
-                        .addComponent(lblApproveAccounts3)
-                        .addGap(0, 428, Short.MAX_VALUE))
-                    .addGroup(tabApprovePatient3Layout.createSequentialGroup()
                         .addContainerGap()
                         .addComponent(jPanel9, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                     .addGroup(tabApprovePatient3Layout.createSequentialGroup()
                         .addContainerGap()
                         .addComponent(jScrollPane6)))
                 .addContainerGap())
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, tabApprovePatient3Layout.createSequentialGroup()
+                .addGap(0, 0, Short.MAX_VALUE)
+                .addComponent(lblApproveAccounts3)
+                .addGap(421, 421, 421))
         );
         tabApprovePatient3Layout.setVerticalGroup(
             tabApprovePatient3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -1651,7 +1530,7 @@ public class SecretaryMenu extends javax.swing.JFrame {
                 .addComponent(lblApproveAccounts3)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jScrollPane6, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 27, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 25, Short.MAX_VALUE)
                 .addComponent(jPanel9, javax.swing.GroupLayout.PREFERRED_SIZE, 153, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap())
         );
@@ -1660,21 +1539,21 @@ public class SecretaryMenu extends javax.swing.JFrame {
         tabRemovePatient.setLayout(tabRemovePatientLayout);
         tabRemovePatientLayout.setHorizontalGroup(
             tabRemovePatientLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 1082, Short.MAX_VALUE)
+            .addGap(0, 1088, Short.MAX_VALUE)
             .addGroup(tabRemovePatientLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                .addGroup(tabRemovePatientLayout.createSequentialGroup()
-                    .addGap(0, 18, Short.MAX_VALUE)
+                .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, tabRemovePatientLayout.createSequentialGroup()
+                    .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(tabApprovePatient3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addGap(0, 18, Short.MAX_VALUE)))
+                    .addContainerGap()))
         );
         tabRemovePatientLayout.setVerticalGroup(
             tabRemovePatientLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGap(0, 707, Short.MAX_VALUE)
             .addGroup(tabRemovePatientLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                .addGroup(tabRemovePatientLayout.createSequentialGroup()
-                    .addGap(0, 0, Short.MAX_VALUE)
+                .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, tabRemovePatientLayout.createSequentialGroup()
+                    .addContainerGap(22, Short.MAX_VALUE)
                     .addComponent(tabApprovePatient3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addGap(0, 0, Short.MAX_VALUE)))
+                    .addContainerGap(21, Short.MAX_VALUE)))
         );
 
         menuSecretary.addTab("Remove Patients", tabRemovePatient);
@@ -1923,21 +1802,52 @@ public class SecretaryMenu extends javax.swing.JFrame {
     }//GEN-LAST:event_tblPatientRequestsMouseClicked
 
     private void btnApprovePatientActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnApprovePatientActionPerformed
-        String id = "P"; //+ GET LAST PATIENT ID FROM ARRAY/FILE + 1
+        String id = String.format("P%03d", Patient.patients.length + 1);
         String forename = this.txtPatientForename.getText();
         String surname = this.txtPatientSurname.getText();
         String address = this.txtPatientAddress.getText();
         String gender = this.txtPatientGender.getText();
         String dob = this.txtPatientDOB.getText();
         
-        int confirm = JOptionPane.showConfirmDialog(this, "ARE YOU SURE YOU WANT TO APPROVE?", "CONFIRM", 
+        for(AccountRequest accountRequest : AccountRequest.accountRequests)
+        {
+            if((accountRequest.getForename().equals(forename)) && (accountRequest.getSurname().equals(surname)))
+            {
+                int confirm = JOptionPane.showConfirmDialog(this, "ARE YOU SURE YOU WANT TO APPROVE?", "CONFIRM", 
                 JOptionPane.YES_NO_OPTION);
         
-        if(confirm == 0)
-        {
-            //Patient newPatient = new Patient(id, forename, surname, address, gender, dob);
-            //ADD PATIENT TO ARRAY
+                if(confirm == 0)
+                {
+                    Patient newPatient = new Patient(id, accountRequest.getPassword(), forename, surname, address, gender, dob);
+                    newPatient.addPatient(newPatient);
+                    
+                    accountRequest.removeAccountRequest(accountRequest);
+                    
+                    DefaultTableModel model = (DefaultTableModel) this.tblPatientRequests.getModel();
+                    int rows = model.getRowCount();
+                    
+                    if(rows > 0)
+                    {
+                        for (int i = rows - 1; i >= 0; i--)
+                        {
+                            model.removeRow(i);
+                        }
+                    }
+                    
+                    this.txtPatientForename.setText("");
+                    this.txtPatientSurname.setText("");
+                    this.txtPatientAddress.setText("");
+                    this.txtPatientGender.setText("");
+                    this.txtPatientDOB.setText("");
+                    
+                    setAccountRequests();
+                    setPatients();
+                }
+                break;
+            }
         }
+        
+        
     }//GEN-LAST:event_btnApprovePatientActionPerformed
 
     private void tblAppointmentRequestsMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tblAppointmentRequestsMouseClicked
@@ -1966,14 +1876,34 @@ public class SecretaryMenu extends javax.swing.JFrame {
         
         if(confirm == 0)
         {
-            //Appointment newAppointment = new Appointment(doctorID, patientID, date);
+            for(Patient patient : Patient.patients)
+            {
+                if(patient.getID().equals(patientID))
+                {
+                    for(Doctor doctor : Doctor.doctors)
+                    {
+                        if(doctor.getID().equals(doctorID))
+                        {
+                            Appointment newAppointment = new Appointment(doctor, patient, date);
+                            newAppointment.addAppointment(newAppointment);
+                            
+                            for(AppointmentRequest appointmentRequest : AppointmentRequest.appointmentRequests)
+                            {
+                                if((appointmentRequest.getDoctor().getID().equals(doctor.getID())) &&
+                                        (appointmentRequest.getPatient().getID().equals(patient.getID())))
+                                {
+                                    appointmentRequest.removeAppointmentRequest(appointmentRequest);
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+            
                     
             int selectedRow = this.tblAppointmentRequests.getSelectedRow();
             DefaultTableModel model = (DefaultTableModel) this.tblAppointmentRequests.getModel();
             model.removeRow(selectedRow);
-            
-            //REMOVE REQUEST FROM REQUEST ARRAY/FILE
-            //ADD APPOINTMENT TO ARRAY/FILE
         }
     }//GEN-LAST:event_btnApproveAppointmentActionPerformed
 
@@ -1988,7 +1918,21 @@ public class SecretaryMenu extends javax.swing.JFrame {
             int selectedRow = this.tblAppointmentRequests.getSelectedRow();
             DefaultTableModel model = (DefaultTableModel) this.tblAppointmentRequests.getModel();
             model.removeRow(selectedRow);
+            
+            String doctorID = this.txtAppointmentDoctorID.getText();
+            String patientID = this.txtAppointmentPatientID.getText();
+            
             //REMOVE APPOINTMENT FROM REQUEST ARRAY
+            for(AppointmentRequest appointmentRequest : AppointmentRequest.appointmentRequests)
+            {
+                Doctor doctor = appointmentRequest.getDoctor();
+                Patient patient = appointmentRequest.getPatient();
+                
+                if((doctor.getID().equals(doctorID)) && (patient.getID().equals(patientID)))
+                {
+                    appointmentRequest.removeAppointmentRequest(appointmentRequest);
+                }
+            }
         }
     }//GEN-LAST:event_btnDeclineAppointmentActionPerformed
 
@@ -2015,51 +1959,76 @@ public class SecretaryMenu extends javax.swing.JFrame {
         
         if(confirm == 0)
         {
-            int quantity = Integer.parseInt(this.txtPrescriptionQuantity.getText());
-            String medicineName = this.txtPrescriptionMedicine.getText();
-            
-            for(Medicine medicine : Medicine.medicines)
+            String doctorID = this.txtPrescriptionDoctorID.getText();
+            String patientID = this.txtPrescriptionPatientID.getText();
+            for(PrescriptionRequest prescriptionRequest : PrescriptionRequest.prescriptionRequests)
             {
-                if(medicineName.equals(medicine.getName()))
+                Doctor doctor = prescriptionRequest.getDoctor();
+                Patient patient = prescriptionRequest.getPatient();
+                
+                if((doctor.getID().equals(doctorID)) && (patient.getID().equals(patientID)))
                 {
-                    Medicine giveMedicine = medicine;
-                    int newStock = giveMedicine.getStock() - quantity;
-                    if((newStock) < 0)
+                    System.out.println(prescriptionRequest.getMedicine().getName());
+                    
+                    for(Medicine medicine : Medicine.medicines)
                     {
-                        int orderMore = JOptionPane.showConfirmDialog(this, "THERE IS NOT ENOUGH MEDICINE IN STOCK TO FULFILL THIS PRESCRIPTION"
-                                + "\nWOULD YOU LIKE TO ORDER MORE?", "CONFIRM", JOptionPane.YES_NO_OPTION);
-                        if(orderMore == 0)
+                        if(medicine.getName().equals(prescriptionRequest.getMedicine().getName()))
                         {
-                            //OPEN ORDER STOCK TAB
-                            this.txtMedicineName.setText(giveMedicine.getName());
-                            this.txtMedicineQuantity.setText(Integer.toString(giveMedicine.getStock()));
-                            this.menuSecretary.setSelectedIndex(4);
+                            System.out.println("TRUE");
+                            int stockAmount = medicine.getStock();
+                            int quantity = prescriptionRequest.getQuantity();
+                            int newStock = stockAmount - quantity;
+                            
+                            if((newStock) < 0)
+                            {
+                                int orderMore = JOptionPane.showConfirmDialog(this, "THERE IS NOT ENOUGH MEDICINE IN STOCK TO FULFILL THIS PRESCRIPTION"
+                                    + "\nWOULD YOU LIKE TO ORDER MORE?", "CONFIRM", JOptionPane.YES_NO_OPTION);
+                                if(orderMore == 0)
+                                {
+                                    //OPEN ORDER STOCK TAB
+                                    this.txtMedicineName.setText(medicine.getName());
+                                    this.txtMedicineQuantity.setText(Integer.toString(medicine.getStock()));
+                                    this.menuSecretary.setSelectedIndex(4);
+                                }
+                                break;
+                            }
+                            else
+                            {
+                                medicine.setStock(newStock);
+                                for(Prescription prescription : Prescription.prescriptions)
+                                {
+                                    if((prescription.getDoctor() == prescriptionRequest.getDoctor()) && 
+                                            prescription.getPatient() == prescriptionRequest.getPatient())
+                                    {
+                                        prescription.removePrescription(prescription);
+                                    }
+                                }
+                                
+                                Prescription newPrescription = new Prescription(doctor, patient, prescriptionRequest.getNotes(),
+                                    medicine, quantity, prescriptionRequest.getDosage());
+                                
+                                newPrescription.addPrescription(newPrescription);
+                                prescriptionRequest.removePrescriptionRequest(prescriptionRequest);
+                                
+                                this.txtPrescriptionDoctorID.setText("");
+                                this.txtPrescriptionMedicine.setText("");
+                                this.txtPrescriptionPatient.setText("");
+                                this.txtPrescriptionPatientID.setText("");
+                                this.txtPrescriptionQuantity.setText("");
+                                
+                                Medicine.saveMedicine();
+                                
+                                setPrescriptions();
+                                setMedicine();
+                                break;
+                            } 
                         }
-                        break;
                     }
-                    else
-                    {
-                        //REMOVE PRESCRIPTION ORDER FROM ARRAY
-                        removePrescription(this.txtPrescriptionDoctorID.getText(), this.txtPrescriptionPatientID.getText());
-                        
-                        //SET NEW STOCK QUANTITY
-                        setStock(giveMedicine, newStock);
-                        
-                        this.txtPrescriptionDoctorID.setText("");
-                        this.txtPrescriptionMedicine.setText("");
-                        this.txtPrescriptionPatient.setText("");
-                        this.txtPrescriptionPatientID.setText("");
-                        this.txtPrescriptionQuantity.setText("");
-                        break;
-                    }
+                    break;
                 }
             } 
         }
     }//GEN-LAST:event_btnApprovePrescriptionActionPerformed
-
-    private void btnApproveAppointment2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnApproveAppointment2ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_btnApproveAppointment2ActionPerformed
 
     private void btnOrderActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnOrderActionPerformed
         String name = this.txtMedicineName.getText();
@@ -2105,15 +2074,20 @@ public class SecretaryMenu extends javax.swing.JFrame {
         
         if(confirm == 0)
         {
-            String id = this.txtID.getText();
-            removePatient(id);
-            updatePatientTable();
-            
-            this.txtID.setText("");
-            this.txtName.setText("");
-            this.txtAddress.setText("");
-            this.txtGender.setText("");
-            this.txtDOB.setText("");
+            for(Patient patient : Patient.patients)
+            {
+                if(patient.getID().equals(this.txtID.getText()))
+                {
+                    this.txtID.setText("");
+                    this.txtName.setText("");
+                    this.txtAddress.setText("");
+                    this.txtGender.setText("");
+                    this.txtDOB.setText("");
+                    
+                    patient.removePatient(patient);
+                    setPatients();
+                }
+            } 
         }
     }//GEN-LAST:event_btnRemoveActionPerformed
 
@@ -2140,15 +2114,31 @@ public class SecretaryMenu extends javax.swing.JFrame {
         if(confirm == 0)
         {
             String id = this.txtTerminatePatientID.getText();
-            removePatient(id);
-            removeTerminationRequest(id);
-            updateTerminationTable();
-            
-            this.txtTerminatePatientID.setText("");
-            this.txtTerminateName.setText("");
-            this.txtTerminateAddress.setText("");
-            this.txtTerminateGender.setText("");
-            this.txtTerminateDOB.setText("");
+            for(Patient patient : Patient.patients)
+            {
+                if(patient.getID().equals(id))
+                {
+                    this.txtTerminatePatientID.setText("");
+                    this.txtTerminateName.setText("");
+                    this.txtTerminateAddress.setText("");
+                    this.txtTerminateGender.setText("");
+                    this.txtTerminateDOB.setText("");
+                    
+                    patient.removePatient(patient);
+                    setPatients();
+                    
+                    for(TerminationRequest terminationRequest : TerminationRequest.terminationRequests)
+                    {
+                        if(terminationRequest.getPatient().getID().equals(id))
+                        {
+                            terminationRequest.removeTerminationRequest(terminationRequest);
+                            setTerminations();
+                            break;
+                        }
+                    }
+                    break;
+                }
+            }
         }
     }//GEN-LAST:event_btnTerminateActionPerformed
 
@@ -2220,7 +2210,6 @@ public class SecretaryMenu extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnApproveAppointment;
-    private javax.swing.JButton btnApproveAppointment2;
     private javax.swing.JButton btnApprovePatient;
     private javax.swing.JButton btnApprovePrescription;
     private javax.swing.JButton btnDeclineAppointment;

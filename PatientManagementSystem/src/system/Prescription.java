@@ -77,6 +77,24 @@ public class Prescription implements Serializable{
         this.Dosage = Dosage;
     }
     
+    public void removePrescription(Prescription removePrescription)
+    {
+        Prescription[] temp = new Prescription[prescriptions.length - 1];
+        int i = 0;
+        for(Prescription prescription : Prescription.prescriptions)
+        {
+            if(prescription != removePrescription)
+            {
+                temp[i] = prescription;
+                i++;
+            }
+        }
+        prescriptions = temp;
+        
+        savePrescriptions();
+        getPrescriptions();
+    }
+    
     public void addPrescription(Prescription newPrescription)
     {
         Prescription[] temp = new Prescription[prescriptions.length + 1];
