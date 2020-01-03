@@ -77,7 +77,24 @@ public class AccountRequest implements Serializable{
         this.DOB = DOB;
     }
     
-    public static void removeAccountRequest(AccountRequest removeAccountRequest)
+    public void addAccountRequest(AccountRequest newAccountRequest)
+    {
+        AccountRequest[] temp = new AccountRequest[accountRequests.length + 1];
+        int i;
+        
+        for(i = 0;i < temp.length - 1; i++)
+        {
+            temp[i] = accountRequests[i];
+        }
+        
+        temp[i] = newAccountRequest;
+        accountRequests = temp;
+        
+        saveAccountRequests();
+        getAccountRequests();
+    }
+    
+    public void removeAccountRequest(AccountRequest removeAccountRequest)
     {
         AccountRequest[] temp = new AccountRequest[accountRequests.length - 1];
         int i = 0;
