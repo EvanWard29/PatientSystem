@@ -1,29 +1,66 @@
 package users;
 
 public class Patient extends User {
-
+    public static Patient[] patients;
+    
     private String Gender;
 
-    private int Age;
+    private String DOB;
 
-    public Patient(String Gender, int Age, String ID, String Forename, String Surname, String Address) {
-        super(ID, Forename, Surname, Address);
+    public Patient(String ID, String Password, String Forename, String Surname, String Address, String Gender, String DOB) {
+        super(ID, Password, Forename, Surname, Address);
         this.Gender = Gender;
-        this.Age = Age;
+        this.DOB = DOB;
     }
 
     public String getGender() {
-        throw new UnsupportedOperationException("Not supported yet.");
+        return Gender;
     }
 
     public void setGender(String Gender) {
+        this.Gender = Gender;
     }
 
-    public int getAge() {
-        throw new UnsupportedOperationException("Not supported yet.");
+    public String getDOB() {
+        return DOB;
     }
 
-    public void setAge(int Age) {
+    public void setDOB(String DOB) {
+        this.DOB = DOB;
+    }
+    
+    public void removePatient(Patient removePatient)
+    {
+        Patient[] temp = new Patient[patients.length - 1];
+        int i = 0;
+        
+        for(Patient patient : patients)
+        {
+            if(patient != removePatient)
+            {
+                temp[i] = patient;
+                i++;
+            }
+        }
+        patients = temp;
+        removeUser(removePatient);
+    }
+    
+    public void addPatient(Patient newPatient)
+    {
+        Patient[] temp = new Patient[patients.length + 1];
+        int i;
+        
+        for(i = 0;i < temp.length - 1; i++)
+        {
+            temp[i] = patients[i];
+        }
+        
+        temp[i] = newPatient;
+        patients = temp;
+        
+        addUser(newPatient);
+        getUsers();
     }
 
     public void requestAccountCreation() {

@@ -5,6 +5,7 @@
  */
 package guis;
 import javax.swing.DefaultComboBoxModel;
+import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 import users.*;
 import system.*;
@@ -20,8 +21,17 @@ public class AdminMenu extends javax.swing.JFrame {
      */
     public AdminMenu() {
         initComponents();
+        getUserInfo();
         setDoctors();
         setNewFeedback();
+    }
+    
+    private void getUserInfo()
+    {
+        this.txtUserAccountType.setText("Admin");
+        this.txtUserID.setText(User.loggedUser.getID());
+        this.txtUserName.setText(User.loggedUser.getForename() + " " + User.loggedUser.getSurname());
+        this.txtUserAddress.setText(User.loggedUser.getAddress());
     }
     
     private void setDoctors()
@@ -55,17 +65,22 @@ public class AdminMenu extends javax.swing.JFrame {
     private void initComponents() {
 
         lblMain = new java.awt.Label();
-        jTabbedPane1 = new javax.swing.JTabbedPane();
+        menuAdmin = new javax.swing.JTabbedPane();
         tabUserInfo = new javax.swing.JPanel();
         jPanel12 = new javax.swing.JPanel();
-        lblUserInfo1 = new javax.swing.JLabel();
         lblAccountType1 = new javax.swing.JLabel();
-        lblUserID1 = new javax.swing.JLabel();
-        lblUserName1 = new javax.swing.JLabel();
+        txtUserAccountType = new javax.swing.JTextField();
         jPanel13 = new javax.swing.JPanel();
-        lblUserAddress1 = new javax.swing.JLabel();
-        lblUserAge1 = new javax.swing.JLabel();
-        lblUserGender1 = new javax.swing.JLabel();
+        lblUserID1 = new javax.swing.JLabel();
+        txtUserID = new javax.swing.JTextField();
+        jPanel16 = new javax.swing.JPanel();
+        lblUserName1 = new javax.swing.JLabel();
+        txtUserName = new javax.swing.JTextField();
+        lblUserInfo1 = new javax.swing.JLabel();
+        jPanel18 = new javax.swing.JPanel();
+        lblUserName2 = new javax.swing.JLabel();
+        jScrollPane8 = new javax.swing.JScrollPane();
+        txtUserAddress = new javax.swing.JTextArea();
         tabCreateAdminAccount = new javax.swing.JPanel();
         jPanel1 = new javax.swing.JPanel();
         lblCreateAdmin = new javax.swing.JLabel();
@@ -126,6 +141,7 @@ public class AdminMenu extends javax.swing.JFrame {
         jScrollPane6 = new javax.swing.JScrollPane();
         txtFeedbackNote = new javax.swing.JTextArea();
         btnApprove = new javax.swing.JButton();
+        btnLogout = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -133,92 +149,128 @@ public class AdminMenu extends javax.swing.JFrame {
         lblMain.setName(""); // NOI18N
         lblMain.setText("Patient Management System");
 
-        jTabbedPane1.setFont(new java.awt.Font("Arial", 1, 14)); // NOI18N
+        menuAdmin.setFont(new java.awt.Font("Arial", 1, 14)); // NOI18N
 
-        jPanel12.setBorder(javax.swing.BorderFactory.createEtchedBorder());
-
-        lblUserInfo1.setFont(new java.awt.Font("Arial", 1, 18)); // NOI18N
-        lblUserInfo1.setText("User Information");
+        jPanel12.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED));
 
         lblAccountType1.setFont(new java.awt.Font("Arial", 0, 16)); // NOI18N
         lblAccountType1.setText("Account Type:");
 
-        lblUserID1.setFont(new java.awt.Font("Arial", 0, 16)); // NOI18N
-        lblUserID1.setText("User ID:");
-
-        lblUserName1.setFont(new java.awt.Font("Arial", 0, 16)); // NOI18N
-        lblUserName1.setText("User Name:");
-
-        jPanel13.setBorder(javax.swing.BorderFactory.createEtchedBorder());
-
-        lblUserAddress1.setFont(new java.awt.Font("Arial", 0, 16)); // NOI18N
-        lblUserAddress1.setText("User Address:");
-
-        javax.swing.GroupLayout jPanel13Layout = new javax.swing.GroupLayout(jPanel13);
-        jPanel13.setLayout(jPanel13Layout);
-        jPanel13Layout.setHorizontalGroup(
-            jPanel13Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel13Layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(lblUserAddress1)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-        );
-        jPanel13Layout.setVerticalGroup(
-            jPanel13Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel13Layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(lblUserAddress1)
-                .addContainerGap(384, Short.MAX_VALUE))
-        );
-
-        lblUserAge1.setFont(new java.awt.Font("Arial", 0, 16)); // NOI18N
-        lblUserAge1.setText("User Age:");
-
-        lblUserGender1.setFont(new java.awt.Font("Arial", 0, 16)); // NOI18N
-        lblUserGender1.setText("User Gender:");
+        txtUserAccountType.setEditable(false);
+        txtUserAccountType.setFont(new java.awt.Font("Arial", 1, 16)); // NOI18N
 
         javax.swing.GroupLayout jPanel12Layout = new javax.swing.GroupLayout(jPanel12);
         jPanel12.setLayout(jPanel12Layout);
         jPanel12Layout.setHorizontalGroup(
             jPanel12Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel12Layout.createSequentialGroup()
-                .addGroup(jPanel12Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanel12Layout.createSequentialGroup()
-                        .addGap(391, 391, 391)
-                        .addComponent(lblUserInfo1)
-                        .addGap(0, 467, Short.MAX_VALUE))
-                    .addGroup(jPanel12Layout.createSequentialGroup()
-                        .addContainerGap()
-                        .addComponent(jPanel13, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
-                .addContainerGap())
-            .addGroup(jPanel12Layout.createSequentialGroup()
-                .addGap(22, 22, 22)
-                .addGroup(jPanel12Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(lblUserID1)
-                    .addComponent(lblUserName1)
-                    .addComponent(lblAccountType1)
-                    .addComponent(lblUserAge1)
-                    .addComponent(lblUserGender1))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap()
+                .addComponent(lblAccountType1)
+                .addGap(18, 18, 18)
+                .addComponent(txtUserAccountType, javax.swing.GroupLayout.PREFERRED_SIZE, 836, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(50, Short.MAX_VALUE))
         );
         jPanel12Layout.setVerticalGroup(
             jPanel12Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel12Layout.createSequentialGroup()
-                .addGap(14, 14, 14)
-                .addComponent(lblUserInfo1)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(lblAccountType1)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addContainerGap()
+                .addGroup(jPanel12Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.CENTER)
+                    .addComponent(lblAccountType1)
+                    .addComponent(txtUserAccountType, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+        );
+
+        jPanel13.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED));
+
+        lblUserID1.setFont(new java.awt.Font("Arial", 0, 16)); // NOI18N
+        lblUserID1.setText("User ID:");
+
+        txtUserID.setEditable(false);
+        txtUserID.setFont(new java.awt.Font("Arial", 1, 16)); // NOI18N
+
+        javax.swing.GroupLayout jPanel13Layout = new javax.swing.GroupLayout(jPanel13);
+        jPanel13.setLayout(jPanel13Layout);
+        jPanel13Layout.setHorizontalGroup(
+            jPanel13Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel13Layout.createSequentialGroup()
+                .addGap(26, 26, 26)
                 .addComponent(lblUserID1)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(lblUserName1)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(lblUserAge1)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(lblUserGender1)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(jPanel13, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(txtUserID, javax.swing.GroupLayout.PREFERRED_SIZE, 874, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap())
+        );
+        jPanel13Layout.setVerticalGroup(
+            jPanel13Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel13Layout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addGroup(jPanel13Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.CENTER)
+                    .addComponent(lblUserID1)
+                    .addComponent(txtUserID, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap())
+        );
+
+        jPanel16.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED));
+
+        lblUserName1.setFont(new java.awt.Font("Arial", 0, 16)); // NOI18N
+        lblUserName1.setText("User Name:");
+
+        txtUserName.setEditable(false);
+        txtUserName.setFont(new java.awt.Font("Arial", 1, 16)); // NOI18N
+
+        javax.swing.GroupLayout jPanel16Layout = new javax.swing.GroupLayout(jPanel16);
+        jPanel16.setLayout(jPanel16Layout);
+        jPanel16Layout.setHorizontalGroup(
+            jPanel16Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel16Layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(lblUserName1)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(txtUserName, javax.swing.GroupLayout.PREFERRED_SIZE, 874, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap())
+        );
+        jPanel16Layout.setVerticalGroup(
+            jPanel16Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel16Layout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(jPanel16Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.CENTER)
+                    .addComponent(lblUserName1)
+                    .addComponent(txtUserName, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+        );
+
+        lblUserInfo1.setFont(new java.awt.Font("Arial", 1, 18)); // NOI18N
+        lblUserInfo1.setText("User Information");
+
+        jPanel18.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED));
+
+        lblUserName2.setFont(new java.awt.Font("Arial", 0, 16)); // NOI18N
+        lblUserName2.setText("Address:");
+
+        txtUserAddress.setEditable(false);
+        txtUserAddress.setColumns(20);
+        txtUserAddress.setFont(new java.awt.Font("Arial", 1, 16)); // NOI18N
+        txtUserAddress.setRows(5);
+        jScrollPane8.setViewportView(txtUserAddress);
+
+        javax.swing.GroupLayout jPanel18Layout = new javax.swing.GroupLayout(jPanel18);
+        jPanel18.setLayout(jPanel18Layout);
+        jPanel18Layout.setHorizontalGroup(
+            jPanel18Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel18Layout.createSequentialGroup()
+                .addGap(23, 23, 23)
+                .addComponent(lblUserName2)
+                .addGap(43, 43, 43)
+                .addComponent(jScrollPane8)
+                .addContainerGap())
+        );
+        jPanel18Layout.setVerticalGroup(
+            jPanel18Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel18Layout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(jPanel18Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jScrollPane8, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(lblUserName2))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout tabUserInfoLayout = new javax.swing.GroupLayout(tabUserInfo);
@@ -226,19 +278,40 @@ public class AdminMenu extends javax.swing.JFrame {
         tabUserInfoLayout.setHorizontalGroup(
             tabUserInfoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(tabUserInfoLayout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(jPanel12, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addGroup(tabUserInfoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(tabUserInfoLayout.createSequentialGroup()
+                        .addGap(391, 391, 391)
+                        .addComponent(lblUserInfo1)
+                        .addGap(0, 0, Short.MAX_VALUE))
+                    .addGroup(tabUserInfoLayout.createSequentialGroup()
+                        .addContainerGap()
+                        .addGroup(tabUserInfoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jPanel13, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(jPanel12, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+                    .addGroup(tabUserInfoLayout.createSequentialGroup()
+                        .addContainerGap()
+                        .addGroup(tabUserInfoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jPanel18, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(jPanel16, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
                 .addContainerGap())
         );
         tabUserInfoLayout.setVerticalGroup(
             tabUserInfoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(tabUserInfoLayout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(jPanel12, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addContainerGap())
+                .addGap(14, 14, 14)
+                .addComponent(lblUserInfo1)
+                .addGap(18, 18, 18)
+                .addComponent(jPanel12, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(18, 18, 18)
+                .addComponent(jPanel13, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(18, 18, 18)
+                .addComponent(jPanel16, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(18, 18, 18)
+                .addComponent(jPanel18, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(235, Short.MAX_VALUE))
         );
 
-        jTabbedPane1.addTab("User Information", tabUserInfo);
+        menuAdmin.addTab("User Information", tabUserInfo);
 
         jPanel1.setBorder(javax.swing.BorderFactory.createEtchedBorder());
 
@@ -410,7 +483,7 @@ public class AdminMenu extends javax.swing.JFrame {
                 .addComponent(jPanel4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
                 .addComponent(btnAddAdmin)
-                .addContainerGap(149, Short.MAX_VALUE))
+                .addContainerGap(148, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout tabCreateAdminAccountLayout = new javax.swing.GroupLayout(tabCreateAdminAccount);
@@ -430,7 +503,7 @@ public class AdminMenu extends javax.swing.JFrame {
                 .addContainerGap())
         );
 
-        jTabbedPane1.addTab("Create Admin Account", tabCreateAdminAccount);
+        menuAdmin.addTab("Create Admin Account", tabCreateAdminAccount);
 
         jPanel7.setBorder(javax.swing.BorderFactory.createEtchedBorder());
 
@@ -610,7 +683,7 @@ public class AdminMenu extends javax.swing.JFrame {
             .addGroup(jPanel7Layout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(lblCreateAdmin1)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 34, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 33, Short.MAX_VALUE)
                 .addGroup(jPanel7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(cmbAccountType, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(lblType))
@@ -644,7 +717,7 @@ public class AdminMenu extends javax.swing.JFrame {
                 .addContainerGap())
         );
 
-        jTabbedPane1.addTab("Add Doctors/Secretarys", tabAddDoctors_Secretarys);
+        menuAdmin.addTab("Add Doctors/Secretarys", tabAddDoctors_Secretarys);
 
         jPanel27.setBorder(javax.swing.BorderFactory.createEtchedBorder());
 
@@ -720,7 +793,7 @@ public class AdminMenu extends javax.swing.JFrame {
                     .addComponent(lblViewAppointment3)
                     .addComponent(cmbSelectDoctor, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
-                .addComponent(jScrollPane3, javax.swing.GroupLayout.DEFAULT_SIZE, 501, Short.MAX_VALUE)
+                .addComponent(jScrollPane3, javax.swing.GroupLayout.DEFAULT_SIZE, 500, Short.MAX_VALUE)
                 .addContainerGap())
         );
 
@@ -741,7 +814,7 @@ public class AdminMenu extends javax.swing.JFrame {
                 .addContainerGap())
         );
 
-        jTabbedPane1.addTab("Doctor Ratings/Feedback", tabDoctorsRatings);
+        menuAdmin.addTab("Doctor Ratings/Feedback", tabDoctorsRatings);
 
         jPanel28.setBorder(javax.swing.BorderFactory.createEtchedBorder());
 
@@ -864,7 +937,7 @@ public class AdminMenu extends javax.swing.JFrame {
                         .addGroup(jPanel25Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(lblRating)
                             .addComponent(txtRating, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 32, Short.MAX_VALUE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 31, Short.MAX_VALUE)
                         .addComponent(btnApprove))
                     .addComponent(jScrollPane6))
                 .addContainerGap())
@@ -923,7 +996,15 @@ public class AdminMenu extends javax.swing.JFrame {
                 .addContainerGap())
         );
 
-        jTabbedPane1.addTab("Add Feedback", tabAddFeedback);
+        menuAdmin.addTab("Add Feedback", tabAddFeedback);
+
+        btnLogout.setFont(new java.awt.Font("Arial", 1, 14)); // NOI18N
+        btnLogout.setText("LOGOUT");
+        btnLogout.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnLogoutActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -931,20 +1012,24 @@ public class AdminMenu extends javax.swing.JFrame {
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jTabbedPane1)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(menuAdmin)
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                        .addGap(0, 0, Short.MAX_VALUE)
+                        .addComponent(lblMain, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(264, 264, 264)
+                        .addComponent(btnLogout)))
                 .addContainerGap())
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(lblMain, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(347, 347, 347))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(lblMain, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(lblMain, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(btnLogout))
                 .addGap(24, 24, 24)
-                .addComponent(jTabbedPane1)
+                .addComponent(menuAdmin)
                 .addContainerGap())
         );
 
@@ -958,7 +1043,7 @@ public class AdminMenu extends javax.swing.JFrame {
         String surname = this.txtNewSurname.getText();
         String address = this.txtNewAddress.getText();
         
-        Admin newAdmin = new Admin(userID, forename, surname, address);
+        //Admin newAdmin = new Admin(userID, forename, surname, address);
         
     }//GEN-LAST:event_btnAddAdminActionPerformed
 
@@ -971,11 +1056,11 @@ public class AdminMenu extends javax.swing.JFrame {
         
         if(userType == "D")
         {
-            Doctor newDoctor = new Doctor(userID, forename, surname, address);
+            //Doctor newDoctor = new Doctor(userID, forename, surname, address);
         }
         else if(userType == "S")
         {
-            Secretary newSecretary = new Secretary(userID, forename, surname, address);
+            //Secretary newSecretary = new Secretary(userID, forename, surname, address);
         }
     }//GEN-LAST:event_btnAddAccountActionPerformed
 
@@ -1035,8 +1120,23 @@ public class AdminMenu extends javax.swing.JFrame {
         String note = this.txtFeedbackNote.getText();
         
         //ADD FEEDBACK TO FILE
-        Feedback doctorFeedback = new Feedback(doctorID, rating, note);
+        //Feedback doctorFeedback = new Feedback(doctorID, rating, note);
     }//GEN-LAST:event_btnApproveActionPerformed
+
+    private void btnLogoutActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnLogoutActionPerformed
+        int confirm = JOptionPane.showConfirmDialog(this, "Are you sure you wish to logout?", "WARNING", JOptionPane.WARNING_MESSAGE);
+
+        if(confirm == 0)
+        {
+            User.loggedUser = null;
+
+            User.saveUsers();
+
+            new Login().setVisible(true);
+
+            this.setVisible(false);
+        }
+    }//GEN-LAST:event_btnLogoutActionPerformed
 
     /**
      * @param args the command line arguments
@@ -1077,6 +1177,7 @@ public class AdminMenu extends javax.swing.JFrame {
     private javax.swing.JButton btnAddAccount;
     private javax.swing.JButton btnAddAdmin;
     private javax.swing.JButton btnApprove;
+    private javax.swing.JButton btnLogout;
     private javax.swing.JComboBox<String> cmbAccountType;
     private javax.swing.JComboBox<String> cmbSelectDoctor;
     private javax.swing.JPanel jPanel1;
@@ -1084,12 +1185,16 @@ public class AdminMenu extends javax.swing.JFrame {
     private javax.swing.JPanel jPanel11;
     private javax.swing.JPanel jPanel12;
     private javax.swing.JPanel jPanel13;
+    private javax.swing.JPanel jPanel14;
+    private javax.swing.JPanel jPanel16;
+    private javax.swing.JPanel jPanel18;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel25;
     private javax.swing.JPanel jPanel27;
     private javax.swing.JPanel jPanel28;
     private javax.swing.JPanel jPanel3;
     private javax.swing.JPanel jPanel4;
+    private javax.swing.JPanel jPanel5;
     private javax.swing.JPanel jPanel6;
     private javax.swing.JPanel jPanel7;
     private javax.swing.JPanel jPanel8;
@@ -1099,9 +1204,10 @@ public class AdminMenu extends javax.swing.JFrame {
     private javax.swing.JScrollPane jScrollPane3;
     private javax.swing.JScrollPane jScrollPane4;
     private javax.swing.JScrollPane jScrollPane6;
-    private javax.swing.JTabbedPane jTabbedPane1;
+    private javax.swing.JScrollPane jScrollPane8;
     private javax.swing.JLabel lblAccountLetter;
     private javax.swing.JLabel lblAccountType1;
+    private javax.swing.JLabel lblAccountType2;
     private javax.swing.JLabel lblAddDoctorFeedback;
     private javax.swing.JLabel lblAdmin;
     private javax.swing.JLabel lblCreateAdmin;
@@ -1120,14 +1226,14 @@ public class AdminMenu extends javax.swing.JFrame {
     private javax.swing.JLabel lblPastNote;
     private javax.swing.JLabel lblRating;
     private javax.swing.JLabel lblType;
-    private javax.swing.JLabel lblUserAddress1;
-    private javax.swing.JLabel lblUserAge1;
-    private javax.swing.JLabel lblUserGender1;
     private javax.swing.JLabel lblUserID1;
     private javax.swing.JLabel lblUserInfo1;
+    private javax.swing.JLabel lblUserInfo2;
     private javax.swing.JLabel lblUserName1;
+    private javax.swing.JLabel lblUserName2;
     private javax.swing.JLabel lblViewAppointment3;
     private javax.swing.JLabel lblViewAppointment5;
+    private javax.swing.JTabbedPane menuAdmin;
     private javax.swing.JPanel tabAddDoctors_Secretarys;
     private javax.swing.JPanel tabAddFeedback;
     private javax.swing.JPanel tabCreateAdminAccount;
@@ -1135,6 +1241,7 @@ public class AdminMenu extends javax.swing.JFrame {
     private javax.swing.JPanel tabUserInfo;
     private javax.swing.JTable tblDoctorFeedback;
     private javax.swing.JTable tblNewFeedback;
+    private javax.swing.JTextField txtAccountType;
     private javax.swing.JTextField txtDoctor;
     private javax.swing.JTextArea txtFeedbackNote;
     private javax.swing.JTextArea txtNewAddress;
@@ -1146,5 +1253,9 @@ public class AdminMenu extends javax.swing.JFrame {
     private javax.swing.JTextField txtNewUserID;
     private javax.swing.JTextField txtNewUserSurname;
     private javax.swing.JTextField txtRating;
+    private javax.swing.JTextField txtUserAccountType;
+    private javax.swing.JTextArea txtUserAddress;
+    private javax.swing.JTextField txtUserID;
+    private javax.swing.JTextField txtUserName;
     // End of variables declaration//GEN-END:variables
 }
