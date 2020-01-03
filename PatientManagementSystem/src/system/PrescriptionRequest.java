@@ -17,6 +17,23 @@ public class PrescriptionRequest extends Prescription {
         super(Doctor, Patient, Notes, Medicine, Quantity, Dosage);
     }
     
+    public void removePrescriptionRequest(PrescriptionRequest removePrescriptionRequest)
+    {
+        PrescriptionRequest[] temp = new PrescriptionRequest[prescriptionRequests.length - 1];
+        int i = 0;
+        for(PrescriptionRequest prescriptionRequest : PrescriptionRequest.prescriptionRequests)
+        {
+            if(prescriptionRequest != removePrescriptionRequest)
+            {
+                temp[i] = prescriptionRequest;
+                i++;
+            }
+        }
+        prescriptionRequests = temp;
+        
+        savePrescriptionRequests();
+        getPrescriptionRequests();
+    }
     
     public static void addPrescriptionRequest(PrescriptionRequest newPrescriptionRequest)
     {
@@ -92,7 +109,10 @@ public class PrescriptionRequest extends Prescription {
     public static void setPrescriptionRequests()
     {
         PrescriptionRequest[] temp = {
-            new PrescriptionRequest(Doctor.doctors[2], Patient.patients[1], "N/A", Medicine.medicines[3], 5, "1 EVERY 12 HOURS")
+            new PrescriptionRequest(
+                new Doctor("D003", "5f4dcc3b5aa765d61d8327deb882cf99", "Henry", "Brooks", "66 Neswick Street,\nPlymouth,\nPL2 5JN"),
+                new Patient("P002", "5f4dcc3b5aa765d61d8327deb882cf99", "Chloe", "Jones", "31 Clarence Place,\nPlymouth,\nPL2 3JP", "F", "13/06/1998"),
+                "N/A", new Medicine("Penicillin", 3), 5, "1 EVERY 12 HOURS")
         };
         
         prescriptionRequests = temp;

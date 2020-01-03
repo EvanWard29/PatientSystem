@@ -10,9 +10,6 @@ import java.io.*;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
 import javax.swing.JOptionPane;
-import java.lang.Thread;
-import java.lang.Runtime;
-
 
 /**
  *
@@ -26,45 +23,55 @@ public class Login extends javax.swing.JFrame {
     public Login() {
         initComponents();
         
-        //User.setUsers();
-        //User.saveUsers();
+        //defaultData();
+        
         User.getUsers();
+        Appointment.getAppointments();
+        Prescription.getPrescriptions();
+        PastAppointment.getPastAppointments();
+        Medicine.getMedicine();
+        PrescriptionRequest.getPrescriptionRequests();
+        MedicineRequest.getMedicineRequests();
+        AppointmentRequest.getAppointmentRequests();
+        Feedback.getFeedback();
+        TerminationRequest.getTerminationRequests();
+        AccountRequest.getAccountRequests();
+    }
+    
+    public void defaultData()
+    {
+        User.setUsers();
+        User.saveUsers();
         
         Appointment.setAppointments();
         Appointment.saveAppointments();
-        Appointment.getAppointments();
         
         Prescription.setPrescriptions();
         Prescription.savePrescriptions();
-        Prescription.getPrescriptions();
         
         PastAppointment.setPastAppointments();
         PastAppointment.savePastAppointments();
-        PastAppointment.getPastAppointments();
         
-        //Medicine.setMedicine();
-        //Medicine.saveMedicine();
-        Medicine.getMedicine();
+        Medicine.setMedicine();
+        Medicine.saveMedicine();
         
-        //PrescriptionRequest.setPrescriptionRequests();
-        //PrescriptionRequest.savePrescriptionRequests();
-        PrescriptionRequest.getPrescriptionRequests();
+        PrescriptionRequest.setPrescriptionRequests();
+        PrescriptionRequest.savePrescriptionRequests();
         
-        //MedicineRequest.setMedicineRequests();
-        //MedicineRequest.saveMedicineRequests();
-        MedicineRequest.getMedicineRequests();
+        MedicineRequest.setMedicineRequests();
+        MedicineRequest.saveMedicineRequests();
         
         AppointmentRequest.setAppointmentRequests();
         AppointmentRequest.saveAppointmentRequests();
-        AppointmentRequest.getAppointmentRequests();
         
         Feedback.setFeedback();
         Feedback.saveFeedback();
-        Feedback.getFeedback();
         
         TerminationRequest.setTerminationRequests();
         TerminationRequest.saveTerminationRequests();
-        TerminationRequest.getTerminationRequests();
+        
+        AccountRequest.setAccountRequests();
+        AccountRequest.saveAccountRequests();
     }
     
     public static String hashPassword(String password)
@@ -91,6 +98,7 @@ public class Login extends javax.swing.JFrame {
         {
             e.printStackTrace();
         }
+
         return generatedPassword;
     }
     
@@ -109,6 +117,7 @@ public class Login extends javax.swing.JFrame {
         lblPassword = new javax.swing.JLabel();
         txtPassword = new javax.swing.JPasswordField();
         btnLogin = new javax.swing.JButton();
+        jButton1 = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -134,6 +143,14 @@ public class Login extends javax.swing.JFrame {
             }
         });
 
+        jButton1.setFont(new java.awt.Font("Arial", 1, 8)); // NOI18N
+        jButton1.setText("DEFAULTS");
+        jButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton1ActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -148,15 +165,21 @@ public class Login extends javax.swing.JFrame {
                     .addComponent(txtPassword)
                     .addComponent(txtUserID, javax.swing.GroupLayout.PREFERRED_SIZE, 375, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(252, 252, 252))
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addGroup(layout.createSequentialGroup()
+                .addContainerGap()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                        .addComponent(btnLogin, javax.swing.GroupLayout.PREFERRED_SIZE, 112, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(446, 446, 446))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                        .addComponent(lblMain, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(327, 327, 327))))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(0, 387, Short.MAX_VALUE)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                                .addComponent(btnLogin, javax.swing.GroupLayout.PREFERRED_SIZE, 112, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(446, 446, 446))
+                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                                .addComponent(lblMain, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(327, 327, 327))))
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(jButton1)
+                        .addGap(0, 0, Short.MAX_VALUE))))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -173,7 +196,9 @@ public class Login extends javax.swing.JFrame {
                     .addComponent(txtPassword, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(36, 36, 36)
                 .addComponent(btnLogin, javax.swing.GroupLayout.PREFERRED_SIZE, 43, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(228, Short.MAX_VALUE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 198, Short.MAX_VALUE)
+                .addComponent(jButton1)
+                .addContainerGap())
         );
 
         pack();
@@ -233,6 +258,22 @@ public class Login extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_btnLoginActionPerformed
 
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+        defaultData();
+        
+        User.getUsers();
+        Appointment.getAppointments();
+        Prescription.getPrescriptions();
+        PastAppointment.getPastAppointments();
+        Medicine.getMedicine();
+        PrescriptionRequest.getPrescriptionRequests();
+        MedicineRequest.getMedicineRequests();
+        AppointmentRequest.getAppointmentRequests();
+        Feedback.getFeedback();
+        TerminationRequest.getTerminationRequests();
+        AccountRequest.getAccountRequests();
+    }//GEN-LAST:event_jButton1ActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -285,11 +326,14 @@ public class Login extends javax.swing.JFrame {
             MedicineRequest.saveMedicineRequests();
             AppointmentRequest.saveAppointmentRequests();
             Feedback.saveFeedback();
+            TerminationRequest.saveTerminationRequests();
+            AccountRequest.saveAccountRequests();
 	}
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnLogin;
+    private javax.swing.JButton jButton1;
     private java.awt.Label lblMain;
     private javax.swing.JLabel lblPassword;
     private javax.swing.JLabel lblUserID;

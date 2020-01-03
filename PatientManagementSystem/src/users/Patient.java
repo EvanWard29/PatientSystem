@@ -29,6 +29,23 @@ public class Patient extends User {
         this.DOB = DOB;
     }
     
+    public void removePatient(Patient removePatient)
+    {
+        Patient[] temp = new Patient[patients.length - 1];
+        int i = 0;
+        
+        for(Patient patient : patients)
+        {
+            if(patient != removePatient)
+            {
+                temp[i] = patient;
+                i++;
+            }
+        }
+        patients = temp;
+        removeUser(removePatient);
+    }
+    
     public void addPatient(Patient newPatient)
     {
         Patient[] temp = new Patient[patients.length + 1];
@@ -41,6 +58,9 @@ public class Patient extends User {
         
         temp[i] = newPatient;
         patients = temp;
+        
+        addUser(newPatient);
+        getUsers();
     }
 
     public void requestAccountCreation() {

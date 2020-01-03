@@ -34,6 +34,23 @@ public class AppointmentRequest extends Appointment{
         getAppointments();
     }
     
+    public void removeAppointmentRequest(AppointmentRequest removeAppointmentRequest)
+    {
+        AppointmentRequest[] temp = new AppointmentRequest[appointmentRequests.length - 1];
+        int i = 0;
+        
+        for(AppointmentRequest appointmentRequest : appointmentRequests)
+        {
+            if(appointmentRequest != removeAppointmentRequest)
+            {
+                temp[i] = appointmentRequest;
+                i++;
+            }
+        }
+        appointmentRequests = temp;
+        saveAppointmentRequests();
+    }
+    
     public static void saveAppointmentRequests()
     {
         String filename = "data/appointmentRequests.ser"; 

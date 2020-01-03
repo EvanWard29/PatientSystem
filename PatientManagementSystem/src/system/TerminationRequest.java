@@ -27,6 +27,24 @@ public class TerminationRequest implements Serializable{
         this.Patient = Patient;
     }
     
+    public void removeTerminationRequest(TerminationRequest removeTerminationRequest)
+    {
+        TerminationRequest[] temp = new TerminationRequest[terminationRequests.length - 1];
+        int i = 0;
+        for(TerminationRequest terminationRequest : terminationRequests)
+        {
+            if(terminationRequest != removeTerminationRequest)
+            {
+                temp[i] = terminationRequest;
+                i++;
+            }
+        }
+        terminationRequests = temp;
+        
+        saveTerminationRequests();
+        getTerminationRequests();
+    }
+    
     public void addTerminationRequest(TerminationRequest newTerminationRequest)
     {
         TerminationRequest[] temp = new TerminationRequest[terminationRequests.length + 1];

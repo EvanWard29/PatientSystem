@@ -64,6 +64,25 @@ public class User implements Serializable{
         this.Address = Address;
     }
     
+    public void removeUser(User removeUser)
+    {
+        User[] temp = new User[users.length - 1];
+        int i = 0;
+        
+        for(User user : users)
+        {
+            if(user != removeUser)
+            {
+                temp[i] = user;
+                i++;
+            }
+        }
+        users = temp;
+        
+        saveUsers();
+        getUsers();
+    }
+    
     public void addUser(User newUser)
     {
         User[] temp = new User[users.length + 1];
@@ -77,7 +96,13 @@ public class User implements Serializable{
         temp[i] = newUser;
         users = temp;
         
+        for(User user : users)
+        {
+            System.out.println(user.getID());
+        }
+        
         saveUsers();
+        getUsers();
     }
 
     public static void saveUsers()
@@ -96,8 +121,6 @@ public class User implements Serializable{
               
             out.close(); 
             file.close(); 
-              
-            //JOptionPane.showMessageDialog(null, "Users have been saved", "SUCCESS", JOptionPane.OK_OPTION);
         } 
           
         catch(IOException ex) 
