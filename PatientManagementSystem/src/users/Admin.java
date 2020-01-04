@@ -20,19 +20,4 @@ public class Admin extends User {
         temp[i] = newAdmin;
         admins = temp;
     }
-    
-    public void createAccount() {
-    }
-
-    public void addDoctor_Secretary() {
-    }
-
-    public void removeDoctor_Secretary() {
-    }
-
-    public void viewDoctorsRatings() {
-    }
-
-    public void provideDoctorFeedback() {
-    }
 }

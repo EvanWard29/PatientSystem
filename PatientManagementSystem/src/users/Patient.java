@@ -62,28 +62,4 @@ public class Patient extends User {
         addUser(newPatient);
         getUsers();
     }
-
-    public void requestAccountCreation() {
-    }
-
-    public void rateDoctor(int doctorID, String note) {
-    }
-
-    public void viewDoctorRating(int doctorID) {
-    }
-
-    public void requestAppointment() {
-    }
-
-    public void viewPatientHistory() {
-    }
-
-    public void viewAppointment() {
-    }
-
-    public void viewPrescription() {
-    }
-
-    public void requestTermination() {
-    }
 }

@@ -20,25 +20,4 @@ public class Secretary extends User {
         temp[i] = newSecretary;
         secretarys = temp;
     }
-
-    public void approvePatientAccount() {
-    }
-
-    public void recieveAppointmentRequest() {
-    }
-
-    public void createAppointment() {
-    }
-
-    public void giveMedicine() {
-    }
-
-    public void orderMedicine() {
-    }
-
-    public void removePatient() {
-    }
-
-    public void approvePatientAccountTermination() {
-    }
 }

@@ -20,19 +20,4 @@ public class Doctor extends User {
         temp[i] = newDoctor;
         doctors = temp;
     }
-
-    public void viewAppointments() {
-    }
-
-    public void makeNote() {
-    }
-
-    public void viewPatientHistory() {
-    }
-
-    public void prescribeMedicine() {
-    }
-
-    public void requestNewMedicine() {
-    }
 }
