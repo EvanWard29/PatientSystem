@@ -16,6 +16,24 @@ public class MedicineRequest extends Medicine{
         super(Name, Stock);
     }
     
+    public void removeMedicineRequest(MedicineRequest removeMedicineRequest)
+    {
+        MedicineRequest[] temp = new MedicineRequest[medicineRequests.length - 1];
+        int i = 0;
+        
+        for(MedicineRequest medicineRequest : MedicineRequest.medicineRequests)
+        {
+            if(medicineRequest != removeMedicineRequest)
+            {
+                temp[i] = medicineRequest;
+                i++;
+            }
+        }
+        medicineRequests = temp;
+        saveMedicineRequests();
+        getMedicineRequests();
+    }
+    
     public void addMedicineRequest(MedicineRequest newMedicine)
     {
         MedicineRequest[] temp = new MedicineRequest[medicineRequests.length + 1];
@@ -90,7 +108,8 @@ public class MedicineRequest extends Medicine{
     public static void setMedicineRequests()
     {
         MedicineRequest[] temp = {
-            new MedicineRequest("Paracetamol", 45)
+            new MedicineRequest("Paracetamol", 45),
+            new MedicineRequest("Iburprofen", 33)
         };
         
         medicineRequests = temp;

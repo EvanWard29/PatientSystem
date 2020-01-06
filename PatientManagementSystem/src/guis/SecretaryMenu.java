@@ -26,6 +26,7 @@ public class SecretaryMenu extends javax.swing.JFrame {
         setAppointmentRequests();
         setPrescriptions();
         setMedicine();
+        setMedicineRequests();
         setPatients();
         setTerminations();
     }
@@ -164,6 +165,7 @@ public class SecretaryMenu extends javax.swing.JFrame {
     
     private void orderStock(String name, int quantity)
     {
+        boolean exist = false;
         for(Medicine medicine : Medicine.medicines)
         {
             if(medicine.getName().equals(name))
@@ -180,6 +182,53 @@ public class SecretaryMenu extends javax.swing.JFrame {
                 }
                 
                 setMedicine();
+                exist = true;
+                break;
+            }
+        }
+        
+        if(exist == false)
+        {
+            orderNewMedicine(name, quantity);
+        }
+    }
+    
+    private void setMedicineRequests()
+    {
+        DefaultTableModel model = (DefaultTableModel) this.tblMedicineRequest.getModel();
+        int rowCount = model.getRowCount();
+        if(rowCount > 0)
+        {
+            for (int i = rowCount - 1; i >= 0; i--) {
+                model.removeRow(i);
+            }
+        }
+        
+        for(MedicineRequest medicineRequest : MedicineRequest.medicineRequests)
+        {        
+            String[] data = {
+                medicineRequest.getName(),
+                Integer.toString(medicineRequest.getStock())
+            };
+
+            model.addRow(data); 
+            
+        }
+    }
+    
+    private void orderNewMedicine(String name, int quantity)
+    {
+        for(MedicineRequest medicineRequest : MedicineRequest.medicineRequests)
+        {
+            if(medicineRequest.getName().equals(name))
+            {
+                Medicine newMedicine = new Medicine(name, quantity);
+                newMedicine.addMedicine(newMedicine);
+
+                medicineRequest.removeMedicineRequest(medicineRequest);
+                
+                setMedicineRequests();
+                break; 
             }
         }
     }
@@ -353,6 +402,10 @@ public class SecretaryMenu extends javax.swing.JFrame {
         lblStock = new javax.swing.JLabel();
         jScrollPane5 = new javax.swing.JScrollPane();
         tblStock = new javax.swing.JTable();
+        jPanel14 = new javax.swing.JPanel();
+        lblMedicineRequests = new javax.swing.JLabel();
+        jScrollPane11 = new javax.swing.JScrollPane();
+        tblMedicineRequest = new javax.swing.JTable();
         tabRemovePatient = new javax.swing.JPanel();
         tabApprovePatient3 = new javax.swing.JPanel();
         lblApproveAccounts3 = new javax.swing.JLabel();
@@ -1108,16 +1161,13 @@ public class SecretaryMenu extends javax.swing.JFrame {
         tabApprovePatient2Layout.setHorizontalGroup(
             tabApprovePatient2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(tabApprovePatient2Layout.createSequentialGroup()
+                .addContainerGap()
                 .addGroup(tabApprovePatient2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(tabApprovePatient2Layout.createSequentialGroup()
-                        .addContainerGap()
                         .addComponent(lblNewRequests2)
                         .addGap(0, 0, Short.MAX_VALUE))
-                    .addGroup(tabApprovePatient2Layout.createSequentialGroup()
-                        .addContainerGap()
-                        .addGroup(tabApprovePatient2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jScrollPane4)
-                            .addComponent(jPanel4, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
+                    .addComponent(jScrollPane4)
+                    .addComponent(jPanel4, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addContainerGap())
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, tabApprovePatient2Layout.createSequentialGroup()
                 .addGap(0, 0, Short.MAX_VALUE)
@@ -1246,7 +1296,7 @@ public class SecretaryMenu extends javax.swing.JFrame {
             .addGroup(jPanel6Layout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(lblStock1)
-                .addGap(25, 25, 25)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(lblMedicineName)
                     .addComponent(lblMedicineQuantity)
@@ -1254,7 +1304,7 @@ public class SecretaryMenu extends javax.swing.JFrame {
                     .addComponent(txtMedicineName, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
                 .addComponent(jPanel8, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(btnOrder)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
@@ -1311,24 +1361,82 @@ public class SecretaryMenu extends javax.swing.JFrame {
                 .addContainerGap()
                 .addComponent(lblStock)
                 .addGap(18, 18, 18)
-                .addComponent(jScrollPane5, javax.swing.GroupLayout.DEFAULT_SIZE, 339, Short.MAX_VALUE)
+                .addComponent(jScrollPane5, javax.swing.GroupLayout.DEFAULT_SIZE, 199, Short.MAX_VALUE)
                 .addContainerGap())
+        );
+
+        jPanel14.setBorder(javax.swing.BorderFactory.createEtchedBorder());
+
+        lblMedicineRequests.setFont(new java.awt.Font("Arial", 1, 16)); // NOI18N
+        lblMedicineRequests.setText("Medicine Requests");
+
+        tblMedicineRequest.setFont(new java.awt.Font("Arial", 1, 16)); // NOI18N
+        tblMedicineRequest.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+
+            },
+            new String [] {
+                "Medicine", "Quantity"
+            }
+        ) {
+            boolean[] canEdit = new boolean [] {
+                false, false
+            };
+
+            public boolean isCellEditable(int rowIndex, int columnIndex) {
+                return canEdit [columnIndex];
+            }
+        });
+        tblMedicineRequest.setRowHeight(25);
+        tblMedicineRequest.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                tblMedicineRequestMouseClicked(evt);
+            }
+        });
+        jScrollPane11.setViewportView(tblMedicineRequest);
+
+        javax.swing.GroupLayout jPanel14Layout = new javax.swing.GroupLayout(jPanel14);
+        jPanel14.setLayout(jPanel14Layout);
+        jPanel14Layout.setHorizontalGroup(
+            jPanel14Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel14Layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(lblMedicineRequests)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+            .addGroup(jPanel14Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(jPanel14Layout.createSequentialGroup()
+                    .addContainerGap()
+                    .addComponent(jScrollPane11)
+                    .addContainerGap()))
+        );
+        jPanel14Layout.setVerticalGroup(
+            jPanel14Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel14Layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(lblMedicineRequests)
+                .addContainerGap(128, Short.MAX_VALUE))
+            .addGroup(jPanel14Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(jPanel14Layout.createSequentialGroup()
+                    .addGap(39, 39, 39)
+                    .addComponent(jScrollPane11, javax.swing.GroupLayout.DEFAULT_SIZE, 108, Short.MAX_VALUE)
+                    .addContainerGap()))
         );
 
         javax.swing.GroupLayout jPanel5Layout = new javax.swing.GroupLayout(jPanel5);
         jPanel5.setLayout(jPanel5Layout);
         jPanel5Layout.setHorizontalGroup(
             jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel5Layout.createSequentialGroup()
-                .addContainerGap()
-                .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jPanel6, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jPanel7, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                .addContainerGap())
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel5Layout.createSequentialGroup()
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(lblMedicineMain)
                 .addGap(498, 498, 498))
+            .addGroup(jPanel5Layout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jPanel6, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(jPanel7, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(jPanel14, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap())
         );
         jPanel5Layout.setVerticalGroup(
             jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -1336,8 +1444,10 @@ public class SecretaryMenu extends javax.swing.JFrame {
                 .addContainerGap()
                 .addComponent(lblMedicineMain)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jPanel7, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addGap(18, 18, 18)
+                .addComponent(jPanel7, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(jPanel14, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jPanel6, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap())
         );
@@ -1510,13 +1620,10 @@ public class SecretaryMenu extends javax.swing.JFrame {
         tabApprovePatient3Layout.setHorizontalGroup(
             tabApprovePatient3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(tabApprovePatient3Layout.createSequentialGroup()
+                .addContainerGap()
                 .addGroup(tabApprovePatient3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(tabApprovePatient3Layout.createSequentialGroup()
-                        .addContainerGap()
-                        .addComponent(jPanel9, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                    .addGroup(tabApprovePatient3Layout.createSequentialGroup()
-                        .addContainerGap()
-                        .addComponent(jScrollPane6)))
+                    .addComponent(jPanel9, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(jScrollPane6))
                 .addContainerGap())
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, tabApprovePatient3Layout.createSequentialGroup()
                 .addGap(0, 0, Short.MAX_VALUE)
@@ -2053,6 +2160,10 @@ public class SecretaryMenu extends javax.swing.JFrame {
                 orderStock(name, quantity);
             }
         }  
+        
+        this.txtMedicineName.setText("");
+        this.txtMedicineQuantity.setText("");
+        this.txtOrderItems.setText("");
     }//GEN-LAST:event_btnOrderActionPerformed
 
     private void tblStockMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tblStockMouseClicked
@@ -2173,6 +2284,20 @@ public class SecretaryMenu extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_btnLogoutActionPerformed
 
+    private void tblMedicineRequestMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tblMedicineRequestMouseClicked
+        int row = 0;
+        String[] data = new String[2];
+        for(int i = 0; i < data.length; i++)
+        {
+            row = this.tblMedicineRequest.getSelectedRow();
+            String value = tblMedicineRequest.getModel().getValueAt(row, i).toString();
+            data[i] = value;
+        }
+        this.txtMedicineName.setText(data[0]);
+        this.txtMedicineQuantity.setText(data[1]);
+        this.txtOrderItems.setText(data[1]);
+    }//GEN-LAST:event_tblMedicineRequestMouseClicked
+
     /**
      * @param args the command line arguments
      */
@@ -2222,6 +2347,7 @@ public class SecretaryMenu extends javax.swing.JFrame {
     private javax.swing.JPanel jPanel11;
     private javax.swing.JPanel jPanel12;
     private javax.swing.JPanel jPanel13;
+    private javax.swing.JPanel jPanel14;
     private javax.swing.JPanel jPanel16;
     private javax.swing.JPanel jPanel18;
     private javax.swing.JPanel jPanel2;
@@ -2234,6 +2360,7 @@ public class SecretaryMenu extends javax.swing.JFrame {
     private javax.swing.JPanel jPanel9;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane10;
+    private javax.swing.JScrollPane jScrollPane11;
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JScrollPane jScrollPane3;
     private javax.swing.JScrollPane jScrollPane4;
@@ -2262,6 +2389,7 @@ public class SecretaryMenu extends javax.swing.JFrame {
     private javax.swing.JLabel lblMedicineMain;
     private javax.swing.JLabel lblMedicineName;
     private javax.swing.JLabel lblMedicineQuantity;
+    private javax.swing.JLabel lblMedicineRequests;
     private javax.swing.JLabel lblNewRequests;
     private javax.swing.JLabel lblNewRequests1;
     private javax.swing.JLabel lblNewRequests2;
@@ -2299,6 +2427,7 @@ public class SecretaryMenu extends javax.swing.JFrame {
     private javax.swing.JPanel tabSetAppointment;
     private javax.swing.JPanel tabUserInfo;
     private javax.swing.JTable tblAppointmentRequests;
+    private javax.swing.JTable tblMedicineRequest;
     private javax.swing.JTable tblPatientRequests;
     private javax.swing.JTable tblPatients;
     private javax.swing.JTable tblPrescriptions;

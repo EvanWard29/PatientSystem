@@ -38,6 +38,23 @@ public class Medicine implements Serializable{
         this.Stock = Stock;
     }
     
+    public void addMedicine(Medicine newMedicine)
+    {
+        Medicine[] temp = new Medicine[medicines.length + 1];
+        int i;
+        
+        for(i = 0;i < temp.length - 1; i++)
+        {
+            temp[i] = medicines[i];
+        }
+        
+        temp[i] = newMedicine;
+        medicines = temp;
+        
+        saveMedicine();
+        getMedicine();
+    }
+    
     public static void getMedicine()
     {
         Medicine[] temp = null;
