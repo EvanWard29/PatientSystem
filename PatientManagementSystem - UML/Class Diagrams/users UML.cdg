@@ -2,7 +2,7 @@
 
 <ClassDiagram name="users">
   <ClassDiagramComponents>
-    <Class name="Admin" package="users" visibility="public" xPosition="32.0" yPosition="146.0">
+    <Class name="Admin" package="users" visibility="public" xPosition="-15.0" yPosition="612.0">
       <Fields>
         <Field name="admins" type="Admin[]" visibility="public" isStatic="true"/>
       </Fields>
@@ -13,6 +13,7 @@
           <Argument type="String" name="Forename"/>
           <Argument type="String" name="Surname"/>
           <Argument type="String" name="Address"/>
+          <Argument type="Notification" name="Message"/>
         </Constructor>
       </Constructors>
       <Methods>
@@ -21,7 +22,7 @@
         </Method>
       </Methods>
     </Class>
-    <Class name="Doctor" package="users" visibility="public" xPosition="582.0" yPosition="84.0">
+    <Class name="Doctor" package="users" visibility="public" xPosition="223.0" yPosition="1031.0">
       <Fields>
         <Field name="doctors" type="Doctor[]" visibility="public" isStatic="true"/>
       </Fields>
@@ -32,6 +33,7 @@
           <Argument type="String" name="Forename"/>
           <Argument type="String" name="Surname"/>
           <Argument type="String" name="Address"/>
+          <Argument type="Notification" name="Message"/>
         </Constructor>
       </Constructors>
       <Methods>
@@ -40,7 +42,7 @@
         </Method>
       </Methods>
     </Class>
-    <Class name="Patient" package="users" visibility="public" xPosition="772.0" yPosition="625.0">
+    <Class name="Patient" package="users" visibility="public" xPosition="981.0" yPosition="1060.0">
       <Fields>
         <Field name="patients" type="Patient[]" visibility="public" isStatic="true"/>
         <Field name="Gender" type="String" visibility="private"/>
@@ -53,6 +55,7 @@
           <Argument type="String" name="Forename"/>
           <Argument type="String" name="Surname"/>
           <Argument type="String" name="Address"/>
+          <Argument type="Notification" name="Message"/>
           <Argument type="String" name="Gender"/>
           <Argument type="String" name="DOB"/>
         </Constructor>
@@ -74,7 +77,7 @@
         </Method>
       </Methods>
     </Class>
-    <Class name="Secretary" package="users" visibility="public" xPosition="1176.0" yPosition="259.0">
+    <Class name="Secretary" package="users" visibility="public" xPosition="1479.0" yPosition="791.0">
       <Fields>
         <Field name="secretarys" type="Secretary[]" visibility="public" isStatic="true"/>
       </Fields>
@@ -85,6 +88,7 @@
           <Argument type="String" name="Forename"/>
           <Argument type="String" name="Surname"/>
           <Argument type="String" name="Address"/>
+          <Argument type="Notification" name="Message"/>
         </Constructor>
       </Constructors>
       <Methods>
@@ -93,7 +97,7 @@
         </Method>
       </Methods>
     </Class>
-    <Class name="User" package="users" visibility="public" xPosition="175.0" yPosition="454.0">
+    <Class name="User" package="users" visibility="public" xPosition="764.0" yPosition="60.0">
       <Fields>
         <Field name="users" type="User[]" visibility="public" isStatic="true"/>
         <Field name="loggedUser" type="User" visibility="public" isStatic="true"/>
@@ -102,6 +106,7 @@
         <Field name="Forename" type="String" visibility="private"/>
         <Field name="Surname" type="String" visibility="private"/>
         <Field name="Address" type="String" visibility="private"/>
+        <Field name="Notification" type="Notification" visibility="private"/>
       </Fields>
       <Constructors>
         <Constructor visibility="public">
@@ -110,6 +115,7 @@
           <Argument type="String" name="Forename"/>
           <Argument type="String" name="Surname"/>
           <Argument type="String" name="Address"/>
+          <Argument type="Notification" name="Notification"/>
         </Constructor>
       </Constructors>
       <Methods>
@@ -133,6 +139,10 @@
         <Method name="setAddress" returnType="void" visibility="public">
           <Argument type="String" name="Address"/>
         </Method>
+        <Method name="getNotification" returnType="Notification" visibility="public"/>
+        <Method name="setNotification" returnType="void" visibility="public">
+          <Argument type="Notification" name="Notification"/>
+        </Method>
         <Method name="removeUser" returnType="void" visibility="public">
           <Argument type="User" name="removeUser"/>
         </Method>
@@ -148,15 +158,15 @@
     </Class>
   </ClassDiagramComponents>
   <ClassDiagramRelations>
+    <UseRelation source="users.User" target="users.User" sourceCardinality="1..1" targetCardinality="1..1"/>
+    <UseRelation source="users.Doctor" target="users.Doctor" sourceCardinality="1..1" targetCardinality="1..1"/>
+    <UseRelation source="users.Admin" target="users.Admin" sourceCardinality="1..1" targetCardinality="1..1"/>
+    <UseRelation source="users.Secretary" target="users.Secretary" sourceCardinality="1..1" targetCardinality="1..1"/>
+    <IsRelation name="is" source="users.Patient" target="users.User"/>
+    <HasRelation name="loggedUser" source="users.User" target="users.User" type="Aggregation" sourceCardinality="1..1" targetCardinality="1..1"/>
+    <IsRelation name="is" source="users.Secretary" target="users.User"/>
+    <UseRelation source="users.Patient" target="users.Patient" sourceCardinality="1..1" targetCardinality="1..1"/>
     <IsRelation name="is" source="users.Admin" target="users.User"/>
     <IsRelation name="is" source="users.Doctor" target="users.User"/>
-    <UseRelation source="users.Secretary" target="users.Secretary" sourceCardinality="1..1" targetCardinality="1..1"/>
-    <UseRelation source="users.Patient" target="users.Patient" sourceCardinality="1..1" targetCardinality="1..1"/>
-    <UseRelation source="users.User" target="users.User" sourceCardinality="1..1" targetCardinality="1..1"/>
-    <IsRelation name="is" source="users.Secretary" target="users.User"/>
-    <UseRelation source="users.Admin" target="users.Admin" sourceCardinality="1..1" targetCardinality="1..1"/>
-    <UseRelation source="users.Doctor" target="users.Doctor" sourceCardinality="1..1" targetCardinality="1..1"/>
-    <HasRelation name="loggedUser" source="users.User" target="users.User" type="Aggregation" sourceCardinality="1..1" targetCardinality="1..1"/>
-    <IsRelation name="is" source="users.Patient" target="users.User"/>
   </ClassDiagramRelations>
 </ClassDiagram>
