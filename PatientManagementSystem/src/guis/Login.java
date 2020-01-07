@@ -556,6 +556,18 @@ public class Login extends javax.swing.JFrame {
             {
                 AccountRequest newAccountRequest = new AccountRequest(password, forename, surname, address, gender, dob);
                 newAccountRequest.addAccountRequest(newAccountRequest);
+                
+                Notification notification = new Notification("You have new Requests:"
+                        + "\nAccount Reqeusts \nAppointment Reqeusts \nMedicine Requests \nTermination Requests");
+                
+                for(User user : User.users)
+                {
+                    if(user instanceof Secretary)
+                    {
+                        user.setNotification(notification);
+                    }
+                }
+                User.saveUsers();
 
                 JOptionPane.showMessageDialog(this, "ACCOUNT REQUEST SUBMITTED\nYOUR ACCOUNT SHOULD BE AVAILABLE  WITHIN AN HOUR", 
                         "SUCCESS", JOptionPane.INFORMATION_MESSAGE);

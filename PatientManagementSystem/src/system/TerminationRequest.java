@@ -120,9 +120,9 @@ public class TerminationRequest implements Serializable{
     {
         TerminationRequest[] temp = {
             new TerminationRequest(new Patient("P003", "5f4dcc3b5aa765d61d8327deb882cf99", 
-                "Linda", "Bennett", "66 Neswick Street,\nPlymouth,\nPL1 5JN", "F", "10/08/1992")),
+                "Linda", "Bennett", "66 Neswick Street,\nPlymouth,\nPL1 5JN", null, "F", "10/08/1992")),
             new TerminationRequest(new Patient("P001", "5f4dcc3b5aa765d61d8327deb882cf99",
-                "Evan", "Ward", "81 Greenwood Avenue,\nPontnewydd,\nCwmbran,\nNP44 5LH", "M", "29/02/2000"))
+                "Evan", "Ward", "81 Greenwood Avenue,\nPontnewydd,\nCwmbran,\nNP44 5LH", null, "M", "29/02/2000"))
         };
         terminationRequests = temp;
     }

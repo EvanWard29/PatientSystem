@@ -33,6 +33,16 @@ public class SecretaryMenu extends javax.swing.JFrame {
     
     private void getUserInfo()
     {
+        Notification notification = User.loggedUser.getNotification();
+        
+        if(notification != null)
+        {
+            JOptionPane.showMessageDialog(this, notification.getMessage(), "WELCOME", 
+                    JOptionPane.INFORMATION_MESSAGE);
+            User.loggedUser.setNotification(null);
+            User.saveUsers();
+        }
+        
         this.txtUserAccountType.setText("Secretary");
         this.txtUserID.setText(User.loggedUser.getID());
         this.txtUserName.setText(User.loggedUser.getForename() + " " + User.loggedUser.getSurname());
@@ -1925,7 +1935,9 @@ public class SecretaryMenu extends javax.swing.JFrame {
         
                 if(confirm == 0)
                 {
-                    Patient newPatient = new Patient(id, accountRequest.getPassword(), forename, surname, address, gender, dob);
+                    Notification message = new Notification("Welcome to your new Patient Account");
+                    
+                    Patient newPatient = new Patient(id, accountRequest.getPassword(), forename, surname, address, message, gender, dob);
                     newPatient.addPatient(newPatient);
                     
                     accountRequest.removeAccountRequest(accountRequest);
@@ -1993,6 +2005,13 @@ public class SecretaryMenu extends javax.swing.JFrame {
                         {
                             Appointment newAppointment = new Appointment(doctor, patient, date);
                             newAppointment.addAppointment(newAppointment);
+                            Appointment.saveAppointments();
+                            
+                            patient.setNotification(new Notification("Your Appointment with Dr. " 
+                                    + doctor.getSurname() + " was approved for " + date));
+                            doctor.setNotification(new Notification("Your Appointment with Patient " + 
+                                    patient.getForename() + " " + patient.getSurname() + " was approved for " + date));
+                            User.saveUsers();
                             
                             for(AppointmentRequest appointmentRequest : AppointmentRequest.appointmentRequests)
                             {
@@ -2000,6 +2019,7 @@ public class SecretaryMenu extends javax.swing.JFrame {
                                         (appointmentRequest.getPatient().getID().equals(patient.getID())))
                                 {
                                     appointmentRequest.removeAppointmentRequest(appointmentRequest);
+                                    AppointmentRequest.saveAppointmentRequests();
                                 }
                             }
                         }
@@ -2038,6 +2058,17 @@ public class SecretaryMenu extends javax.swing.JFrame {
                 if((doctor.getID().equals(doctorID)) && (patient.getID().equals(patientID)))
                 {
                     appointmentRequest.removeAppointmentRequest(appointmentRequest);
+                }
+                
+                for(Patient patients : Patient.patients)
+                {
+                    if(patients.getID().equals(patient.getID()))
+                    {
+                        patients.setNotification(new Notification("Your Appointment Request with Dr. " +
+                            doctor.getSurname() + " was declined"));
+                        User.saveUsers();
+                        break;
+                    }
                 }
             }
         }

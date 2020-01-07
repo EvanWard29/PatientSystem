@@ -1,5 +1,7 @@
 package users;
 
+import system.Notification;
+
 public class Patient extends User {
     public static Patient[] patients;
     
@@ -7,8 +9,8 @@ public class Patient extends User {
 
     private String DOB;
 
-    public Patient(String ID, String Password, String Forename, String Surname, String Address, String Gender, String DOB) {
-        super(ID, Password, Forename, Surname, Address);
+    public Patient(String ID, String Password, String Forename, String Surname, String Address, Notification Message, String Gender, String DOB) {
+        super(ID, Password, Forename, Surname, Address, Message);
         this.Gender = Gender;
         this.DOB = DOB;
     }

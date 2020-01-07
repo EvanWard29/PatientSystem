@@ -28,6 +28,16 @@ public class AdminMenu extends javax.swing.JFrame {
     
     private void getUserInfo()
     {
+        Notification notification = User.loggedUser.getNotification();
+        
+        if(notification != null)
+        {
+            JOptionPane.showMessageDialog(this, notification.getMessage(), "WELCOME", 
+                    JOptionPane.INFORMATION_MESSAGE);
+            User.loggedUser.setNotification(null);
+            User.saveUsers();
+        }
+        
         this.txtUserAccountType.setText("Admin");
         this.txtUserID.setText(User.loggedUser.getID());
         this.txtUserName.setText(User.loggedUser.getForename() + " " + User.loggedUser.getSurname());
