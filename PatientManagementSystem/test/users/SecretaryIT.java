@@ -38,7 +38,7 @@ public class SecretaryIT {
         
         //Add new Secretary to end of User array
         Secretary newSecretary = new Secretary("P004", "password", 
-            "Evan", "Ward", "81 Greenwood Avenue,\nPontnewydd,\nCwmbran,\nNP44 5LH");
+            "Evan", "Ward", "81 Greenwood Avenue,\nPontnewydd,\nCwmbran,\nNP44 5LH", null);
         newSecretary.addUser(newSecretary);
         
         boolean error;

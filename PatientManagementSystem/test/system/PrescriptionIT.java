@@ -42,7 +42,7 @@ public class PrescriptionIT {
         //Default Doctor of first Prescription:
         Prescription instance = Prescription.prescriptions[0];
         Doctor expResult = new Doctor("D001", "5f4dcc3b5aa765d61d8327deb882cf99", 
-                "Joe", "Bloggs", "3 Charles Darwin Road,\nPlymouth,\nPL3 4GU");
+                "Joe", "Bloggs", "3 Charles Darwin Road,\nPlymouth,\nPL3 4GU", null);
         Doctor result = instance.getDoctor();
         
         //Pass if expected Doctor is in array
@@ -58,7 +58,7 @@ public class PrescriptionIT {
         
         //Set new Doctor:
         Doctor Doctor = new Doctor("D002", "5f4dcc3b5aa765d61d8327deb882cf99", 
-                "Shirley", "Jones", "5 Admirals Hard,\nPlymouth,\nPL1 3RJ");
+                "Shirley", "Jones", "5 Admirals Hard,\nPlymouth,\nPL1 3RJ", null);
         Prescription instance = Prescription.prescriptions[0];
         instance.setDoctor(Doctor);
         
@@ -77,7 +77,7 @@ public class PrescriptionIT {
         //Default Patient of first Prescription:
         Prescription instance = Prescription.prescriptions[0];
         Patient expResult = new Patient("P001", "5f4dcc3b5aa765d61d8327deb882cf99", 
-                "Evan", "Ward", "Flat 5,\n58 North Road East,\nPlymouth,\nPL4 6AJ", "M", "29/02/2000");
+                "Evan", "Ward", "Flat 5,\n58 North Road East,\nPlymouth,\nPL4 6AJ", null, "M", "29/02/2000");
         Patient result = instance.getPatient();
         
         
@@ -93,7 +93,7 @@ public class PrescriptionIT {
         
         //Set new Patient:
         Patient Patient = new Patient("P003", "5f4dcc3b5aa765d61d8327deb882cf99", 
-                "Chloe", "Jones", "31 Clarence Place,\nPlymouth,\nPL2 3JP", "F", "13/06/1998");
+                "Chloe", "Jones", "31 Clarence Place,\nPlymouth,\nPL2 3JP", null, "F", "13/06/1998");
         Prescription instance = Prescription.prescriptions[0];
         instance.setPatient(Patient);
         
@@ -268,8 +268,8 @@ public class PrescriptionIT {
         Login.defaultData();
         System.out.println("addPrescription");
         Prescription newPrescription = new Prescription(
-                    new Doctor("D002", "5f4dcc3b5aa765d61d8327deb882cf99", "Shirley", "Jones", "5 Admirals Hard,\nPlymouth,\nPL1 3RJ"),
-                    new Patient("P003", "5f4dcc3b5aa765d61d8327deb882cf99", "Linda", "Bennett", "66 Neswick Street,\nPlymouth,\nPL1 5JN", "F", "10/08/1992"),
+                    new Doctor("D002", "5f4dcc3b5aa765d61d8327deb882cf99", "Shirley", "Jones", "5 Admirals Hard,\nPlymouth,\nPL1 3RJ", null),
+                    new Patient("P003", "5f4dcc3b5aa765d61d8327deb882cf99", "Linda", "Bennett", "66 Neswick Street,\nPlymouth,\nPL1 5JN", null, "F", "10/08/1992"),
                     "Health in perfect condition.\nRecommend dosage decrease.", new Medicine("Penicillin", 5), 6, "1 EVERY 48 HOURS");
         newPrescription.addPrescription(newPrescription);
         

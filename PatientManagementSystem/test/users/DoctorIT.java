@@ -39,7 +39,7 @@ public class DoctorIT {
         
         //Add new Doctor to end of User array
         Doctor newDoctor = new Doctor("P004", "password", 
-            "Evan", "Ward", "81 Greenwood Avenue,\nPontnewydd,\nCwmbran,\nNP44 5LH");
+            "Evan", "Ward", "81 Greenwood Avenue,\nPontnewydd,\nCwmbran,\nNP44 5LH", null);
         newDoctor.addUser(newDoctor);
         
         boolean error;

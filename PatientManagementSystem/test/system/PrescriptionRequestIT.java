@@ -71,8 +71,8 @@ public class PrescriptionRequestIT {
         Login.defaultData();
         System.out.println("addPrescriptionRequest");
         PrescriptionRequest newPrescriptionRequest = new PrescriptionRequest(
-            new Doctor("D002", "5f4dcc3b5aa765d61d8327deb882cf99", "Shirley", "Jones", "5 Admirals Hard,\nPlymouth,\nPL1 3RJ"),
-            new Patient("P003", "5f4dcc3b5aa765d61d8327deb882cf99", "Linda", "Bennett", "66 Neswick Street,\nPlymouth,\nPL1 5JN", "F", "10/08/1992"),
+            new Doctor("D002", "5f4dcc3b5aa765d61d8327deb882cf99", "Shirley", "Jones", "5 Admirals Hard,\nPlymouth,\nPL1 3RJ", null),
+            new Patient("P003", "5f4dcc3b5aa765d61d8327deb882cf99", "Linda", "Bennett", "66 Neswick Street,\nPlymouth,\nPL1 5JN", null, "F", "10/08/1992"),
             "Health slowly decreasing.", new Medicine("Paracetemol", 18), 10, "2 EVERY 12 HOURS");
         newPrescriptionRequest.addPrescriptionRequest(newPrescriptionRequest);
         

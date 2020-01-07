@@ -36,7 +36,7 @@ public class AdminIT {
         
         //Add new Admin to end of User array
         Admin newAdmin = new Admin("P004", "password", 
-            "Evan", "Ward", "81 Greenwood Avenue,\nPontnewydd,\nCwmbran,\nNP44 5LH");
+            "Evan", "Ward", "81 Greenwood Avenue,\nPontnewydd,\nCwmbran,\nNP44 5LH", null);
         newAdmin.addUser(newAdmin);
         
         boolean error;

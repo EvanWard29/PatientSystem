@@ -238,7 +238,7 @@ public class UserIT {
         //Reset data in array
         Login.defaultData();
         System.out.println("addUser");
-        User newUser = new User("A002", "password", "Evan", "Ward", "81 Greenwood Avenue,\nPontnewydd,\nCwmbran,\nNP44 5LH");
+        User newUser = new User("A002", "password", "Evan", "Ward", "81 Greenwood Avenue,\nPontnewydd,\nCwmbran,\nNP44 5LH", null);
         
         //Add new User to end of array
         newUser.addUser(newUser);

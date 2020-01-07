@@ -42,7 +42,7 @@ public class AppointmentIT {
         Appointment instance = Appointment.appointments[0];
         //Default stored doctor for first Appointment
         Doctor expResult = new Doctor("D002", "5f4dcc3b5aa765d61d8327deb882cf99", 
-                "Shirley", "Jones", "5 Admirals Hard,\nPlymouth,\nPL1 3RJ");
+                "Shirley", "Jones", "5 Admirals Hard,\nPlymouth,\nPL1 3RJ", null);
         Doctor result = instance.getDoctor();
         
         //Pass if expected Doctor is equals to stored Doctor
@@ -57,7 +57,7 @@ public class AppointmentIT {
         System.out.println("setDoctor");
         
         Doctor Doctor = new Doctor("D003", "5f4dcc3b5aa765d61d8327deb882cf99", 
-                "Henry", "Brooks", "66 Neswick Street,\nPlymouth,\nPL2 5JN"); 
+                "Henry", "Brooks", "66 Neswick Street,\nPlymouth,\nPL2 5JN", null); 
         Appointment instance = Appointment.appointments[0];
         instance.setDoctor(Doctor);
         boolean error;
@@ -89,7 +89,7 @@ public class AppointmentIT {
         //Default stored Patient for first appointment
         Appointment instance = Appointment.appointments[0];
         Patient expResult = new Patient("P003", "5f4dcc3b5aa765d61d8327deb882cf99", 
-                "Linda", "Bennett", "66 Neswick Street,\nPlymouth,\nPL1 5JN", "F", "10/08/1992");
+                "Linda", "Bennett", "66 Neswick Street,\nPlymouth,\nPL1 5JN", null, "F", "10/08/1992");
         Patient result = instance.getPatient();
         
         //Pass if stored Patient is equal to default stored Patient
@@ -103,7 +103,7 @@ public class AppointmentIT {
     public void testSetPatient() {
         System.out.println("setPatient");
         Patient Patient = new Patient("P004", "password", "Evan", "Ward",
-                                "81 Greenwood Avenue,\nPontnewydd,\nCwmbran,\nNP44 5LH", "M", "29/02/2000");
+                                "81 Greenwood Avenue,\nPontnewydd,\nCwmbran,\nNP44 5LH", null, "M", "29/02/2000");
         Appointment instance = Appointment.appointments[0];
         instance.setPatient(Patient);
         boolean error;
@@ -164,8 +164,8 @@ public class AppointmentIT {
         Login.defaultData();
         System.out.println("addAppointment");
         Appointment newAppointment = new Appointment(
-            new Doctor("D002", "5f4dcc3b5aa765d61d8327deb882cf99", "Shirley", "Jones", "5 Admirals Hard,\nPlymouth,\nPL1 3RJ"),
-            new Patient("P001", "5f4dcc3b5aa765d61d8327deb882cf99", "Evan", "Ward", "Flat 5,\n58 North Road East,\nPlymouth,\nPL4 6AJ", "M", "29/02/2000"),
+            new Doctor("D002", "5f4dcc3b5aa765d61d8327deb882cf99", "Shirley", "Jones", "5 Admirals Hard,\nPlymouth,\nPL1 3RJ", null),
+            new Patient("P001", "5f4dcc3b5aa765d61d8327deb882cf99", "Evan", "Ward", "Flat 5,\n58 North Road East,\nPlymouth,\nPL4 6AJ", null, "M", "29/02/2000"),
             "06/01/2020");
         
         //Add new User to end of array

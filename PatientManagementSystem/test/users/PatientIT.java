@@ -135,7 +135,7 @@ public class PatientIT {
         
         //Add new Patient to end of User array
         Patient newPatient = new Patient("P004", "password", 
-            "Evan", "Ward", "81 Greenwood Avenue,\nPontnewydd,\nCwmbran,\nNP44 5LH", "M", "29/02/2000");
+            "Evan", "Ward", "81 Greenwood Avenue,\nPontnewydd,\nCwmbran,\nNP44 5LH", null, "M", "29/02/2000");
         newPatient.addUser(newPatient);
         
         boolean error;

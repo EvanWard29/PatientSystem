@@ -41,7 +41,7 @@ public class FeedbackIT {
         //Default Doctor of first Feedback in array
         Feedback instance = Feedback.feedback[0];
         Doctor expResult = new Doctor("D001", "5f4dcc3b5aa765d61d8327deb882cf99", 
-                "Joe", "Bloggs", "3 Charles Darwin Road,\nPlymouth,\nPL3 4GU");
+                "Joe", "Bloggs", "3 Charles Darwin Road,\nPlymouth,\nPL3 4GU", null);
         Doctor result = instance.getDoctor();
         
         //Pass if expected Doctor is in first Feedback of array
@@ -55,7 +55,7 @@ public class FeedbackIT {
     public void testSetDoctor() {
         System.out.println("setDoctor");
         Doctor Doctor = new Doctor("D002", "5f4dcc3b5aa765d61d8327deb882cf99", 
-                "Shirley", "Jones", "5 Admirals Hard,\nPlymouth,\nPL1 3RJ");
+                "Shirley", "Jones", "5 Admirals Hard,\nPlymouth,\nPL1 3RJ", null);
         Feedback instance = Feedback.feedback[0];
         instance.setDoctor(Doctor);
         
@@ -73,8 +73,9 @@ public class FeedbackIT {
         
         //Default rating of first Feedback in array is 7
         Feedback instance = Feedback.feedback[0];
-        int expResult = 7;
-        int result = instance.getRating();
+        String expResult = "7.0";
+        String result = Double.toString(instance.getRating());
+         
         
         //Pass if rating is 7
         assertEquals(expResult, result);
@@ -88,12 +89,12 @@ public class FeedbackIT {
         System.out.println("setRating");
         
         //Set new Rating
-        int Rating = 0;
+        double Rating = 0.0;
         Feedback instance = Feedback.feedback[0];
         instance.setRating(Rating);
         
         //Pass if new rating set
-        assertEquals(Rating, instance.getRating());
+        assertEquals(Double.toString(Rating), Double.toString(instance.getRating()));
     }
 
     /**
@@ -138,7 +139,7 @@ public class FeedbackIT {
         System.out.println("addFeedback");
         Feedback newFeedback = new Feedback(
                                     new Doctor("D002", "5f4dcc3b5aa765d61d8327deb882cf99", 
-                                        "Shirley", "Jones", "5 Admirals Hard,\nPlymouth,\nPL1 3RJ"),
+                                        "Shirley", "Jones", "5 Admirals Hard,\nPlymouth,\nPL1 3RJ", null),
                                     0, "Very nice Doctor");
 
         newFeedback.addFeedback(newFeedback);

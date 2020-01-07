@@ -38,7 +38,7 @@ public class TerminationRequestIT {
         System.out.println("getPatient");
         TerminationRequest instance = TerminationRequest.terminationRequests[0];
         Patient expResult = new Patient("P003", "5f4dcc3b5aa765d61d8327deb882cf99", 
-                "Linda", "Bennett", "66 Neswick Street,\nPlymouth,\nPL1 5JN", "F", "10/08/1992");
+                "Linda", "Bennett", "66 Neswick Street,\nPlymouth,\nPL1 5JN", null, "F", "10/08/1992");
         Patient result = instance.getPatient();
         
         //Pass if Patient is in array
@@ -53,7 +53,7 @@ public class TerminationRequestIT {
         Login.defaultData();
         System.out.println("setPatientID");
         Patient Patient = new Patient("P003", "5f4dcc3b5aa765d61d8327deb882cf99", 
-                "Linda", "Bennett", "66 Neswick Street,\nPlymouth,\nPL1 5JN", "F", "10/08/1992");
+                "Linda", "Bennett", "66 Neswick Street,\nPlymouth,\nPL1 5JN", null, "F", "10/08/1992");
         TerminationRequest instance = TerminationRequest.terminationRequests[0];
         instance.setPatientID(Patient);
         
@@ -98,7 +98,7 @@ public class TerminationRequestIT {
         
         //New TerminationRequest:
         TerminationRequest newTerminationRequest = new TerminationRequest(
-            new Patient("P002", "5f4dcc3b5aa765d61d8327deb882cf99", "Chloe", "Jones", "31 Clarence Place,\nPlymouth,\nPL2 3JP", "F", "13/06/1998"));
+            new Patient("P002", "5f4dcc3b5aa765d61d8327deb882cf99", "Chloe", "Jones", "31 Clarence Place,\nPlymouth,\nPL2 3JP", null, "F", "13/06/1998"));
         newTerminationRequest.addTerminationRequest(newTerminationRequest);
        
         int i = TerminationRequest.terminationRequests.length - 1;
