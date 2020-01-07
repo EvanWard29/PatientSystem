@@ -21,5 +21,7 @@ public class Secretary extends User {
         
         temp[i] = newSecretary;
         secretarys = temp;
+        
+        addUser(newSecretary);
     }
 }

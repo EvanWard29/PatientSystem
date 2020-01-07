@@ -21,5 +21,7 @@ public class Doctor extends User {
         
         temp[i] = newDoctor;
         doctors = temp;
+        
+        addUser(newDoctor);
     }
 }

@@ -13,10 +13,10 @@ import java.io.*;
 public class Feedback  implements Serializable{
     public static Feedback[] feedback;
     private Doctor Doctor;
-    private int Rating;
+    private double Rating;
     private String Notes;
 
-    public Feedback(Doctor Doctor, int Rating, String Notes) {
+    public Feedback(Doctor Doctor, double Rating, String Notes) {
         this.Doctor = Doctor;
         this.Rating = Rating;
         this.Notes = Notes;
@@ -30,11 +30,11 @@ public class Feedback  implements Serializable{
         this.Doctor = Doctor;
     }
 
-    public int getRating() {
+    public double getRating() {
         return Rating;
     }
 
-    public void setRating(int Rating) {
+    public void setRating(double Rating) {
         this.Rating = Rating;
     }
 

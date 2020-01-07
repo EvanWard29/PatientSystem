@@ -25,7 +25,7 @@ public class Login extends javax.swing.JFrame {
     public Login() {
         initComponents();
         
-        //defaultData();
+        defaultData();
         
         User.getUsers();
         Appointment.getAppointments();
@@ -38,9 +38,11 @@ public class Login extends javax.swing.JFrame {
         Feedback.getFeedback();
         TerminationRequest.getTerminationRequests();
         AccountRequest.getAccountRequests();
+        FeedbackRequest.getFeedbackRequests();
         
         this.pnlLogin.setVisible(true);
         this.pnlRequest.setVisible(false);
+
     }
     
     public static void defaultData()
@@ -77,6 +79,9 @@ public class Login extends javax.swing.JFrame {
         
         AccountRequest.setAccountRequests();
         AccountRequest.saveAccountRequests();
+        
+        FeedbackRequest.setFeedbackRequests();
+        FeedbackRequest.saveFeedbackRequests();
     }
     
     public static String hashPassword(String password)
@@ -639,6 +644,7 @@ public class Login extends javax.swing.JFrame {
             Feedback.saveFeedback();
             TerminationRequest.saveTerminationRequests();
             AccountRequest.saveAccountRequests();
+            FeedbackRequest.saveFeedbackRequests();
 	}
     }
 
