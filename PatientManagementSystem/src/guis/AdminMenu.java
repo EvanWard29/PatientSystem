@@ -1089,7 +1089,9 @@ public class AdminMenu extends javax.swing.JFrame {
         
             if(confirm == 0)
             {
-                Admin newAdmin = new Admin(userID, "5f4dcc3b5aa765d61d8327deb882cf99", forename, surname, address, null);
+                Admin newAdmin = new Admin(userID, "5f4dcc3b5aa765d61d8327deb882cf99", forename, surname, address, 
+                        new Notification("Welcome to your new Admin Account"));
+                System.out.println(userID);
                 newAdmin.addAdmin(newAdmin);
                 
                 JOptionPane.showMessageDialog(this, "ADMIN ADDED", "SUCCESS", JOptionPane.INFORMATION_MESSAGE);
@@ -1118,13 +1120,15 @@ public class AdminMenu extends javax.swing.JFrame {
             if(userType.equals("Doctor"))
             {
                 userID = String.format("D%03d", Doctor.doctors.length + 1);
-                Doctor newDoctor = new Doctor(userID, "5f4dcc3b5aa765d61d8327deb882cf99", forename, surname, address, null);
+                Doctor newDoctor = new Doctor(userID, "5f4dcc3b5aa765d61d8327deb882cf99", forename, surname, address,
+                    new Notification("Welcome to your new Doctor Account"));
                 newDoctor.addDoctor(newDoctor);
             }
             else if(userType.equals("Secretary"))
             {
                 userID = String.format("S%03d", Secretary.secretarys.length + 1);
-                Secretary newSecretary = new Secretary(userID, "5f4dcc3b5aa765d61d8327deb882cf99", forename, surname, address, null);
+                Secretary newSecretary = new Secretary(userID, "5f4dcc3b5aa765d61d8327deb882cf99", forename, surname, address, 
+                    new Notification("Welcome to your new Secretary Account"));
                 newSecretary.addSecretary(newSecretary);
             }
             

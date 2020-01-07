@@ -85,7 +85,6 @@ public class User implements Serializable{
         users = temp;
         
         saveUsers();
-        getUsers();
     }
     
     public void addUser(User newUser)
@@ -102,7 +101,6 @@ public class User implements Serializable{
         users = temp;
         
         saveUsers();
-        getUsers();
     }
 
     public static void saveUsers()
