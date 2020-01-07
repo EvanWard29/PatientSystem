@@ -1,10 +1,12 @@
 package users;
 
+import system.Notification;
+
 public class Secretary extends User {
     public static Secretary[] secretarys;
     
-    public Secretary(String ID, String Password, String Forename, String Surname, String Address) {
-        super(ID, Password, Forename, Surname, Address);
+    public Secretary(String ID, String Password, String Forename, String Surname, String Address, Notification Message) {
+        super(ID, Password, Forename, Surname, Address, Message);
     }
     
     public void addSecretary(Secretary newSecretary)
@@ -19,26 +21,7 @@ public class Secretary extends User {
         
         temp[i] = newSecretary;
         secretarys = temp;
-    }
-
-    public void approvePatientAccount() {
-    }
-
-    public void recieveAppointmentRequest() {
-    }
-
-    public void createAppointment() {
-    }
-
-    public void giveMedicine() {
-    }
-
-    public void orderMedicine() {
-    }
-
-    public void removePatient() {
-    }
-
-    public void approvePatientAccountTermination() {
+        
+        addUser(newSecretary);
     }
 }

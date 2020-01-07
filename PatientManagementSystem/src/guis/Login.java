@@ -38,12 +38,14 @@ public class Login extends javax.swing.JFrame {
         Feedback.getFeedback();
         TerminationRequest.getTerminationRequests();
         AccountRequest.getAccountRequests();
+        FeedbackRequest.getFeedbackRequests();
         
         this.pnlLogin.setVisible(true);
         this.pnlRequest.setVisible(false);
+
     }
     
-    public void defaultData()
+    public static void defaultData()
     {
         User.setUsers();
         User.saveUsers();
@@ -77,6 +79,9 @@ public class Login extends javax.swing.JFrame {
         
         AccountRequest.setAccountRequests();
         AccountRequest.saveAccountRequests();
+        
+        FeedbackRequest.setFeedbackRequests();
+        FeedbackRequest.saveFeedbackRequests();
     }
     
     public static String hashPassword(String password)
@@ -342,9 +347,9 @@ public class Login extends javax.swing.JFrame {
                     .addComponent(lblAddress)
                     .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addGroup(pnlRequestLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(lblGender)
-                    .addComponent(txtGender, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGroup(pnlRequestLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(txtGender, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(lblGender))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(lblDOB2)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 17, Short.MAX_VALUE)
@@ -382,7 +387,7 @@ public class Login extends javax.swing.JFrame {
             .addGroup(panAccountsLayout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(pnlLogin, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(140, Short.MAX_VALUE))
+                .addContainerGap(235, Short.MAX_VALUE))
             .addGroup(panAccountsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                 .addGroup(panAccountsLayout.createSequentialGroup()
                     .addGap(0, 0, Short.MAX_VALUE)
@@ -556,6 +561,18 @@ public class Login extends javax.swing.JFrame {
             {
                 AccountRequest newAccountRequest = new AccountRequest(password, forename, surname, address, gender, dob);
                 newAccountRequest.addAccountRequest(newAccountRequest);
+                
+                Notification notification = new Notification("You have new Requests:"
+                        + "\nAccount Reqeusts \nAppointment Reqeusts \nMedicine Requests \nTermination Requests");
+                
+                for(User user : User.users)
+                {
+                    if(user instanceof Secretary)
+                    {
+                        user.setNotification(notification);
+                    }
+                }
+                User.saveUsers();
 
                 JOptionPane.showMessageDialog(this, "ACCOUNT REQUEST SUBMITTED\nYOUR ACCOUNT SHOULD BE AVAILABLE  WITHIN AN HOUR", 
                         "SUCCESS", JOptionPane.INFORMATION_MESSAGE);
@@ -627,6 +644,7 @@ public class Login extends javax.swing.JFrame {
             Feedback.saveFeedback();
             TerminationRequest.saveTerminationRequests();
             AccountRequest.saveAccountRequests();
+            FeedbackRequest.saveFeedbackRequests();
 	}
     }
 

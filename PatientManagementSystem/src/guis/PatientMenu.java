@@ -40,6 +40,15 @@ public class PatientMenu extends javax.swing.JFrame {
         Patient patient = (Patient) User.loggedUser;
         String dob = patient.getDOB();
         String gender = patient.getGender();
+        Notification notification = patient.getNotification();
+        
+        if(notification != null)
+        {
+            JOptionPane.showMessageDialog(this, notification.getMessage(), "WELCOME", 
+                    JOptionPane.INFORMATION_MESSAGE);
+            patient.setNotification(null);
+            Patient.saveUsers();
+        }
         
         this.txtUserAccountType.setText("Patient");
         this.txtUserID.setText(User.loggedUser.getID());
@@ -1991,6 +2000,13 @@ public class PatientMenu extends javax.swing.JFrame {
                         
                         newRequest.addAppointmentRequest(newRequest);
                         
+                        for(Secretary secretary : Secretary.secretarys)
+                        {
+                            secretary.setNotification(new Notification("You have new Requests:"
+                                + "\nAccount Reqeusts \nAppointment Reqeusts \nMedicine Requests \nTermination Requests"));
+                        }
+                        User.saveUsers();
+                        
                         JOptionPane.showMessageDialog(this, "APPOINTMENT REQUEST SUBMITTED", "SUCCESS", 
                                 JOptionPane.INFORMATION_MESSAGE);
                         
@@ -2106,6 +2122,12 @@ public class PatientMenu extends javax.swing.JFrame {
                         Feedback newFeedback = new Feedback(doctor, Integer.parseInt(rate), note);
                         newFeedback.addFeedback(newFeedback);
                         
+                        for(Admin admin : Admin.admins)
+                        {
+                            admin.setNotification(new Notification("You have new Feedback Requests"));
+                        }
+                        User.saveUsers();
+                        
                         this.cmbDoctorFeedback.setSelectedIndex(0);
                         this.cmbRating.setSelectedIndex(0);
                         this.txtFeedbackNote.setText("");
@@ -2131,6 +2153,13 @@ public class PatientMenu extends javax.swing.JFrame {
             {
                 TerminationRequest newTerminationRequest = new TerminationRequest((Patient)User.loggedUser);
                 newTerminationRequest.addTerminationRequest(newTerminationRequest);
+                
+                for(Secretary secretary : Secretary.secretarys)
+                {
+                    secretary.setNotification(new Notification("You have new Requests:"
+                        + "\nAccount Reqeusts \nAppointment Reqeusts \nMedicine Requests \nTermination Requests"));
+                }
+                User.saveUsers();
                 
                 JOptionPane.showMessageDialog(this, "REQUEST COMPLETE", "SUCCESS", 
                         JOptionPane.INFORMATION_MESSAGE);

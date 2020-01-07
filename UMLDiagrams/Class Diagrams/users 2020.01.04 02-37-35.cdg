@@ -1,0 +1,162 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<ClassDiagram name="users">
+  <ClassDiagramComponents>
+    <Class name="Admin" package="users" visibility="public" xPosition="32.0" yPosition="146.0">
+      <Fields>
+        <Field name="admins" type="Admin[]" visibility="public" isStatic="true"/>
+      </Fields>
+      <Constructors>
+        <Constructor visibility="public">
+          <Argument type="String" name="ID"/>
+          <Argument type="String" name="Password"/>
+          <Argument type="String" name="Forename"/>
+          <Argument type="String" name="Surname"/>
+          <Argument type="String" name="Address"/>
+        </Constructor>
+      </Constructors>
+      <Methods>
+        <Method name="addAdmin" returnType="void" visibility="public">
+          <Argument type="Admin" name="newAdmin"/>
+        </Method>
+      </Methods>
+    </Class>
+    <Class name="Doctor" package="users" visibility="public" xPosition="582.0" yPosition="84.0">
+      <Fields>
+        <Field name="doctors" type="Doctor[]" visibility="public" isStatic="true"/>
+      </Fields>
+      <Constructors>
+        <Constructor visibility="public">
+          <Argument type="String" name="ID"/>
+          <Argument type="String" name="Password"/>
+          <Argument type="String" name="Forename"/>
+          <Argument type="String" name="Surname"/>
+          <Argument type="String" name="Address"/>
+        </Constructor>
+      </Constructors>
+      <Methods>
+        <Method name="addDoctor" returnType="void" visibility="public">
+          <Argument type="Doctor" name="newDoctor"/>
+        </Method>
+      </Methods>
+    </Class>
+    <Class name="Patient" package="users" visibility="public" xPosition="772.0" yPosition="625.0">
+      <Fields>
+        <Field name="patients" type="Patient[]" visibility="public" isStatic="true"/>
+        <Field name="Gender" type="String" visibility="private"/>
+        <Field name="DOB" type="String" visibility="private"/>
+      </Fields>
+      <Constructors>
+        <Constructor visibility="public">
+          <Argument type="String" name="ID"/>
+          <Argument type="String" name="Password"/>
+          <Argument type="String" name="Forename"/>
+          <Argument type="String" name="Surname"/>
+          <Argument type="String" name="Address"/>
+          <Argument type="String" name="Gender"/>
+          <Argument type="String" name="DOB"/>
+        </Constructor>
+      </Constructors>
+      <Methods>
+        <Method name="getGender" returnType="String" visibility="public"/>
+        <Method name="setGender" returnType="void" visibility="public">
+          <Argument type="String" name="Gender"/>
+        </Method>
+        <Method name="getDOB" returnType="String" visibility="public"/>
+        <Method name="setDOB" returnType="void" visibility="public">
+          <Argument type="String" name="DOB"/>
+        </Method>
+        <Method name="removePatient" returnType="void" visibility="public">
+          <Argument type="Patient" name="removePatient"/>
+        </Method>
+        <Method name="addPatient" returnType="void" visibility="public">
+          <Argument type="Patient" name="newPatient"/>
+        </Method>
+      </Methods>
+    </Class>
+    <Class name="Secretary" package="users" visibility="public" xPosition="1176.0" yPosition="259.0">
+      <Fields>
+        <Field name="secretarys" type="Secretary[]" visibility="public" isStatic="true"/>
+      </Fields>
+      <Constructors>
+        <Constructor visibility="public">
+          <Argument type="String" name="ID"/>
+          <Argument type="String" name="Password"/>
+          <Argument type="String" name="Forename"/>
+          <Argument type="String" name="Surname"/>
+          <Argument type="String" name="Address"/>
+        </Constructor>
+      </Constructors>
+      <Methods>
+        <Method name="addSecretary" returnType="void" visibility="public">
+          <Argument type="Secretary" name="newSecretary"/>
+        </Method>
+      </Methods>
+    </Class>
+    <Class name="User" package="users" visibility="public" xPosition="175.0" yPosition="454.0">
+      <Fields>
+        <Field name="users" type="User[]" visibility="public" isStatic="true"/>
+        <Field name="loggedUser" type="User" visibility="public" isStatic="true"/>
+        <Field name="ID" type="String" visibility="private"/>
+        <Field name="Password" type="String" visibility="private"/>
+        <Field name="Forename" type="String" visibility="private"/>
+        <Field name="Surname" type="String" visibility="private"/>
+        <Field name="Address" type="String" visibility="private"/>
+      </Fields>
+      <Constructors>
+        <Constructor visibility="public">
+          <Argument type="String" name="ID"/>
+          <Argument type="String" name="Password"/>
+          <Argument type="String" name="Forename"/>
+          <Argument type="String" name="Surname"/>
+          <Argument type="String" name="Address"/>
+        </Constructor>
+      </Constructors>
+      <Methods>
+        <Method name="getID" returnType="String" visibility="public"/>
+        <Method name="setID" returnType="void" visibility="public">
+          <Argument type="String" name="ID"/>
+        </Method>
+        <Method name="getPassword" returnType="String" visibility="public"/>
+        <Method name="setPassword" returnType="void" visibility="public">
+          <Argument type="String" name="Password"/>
+        </Method>
+        <Method name="getForename" returnType="String" visibility="public"/>
+        <Method name="setForename" returnType="void" visibility="public">
+          <Argument type="String" name="Forename"/>
+        </Method>
+        <Method name="getSurname" returnType="String" visibility="public"/>
+        <Method name="setSurname" returnType="void" visibility="public">
+          <Argument type="String" name="Surname"/>
+        </Method>
+        <Method name="getAddress" returnType="String" visibility="public"/>
+        <Method name="setAddress" returnType="void" visibility="public">
+          <Argument type="String" name="Address"/>
+        </Method>
+        <Method name="removeUser" returnType="void" visibility="public">
+          <Argument type="User" name="removeUser"/>
+        </Method>
+        <Method name="addUser" returnType="void" visibility="public">
+          <Argument type="User" name="newUser"/>
+        </Method>
+        <Method name="saveUsers" returnType="void" visibility="public" isStatic="true"/>
+        <Method name="getUsers" returnType="void" visibility="public" isStatic="true"/>
+        <Method name="sortUsers" returnType="void" visibility="private" isStatic="true"/>
+        <Method name="showUsers" returnType="void" visibility="private" isStatic="true"/>
+        <Method name="setUsers" returnType="void" visibility="public" isStatic="true"/>
+      </Methods>
+    </Class>
+  </ClassDiagramComponents>
+  <ClassDiagramRelations>
+    <IsRelation name="is" source="users.Admin" target="users.User"/>
+    <IsRelation name="is" source="users.Doctor" target="users.User"/>
+    <UseRelation source="users.Secretary" target="users.Secretary" sourceCardinality="1..1" targetCardinality="1..1"/>
+    <UseRelation source="users.Patient" target="users.Patient" sourceCardinality="1..1" targetCardinality="1..1"/>
+    <UseRelation source="users.User" target="users.User" sourceCardinality="1..1" targetCardinality="1..1"/>
+    <IsRelation name="is" source="users.Secretary" target="users.User"/>
+    <UseRelation source="users.Admin" target="users.Admin" sourceCardinality="1..1" targetCardinality="1..1"/>
+    <UseRelation source="users.Doctor" target="users.Doctor" sourceCardinality="1..1" targetCardinality="1..1"/>
+    <HasRelation name="loggedUser" source="users.User" target="users.User" type="Aggregation" sourceCardinality="1..1" targetCardinality="1..1"/>
+    <IsRelation name="is" source="users.Patient" target="users.User"/>
+  </ClassDiagramRelations>
+</ClassDiagram>

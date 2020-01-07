@@ -1,27 +1,24 @@
 package users;
 import java.io.*;
-import javax.swing.JOptionPane;
-import org.json.JSONException;
-import org.json.JSONObject;
+import system.Notification;
 
 public class User implements Serializable{
     public static User[] users;
     public static User loggedUser;
-    
     private String ID;
     private String Password;
-        
     private String Forename;
     private String Surname;
-
     private String Address;
+    private Notification Notification;
 
-    public User(String ID, String Password, String Forename, String Surname, String Address) {
+    public User(String ID, String Password, String Forename, String Surname, String Address, Notification Notification) {
         this.ID = ID;
         this.Password = Password;
         this.Forename = Forename;
         this.Surname = Surname;
         this.Address = Address;
+        this.Notification = Notification;
     }
 
     public String getID() {
@@ -63,6 +60,14 @@ public class User implements Serializable{
     public void setAddress(String Address) {
         this.Address = Address;
     }
+
+    public Notification getNotification() {
+        return Notification;
+    }
+
+    public void setNotification(Notification Notification) {
+        this.Notification = Notification;
+    }
     
     public void removeUser(User removeUser)
     {
@@ -80,7 +85,6 @@ public class User implements Serializable{
         users = temp;
         
         saveUsers();
-        getUsers();
     }
     
     public void addUser(User newUser)
@@ -96,13 +100,7 @@ public class User implements Serializable{
         temp[i] = newUser;
         users = temp;
         
-        for(User user : users)
-        {
-            System.out.println(user.getID());
-        }
-        
         saveUsers();
-        getUsers();
     }
 
     public static void saveUsers()
@@ -258,14 +256,14 @@ public class User implements Serializable{
     public static void setUsers()
     {
         User[] temp = {
-            new Patient("P001", "5f4dcc3b5aa765d61d8327deb882cf99", "Evan", "Ward", "Flat 5,\n58 North Road East,\nPlymouth,\nPL4 6AJ", "M", "29/02/2000"),
-            new Patient("P002", "5f4dcc3b5aa765d61d8327deb882cf99", "Chloe", "Jones", "31 Clarence Place,\nPlymouth,\nPL2 3JP", "F", "13/06/1998"),
-            new Patient("P003", "5f4dcc3b5aa765d61d8327deb882cf99", "Linda", "Bennett", "66 Neswick Street,\nPlymouth,\nPL1 5JN", "F", "10/08/1992"),
-            new Doctor("D001", "5f4dcc3b5aa765d61d8327deb882cf99", "Joe", "Bloggs", "3 Charles Darwin Road,\nPlymouth,\nPL3 4GU"),
-            new Doctor("D002", "5f4dcc3b5aa765d61d8327deb882cf99", "Shirley", "Jones", "5 Admirals Hard,\nPlymouth,\nPL1 3RJ"),
-            new Doctor("D003", "5f4dcc3b5aa765d61d8327deb882cf99", "Henry", "Brooks", "66 Neswick Street,\nPlymouth,\nPL2 5JN"),
-            new Admin("A001", "5f4dcc3b5aa765d61d8327deb882cf99", "James", "Powell", "320 Union St,\nPlymouth,\nPL1 3HP"),
-            new Secretary("S001", "5f4dcc3b5aa765d61d8327deb882cf99", "Sophie", "Owens", "33 Stonehouse St,\nPlymouth,\nPL3 3PE")
+            new Patient("P001", "5f4dcc3b5aa765d61d8327deb882cf99", "Evan", "Ward", "Flat 5,\n58 North Road East,\nPlymouth,\nPL4 6AJ", null, "M", "29/02/2000"),
+            new Patient("P002", "5f4dcc3b5aa765d61d8327deb882cf99", "Chloe", "Jones", "31 Clarence Place,\nPlymouth,\nPL2 3JP", null, "F", "13/06/1998"),
+            new Patient("P003", "5f4dcc3b5aa765d61d8327deb882cf99", "Linda", "Bennett", "66 Neswick Street,\nPlymouth,\nPL1 5JN", null, "F", "10/08/1992"),
+            new Doctor("D001", "5f4dcc3b5aa765d61d8327deb882cf99", "Joe", "Bloggs", "3 Charles Darwin Road,\nPlymouth,\nPL3 4GU", null),
+            new Doctor("D002", "5f4dcc3b5aa765d61d8327deb882cf99", "Shirley", "Jones", "5 Admirals Hard,\nPlymouth,\nPL1 3RJ", null),
+            new Doctor("D003", "5f4dcc3b5aa765d61d8327deb882cf99", "Henry", "Brooks", "66 Neswick Street,\nPlymouth,\nPL2 5JN", null),
+            new Admin("A001", "5f4dcc3b5aa765d61d8327deb882cf99", "James", "Powell", "320 Union St,\nPlymouth,\nPL1 3HP", null),
+            new Secretary("S001", "5f4dcc3b5aa765d61d8327deb882cf99", "Sophie", "Owens", "33 Stonehouse St,\nPlymouth,\nPL3 3PE", null)
         };
         
         users = temp;

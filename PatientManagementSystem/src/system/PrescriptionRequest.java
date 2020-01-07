@@ -35,7 +35,7 @@ public class PrescriptionRequest extends Prescription {
         getPrescriptionRequests();
     }
     
-    public static void addPrescriptionRequest(PrescriptionRequest newPrescriptionRequest)
+    public void addPrescriptionRequest(PrescriptionRequest newPrescriptionRequest)
     {
         PrescriptionRequest[] temp = new PrescriptionRequest[prescriptionRequests.length + 1];
         int i;
@@ -110,9 +110,13 @@ public class PrescriptionRequest extends Prescription {
     {
         PrescriptionRequest[] temp = {
             new PrescriptionRequest(
-                new Doctor("D003", "5f4dcc3b5aa765d61d8327deb882cf99", "Henry", "Brooks", "66 Neswick Street,\nPlymouth,\nPL2 5JN"),
-                new Patient("P002", "5f4dcc3b5aa765d61d8327deb882cf99", "Chloe", "Jones", "31 Clarence Place,\nPlymouth,\nPL2 3JP", "F", "13/06/1998"),
-                "N/A", new Medicine("Penicillin", 3), 5, "1 EVERY 12 HOURS")
+                new Doctor("D003", "5f4dcc3b5aa765d61d8327deb882cf99", "Henry", "Brooks", "66 Neswick Street,\nPlymouth,\nPL2 5JN", null),
+                new Patient("P002", "5f4dcc3b5aa765d61d8327deb882cf99", "Chloe", "Jones", "31 Clarence Place,\nPlymouth,\nPL2 3JP", null, "F", "13/06/1998"),
+                "Health increasing", new Medicine("Penicillin", 3), 5, "1 EVERY 12 HOURS"),
+            new PrescriptionRequest(
+                new Doctor("D001", "5f4dcc3b5aa765d61d8327deb882cf99", "Joe", "Bloggs", "3 Charles Darwin Road,\nPlymouth,\nPL3 4GU", null),
+                new Patient("P003", "5f4dcc3b5aa765d61d8327deb882cf99", "Linda", "Bennett", "66 Neswick Street,\nPlymouth,\nPL1 5JN", null, "F", "10/08/1992"),
+                "Healthy individual", new Medicine("Penicillin", 3), 5, "1 EVERY 12 HOURS")
         };
         
         prescriptionRequests = temp;

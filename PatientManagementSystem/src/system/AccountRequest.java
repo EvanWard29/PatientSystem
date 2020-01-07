@@ -41,7 +41,7 @@ public class AccountRequest implements Serializable{
         return Forename;
     }
 
-    public void setName(String Name) {
+    public void setForename(String Forename) {
         this.Forename = Forename;
     }
 

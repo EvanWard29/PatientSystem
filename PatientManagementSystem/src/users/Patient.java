@@ -1,5 +1,7 @@
 package users;
 
+import system.Notification;
+
 public class Patient extends User {
     public static Patient[] patients;
     
@@ -7,8 +9,8 @@ public class Patient extends User {
 
     private String DOB;
 
-    public Patient(String ID, String Password, String Forename, String Surname, String Address, String Gender, String DOB) {
-        super(ID, Password, Forename, Surname, Address);
+    public Patient(String ID, String Password, String Forename, String Surname, String Address, Notification Message, String Gender, String DOB) {
+        super(ID, Password, Forename, Surname, Address, Message);
         this.Gender = Gender;
         this.DOB = DOB;
     }
@@ -61,29 +63,5 @@ public class Patient extends User {
         
         addUser(newPatient);
         getUsers();
-    }
-
-    public void requestAccountCreation() {
-    }
-
-    public void rateDoctor(int doctorID, String note) {
-    }
-
-    public void viewDoctorRating(int doctorID) {
-    }
-
-    public void requestAppointment() {
-    }
-
-    public void viewPatientHistory() {
-    }
-
-    public void viewAppointment() {
-    }
-
-    public void viewPrescription() {
-    }
-
-    public void requestTermination() {
     }
 }

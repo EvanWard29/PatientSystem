@@ -13,10 +13,10 @@ import java.io.*;
 public class Feedback  implements Serializable{
     public static Feedback[] feedback;
     private Doctor Doctor;
-    private int Rating;
+    private double Rating;
     private String Notes;
 
-    public Feedback(Doctor Doctor, int Rating, String Notes) {
+    public Feedback(Doctor Doctor, double Rating, String Notes) {
         this.Doctor = Doctor;
         this.Rating = Rating;
         this.Notes = Notes;
@@ -30,11 +30,11 @@ public class Feedback  implements Serializable{
         this.Doctor = Doctor;
     }
 
-    public int getRating() {
+    public double getRating() {
         return Rating;
     }
 
-    public void setRating(int Rating) {
+    public void setRating(double Rating) {
         this.Rating = Rating;
     }
 
@@ -121,22 +121,22 @@ public class Feedback  implements Serializable{
     {
         Feedback[] temp = {
             new Feedback(
-                new Doctor("D001", "5f4dcc3b5aa765d61d8327deb882cf99", "Joe", "Bloggs", "3 Charles Darwin Road,\nPlymouth,\nPL3 4GU"),
+                new Doctor("D001", "5f4dcc3b5aa765d61d8327deb882cf99", "Joe", "Bloggs", "3 Charles Darwin Road,\nPlymouth,\nPL3 4GU", null),
                 7, "Very kind and gentle person."),
             new Feedback(
-                new Doctor("D001", "5f4dcc3b5aa765d61d8327deb882cf99", "Joe", "Bloggs", "3 Charles Darwin Road,\nPlymouth,\nPL3 4GU"),
+                new Doctor("D001", "5f4dcc3b5aa765d61d8327deb882cf99", "Joe", "Bloggs", "3 Charles Darwin Road,\nPlymouth,\nPL3 4GU", null),
                 5, "Nice person but hard to understand."),
             new Feedback(
-                new Doctor("D002", "5f4dcc3b5aa765d61d8327deb882cf99", "Shirley", "Jones", "5 Admirals Hard,\nPlymouth,\nPL1 3RJ"),
+                new Doctor("D002", "5f4dcc3b5aa765d61d8327deb882cf99", "Shirley", "Jones", "5 Admirals Hard,\nPlymouth,\nPL1 3RJ", null),
                 3, "Seems very rough and confused half the time"),
             new Feedback(
-                new Doctor("D002", "5f4dcc3b5aa765d61d8327deb882cf99", "Shirley", "Jones", "5 Admirals Hard,\nPlymouth,\nPL1 3RJ"),
+                new Doctor("D002", "5f4dcc3b5aa765d61d8327deb882cf99", "Shirley", "Jones", "5 Admirals Hard,\nPlymouth,\nPL1 3RJ", null),
                 7, "Very nice doctor."),
             new Feedback(
-                new Doctor("D003", "5f4dcc3b5aa765d61d8327deb882cf99", "Henry", "Brooks", "66 Neswick Street,\nPlymouth,\nPL2 5JN"),
+                new Doctor("D003", "5f4dcc3b5aa765d61d8327deb882cf99", "Henry", "Brooks", "66 Neswick Street,\nPlymouth,\nPL2 5JN", null),
                 9, "Very kind and friendly doctor."),
             new Feedback(
-                new Doctor("D003", "5f4dcc3b5aa765d61d8327deb882cf99", "Henry", "Brooks", "66 Neswick Street,\nPlymouth,\nPL2 5JN"),
+                new Doctor("D003", "5f4dcc3b5aa765d61d8327deb882cf99", "Henry", "Brooks", "66 Neswick Street,\nPlymouth,\nPL2 5JN", null),
                 7, "Always a pleasure to have Dr. Brooks!")
         };
         feedback = temp;

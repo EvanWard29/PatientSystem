@@ -34,6 +34,16 @@ public class DoctorMenu extends javax.swing.JFrame {
     
     private void getUserInfo()
     {
+        Notification notification = User.loggedUser.getNotification();
+        
+        if(notification != null)
+        {
+            JOptionPane.showMessageDialog(this, notification.getMessage(), "WELCOME", 
+                    JOptionPane.INFORMATION_MESSAGE);
+            User.loggedUser.setNotification(null);
+            User.saveUsers();
+        }
+        
         this.txtUserAccountType.setText("Doctor");
         this.txtUserID.setText(User.loggedUser.getID());
         this.txtUserName.setText(User.loggedUser.getForename() + " " + User.loggedUser.getSurname());
@@ -2265,12 +2275,23 @@ public class DoctorMenu extends javax.swing.JFrame {
                         if(patient.getID().equals(patientID))
                         {
                             selectedPatient = patient;
+                            patient.setNotification(new Notification("An Appointment has been arranged with you and Dr. "
+                                + User.loggedUser.getSurname() + " for " + date));
                             break;
                         }
                     }
                     
                     Appointment newAppointment = new Appointment((Doctor) User.loggedUser, selectedPatient, date);
                     newAppointment.addAppointment(newAppointment);
+                    User.saveUsers();
+                    
+                    this.cmbSelectPatient.setSelectedIndex(0);
+                    this.txtEnterDate.setText("");
+                    this.txtEnterTime.setText("");
+                    this.txtSelectedPatient.setText("");
+                    this.txtEnteredDate.setText("");
+                    this.txtEnteredTime.setText("");
+                    
                     getAppointments();
                     setAppointments();
                 }
@@ -2357,7 +2378,13 @@ public class DoctorMenu extends javax.swing.JFrame {
                                     quantity, dosage);
 
                                 newPrescriptionRequest.addPrescriptionRequest(newPrescriptionRequest);
-                                System.out.println("NEW PRESCRIPTION");
+                                
+                                for(Secretary secretary : Secretary.secretarys)
+                                {
+                                    secretary.setNotification(new Notification("You have new Requests:"
+                                        + "\nAccount Reqeusts \nAppointment Reqeusts \nMedicine Requests \nTermination Requests"));
+                                }
+                                User.saveUsers();
                             }
                         }
                     }
@@ -2408,6 +2435,14 @@ public class DoctorMenu extends javax.swing.JFrame {
         {
             MedicineRequest newMedicine = new MedicineRequest(name, quantity);
             newMedicine.addMedicineRequest(newMedicine);
+            
+            for(Secretary secretary : Secretary.secretarys)
+            {
+                secretary.setNotification(new Notification("You have new Requests:"
+                    + "\nAccount Reqeusts \nAppointment Reqeusts \nMedicine Requests \nTermination Requests"));
+            }
+            User.saveUsers();
+                                
             this.txtAddMedicineName.setText("");
             this.txtAddMedicineQauntity.setText("");
         }

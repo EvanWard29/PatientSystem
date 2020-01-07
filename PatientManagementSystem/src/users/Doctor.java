@@ -1,10 +1,12 @@
 package users;
 
+import system.Notification;
+
 public class Doctor extends User {
     public static Doctor[] doctors;
     
-    public Doctor(String ID, String Password, String Forename, String Surname, String Address) {
-        super(ID, Password, Forename, Surname, Address);
+    public Doctor(String ID, String Password, String Forename, String Surname, String Address, Notification Message) {
+        super(ID, Password, Forename, Surname, Address, Message);
     }
     
     public void addDoctor(Doctor newDoctor)
@@ -19,20 +21,7 @@ public class Doctor extends User {
         
         temp[i] = newDoctor;
         doctors = temp;
-    }
-
-    public void viewAppointments() {
-    }
-
-    public void makeNote() {
-    }
-
-    public void viewPatientHistory() {
-    }
-
-    public void prescribeMedicine() {
-    }
-
-    public void requestNewMedicine() {
+        
+        addUser(newDoctor);
     }
 }
