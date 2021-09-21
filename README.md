@@ -1,4 +1,5 @@
 # SOFT252-Coursework
+This project is an Object Oriented Java application, which is essentailly a Patient Management System.
 
 #### Note
 UML Diagram for this project is stored in the "ProjectManagementSystem - UML" NetBeans Project as an EasyUML project.
